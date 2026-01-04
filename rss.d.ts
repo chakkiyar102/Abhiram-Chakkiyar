@@ -7,6 +7,7 @@ declare module 'rss' {
       site_url: string;
       language?: string;
       pubDate?: Date;
+      ttl?: number;
     });
 
     item(options: {
