@@ -42,7 +42,7 @@ export default function Home() {
               GitHub
             </a>
             <a
-              href="https://twitter.com/yourhandle"
+              href="https://twitter.com/abhichakkiyar"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
@@ -53,7 +53,7 @@ export default function Home() {
               Twitter
             </a>
             <a
-              href="https://linkedin.com/in/yourhandle"
+              href="https://linkedin.com/in/abhiramchakkiyar"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
