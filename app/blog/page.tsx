@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { getAllPosts } from '@/lib/posts';
 import { formatDate } from '@/lib/utils';
 
+export const dynamic = 'force-static';
+
 export default function BlogPage() {
   const posts = getAllPosts();
 

@@ -4,6 +4,8 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getPostBySlug, getAllPostSlugs } from '@/lib/posts';
 import { formatDate } from '@/lib/utils';
 
+export const dynamic = 'force-static';
+
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
   return slugs.map((slug) => ({ slug }));
