@@ -64,7 +64,7 @@ export default function Home() {
               LinkedIn
             </a>
             <a
-              href="mailto:chakkiyar.abhiram@gmail.com"
+              href="mailto:abhiram@chakkiyar.org"
               className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
