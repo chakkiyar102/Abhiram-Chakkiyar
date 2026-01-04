@@ -75,18 +75,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About Me Section */}
-        <section className="mb-16 p-8 bg-white dark:bg-zinc-900 rounded-2xl shadow-lg border border-zinc-200 dark:border-zinc-800">
-          <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">About Me</h2>
-          <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed mb-4">
-            I'm a passionate developer who loves building things for the web. When I'm not coding,
-            you'll find me reading about the latest tech trends, experimenting with new frameworks,
-            or sharing my knowledge through writing.
-          </p>
-          <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
-            This blog is my space to document my journey, share tutorials, and connect with fellow
-            developers. Feel free to explore my posts or reach out!
-          </p>
+        {/* About Link */}
+        <section className="mb-16">
+          <Link
+            href="/about"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-zinc-900 rounded-2xl shadow-lg border border-zinc-200 dark:border-zinc-800 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:shadow-xl transition-all font-medium"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            About Me
+          </Link>
         </section>
 
         {/* Blog Posts Section */}
