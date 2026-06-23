@@ -1,0 +1,65 @@
+---
+import type { CollectionEntry } from "astro:content";
+import LinkButton from "@/components/LinkButton.astro";
+
+type Props = {
+  project: CollectionEntry<"projects">;
+};
+
+const { project } = Astro.props;
+const { title, summary, why, link, repo, year, tags, featured } = project.data;
+---
+
+<li class="rounded-lg border border-border my-6 px-6 py-5">
+  <div class="flex items-start justify-between gap-2 flex-wrap">
+    <h2 class="text-lg font-semibold leading-snug">
+      {title}
+    </h2>
+    <span class="text-xs text-muted-foreground tabular-nums">{year}</span>
+  </div>
+
+  {
+    tags && tags.length > 0 && (
+      <ul class="mt-1 flex flex-wrap gap-1">
+        {tags.map(tag => (
+          <li class="text-xs px-2 py-0.5 rounded-full border border-border opacity-70">
+            {tag}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <p class="mt-3 text-sm leading-relaxed">{summary}</p>
+
+  <p class="mt-2 text-sm italic opacity-75">
+    <span class="font-medium not-italic">Why:</span> {why}
+  </p>
+
+  {
+    (link || repo) && (
+      <div class="mt-4 flex flex-wrap gap-3">
+        {link && (
+          <LinkButton
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-medium underline underline-offset-4 decoration-dashed"
+          >
+            Live site →
+          </LinkButton>
+        )}
+        {repo && (
+          <LinkButton
+            href={repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-medium underline underline-offset-4 decoration-dashed"
+          >
+            Repo →
+          </LinkButton>
+        )}
+      </div>
+    )
+  }
+</li>

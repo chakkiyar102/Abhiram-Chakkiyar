@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Card from "@/components/Card.astro";
+import Footer from "@/components/Footer.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import config from "@/config";
+
+const allPosts = await getCollection("posts", ({ data }) => !data.draft);
+const essays = getSortedPosts(
+  allPosts.filter(post => post.id.startsWith("essays/"))
+);
+---
+
+<Layout title={`Essays | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main
+    pageTitle="Essays"
+    pageDesc="Long-form writing. Ideas that need space to develop."
+  >
+    <ul>
+      {essays.map(data => <Card {...data} />)}
+    </ul>
+  </Main>
+
+  <Footer />
+</Layout>

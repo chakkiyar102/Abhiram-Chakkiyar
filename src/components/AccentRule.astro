@@ -1,0 +1,24 @@
+---
+// Short hand-drawn marine underline. Echoes the homepage hero signature
+// across section headers. Static (no draw animation) so repeated use stays calm.
+interface Props {
+  class?: string;
+}
+const { class: klass = "" } = Astro.props;
+---
+
+<svg
+  class={`text-accent ${klass}`}
+  width="72"
+  height="10"
+  viewBox="0 0 200 16"
+  fill="none"
+  aria-hidden="true"
+  preserveAspectRatio="none"
+>
+  <path
+    d="M3 11 C40 4, 80 4, 117 8 C150 11, 180 9, 197 5"
+    stroke="currentColor"
+    stroke-width="4"
+    stroke-linecap="round"></path>
+</svg>

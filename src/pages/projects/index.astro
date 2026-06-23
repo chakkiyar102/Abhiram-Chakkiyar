@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import Footer from "@/components/Footer.astro";
+import config from "@/config";
+
+const allProjects = await getCollection("projects", ({ data }) => {
+  // In production, exclude drafts; in dev, show everything
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+// Sort: featured first, then by year descending
+const projects = allProjects.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return b.data.year - a.data.year;
+});
+---
+
+<Layout title={`Projects | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main
+    pageTitle="Projects"
+    pageDesc="Things I have built, shipped, or tinkered with."
+  >
+    {
+      projects.length === 0 ? (
+        <p class="opacity-60">No projects to show yet.</p>
+      ) : (
+        <ul>
+          {projects.map(project => (
+            <ProjectCard project={project} />
+          ))}
+        </ul>
+      )
+    }
+  </Main>
+
+  <Footer />
+</Layout>

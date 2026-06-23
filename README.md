@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# abhiram.cyou
 
-## Getting Started
+Personal site of Abhiram Chakkiyar, a writer who codes. Essays and notes on
+making complex things clear, in docs, code, and pixels.
 
-First, run the development server:
+Built on [AstroPaper](https://github.com/satnaing/astro-paper), recolored to a
+marine and tropical-pastel palette with watercolor accents, a two-layer
+crumpled-paper texture, and Fraunces serif display type.
+
+## Stack
+
+Astro, Tailwind v4, TypeScript. Pagefind search, Satori/Sharp OG images, RSS,
+sitemap. Deployed static to Vercel.
+
+## Run locally
+
+Requires Node >= 22.12 (use `nvm use 22`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:4321
+npx astro build  # production build to dist/ (use this, not `npm run build`)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Note: `npm run build` runs `astro check`, which currently throws a known,
+unrelated vite-plugin type error. `npx astro build` is the real build gate.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Essays: `src/content/posts/essays/`
+- Notes: `src/content/posts/notes/`
+- Projects: `src/content/projects/`
+- About: `src/content/pages/about.md`
 
-## Learn More
+Add a real profile photo at `public/avatar.jpg` and set `src="/avatar.jpg"` on
+the `<Avatar>` in `src/pages/index.astro` to replace the monogram.
 
-To learn more about Next.js, take a look at the following resources:
+## Theme
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Palette tokens: `src/styles/theme.css`
+- Fonts, utilities, crumple texture: `src/styles/global.css`,
+  `src/components/PaperTexture.astro`
+- Watercolor accent: `src/components/Watercolor.astro`

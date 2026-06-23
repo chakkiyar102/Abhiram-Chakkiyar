@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500;1,7..72,600&display=swap");
+@import "tailwindcss";
+@import "./theme.css";
+@import "./typography.css";
+@import "rehype-callouts/theme/obsidian";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@layer base {
+  * {
+    @apply border-border outline-accent/75;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-muted) transparent;
+  }
+  a,
+  button {
+    @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  body {
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+
+  /* Literata reading serif for headings + wordmark; Inter carries body. */
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.011em;
+    text-wrap: balance;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility max-w-app {
+  @apply max-w-3xl;
+}
+
+@utility app-layout {
+  @apply max-w-app mx-auto w-full px-4;
+}
+
+@utility active-nav {
+  @apply underline decoration-wavy decoration-2 underline-offset-8;
+}
+
+
+:target {
+  scroll-margin-block: 1rem;
+}
+
+/* Signature wordmark: PNG used as a mask so it inherits the ink color and
+   adapts to light/dark automatically. */
+.signature-mark {
+  display: inline-block;
+  height: 2.1rem;
+  aspect-ratio: 640 / 202;
+  background-color: currentColor;
+  -webkit-mask: url("/signature.png") center / contain no-repeat;
+  mask: url("/signature.png") center / contain no-repeat;
+}
+@media (min-width: 640px) {
+  .signature-mark {
+    height: 2.5rem;
+  }
+}
+
+/* Hero: oversized statement + drawn marine underline. One entrance, on load. */
+.hero-underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.08em;
+  width: 100%;
+  height: 0.34em;
+  overflow: visible;
+}
+.hero-underline path {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: hero-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
+}
+.hero-statement {
+  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-sub,
+.hero-byline {
+  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-sub {
+  animation-delay: 0.12s;
+}
+.hero-byline {
+  animation-delay: 0.22s;
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-statement,
+  .hero-sub,
+  .hero-byline {
+    animation: none;
+  }
+  .hero-underline path {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+}
