@@ -1,5 +1,5 @@
 {
-  "name": "ap-scaffold",
+  "name": "abhiram-cyou",
   "type": "module",
   "version": "6.1.0",
   "engines": {
@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
+    "build": "astro build && pagefind --site dist && cp -r dist/pagefind public/",
+    "check": "astro check",
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",
