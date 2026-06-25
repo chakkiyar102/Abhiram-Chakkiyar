@@ -2,6 +2,7 @@
 author: Abhiram Chakkiyar
 pubDatetime: 2026-06-25T09:00:00Z
 title: "How I Built a Product Promo, End to End, Without Writing the Code"
+ogImage: "/essays/building-a-promo-without-code/essay-banner.png"
 tags:
   - ai
   - video-production
@@ -10,6 +11,8 @@ tags:
   - workflow
 description: "A documentation manager built a sixty-second product promo end to end, with AI doing the hands-on work and me directing. The full nine-stage pipeline, and why the real skill turned out to be taste, not code."
 ---
+
+![Build log banner: I Made This Promo Without Writing the Code, built with Claude Code, HyperFrames, ffmpeg, and ElevenLabs, beside a fan of the promo's screens](/essays/building-a-promo-without-code/essay-banner.png)
 
 We were launching a new AI feature, an app builder, and it needed a promo. A sixty-second teaser, not a tutorial, the kind that makes someone feel the shift and want to try it. I run the documentation team. I am a words person. I have never written a line of video code in my life.
 
@@ -31,7 +34,9 @@ Here is the shape of the work before we go deep. Nine stages, roughly in order, 
 
 ## Stage 1 — Set up the workshop
 
-Before any of the fun, you wire the bench. This is the unglamorous part nobody blogs about, and skipping it is why people give up on day one. My setup, all of it free or already on my machine: an AI coding agent in the terminal as the conductor, **ffmpeg** for every video operation, **HyperFrames** for the motion-graphics overlays, a voiceover tool for the narration, the open-source **Inter** typeface, and the real brand kit so the logo is never the garbled AI version.
+Before any of the fun, you wire the bench. This is the unglamorous part nobody blogs about, and skipping it is why people give up on day one. My setup: **Claude Code** running the Opus 4.8 model as the agent in the terminal that conducts everything, **ffmpeg** for every video operation, **HyperFrames** for the motion-graphics overlays, **ElevenLabs** for the voiceover, the open-source **Inter** typeface, and the real brand kit so the logo is never the garbled AI version.
+
+Two of those are worth a special note. HyperFrames and a video pipeline called **video-use** are structured *skills*, packaged recipes the agent loads on demand for one kind of job. A skill is the difference between asking an agent to wing it and handing it a checklist it has run a hundred times. On a job this sprawling, leaning on them is most of what kept it from sliding into chaos.
 
 One real gotcha lives here. The overlay tool needed a newer runtime than my default, and the first render quietly flattened the transparency. Five minutes of pointing it at the right runtime fixed it. Workshops are like that. Sharpen the tools first, or every later stage bleeds time.
 
@@ -78,6 +83,8 @@ One of those watermarks was not even static. It was a little badge that drifted 
 
 ![The watermark that refused to hold still.](/essays/building-a-promo-without-code/3-badge-tracking.png)
 
+Not every artifact was visual. The narration itself was generated, not recorded in a booth. I had **ElevenLabs** read the script back as text-to-speech, calm and even, matched to the restrained tone the house style asks for. One more asset described in a sentence and produced on demand.
+
 ## Stage 6 & 7 — Record the screens, then cut it together
 
 The product footage is real. I recorded the app with a clean screen-recorder, beat by beat, matching the script's right-hand column. Slow, deliberate captures, one per moment the script calls for. Recording to the script, not freestyling, is what saves you in the edit.
@@ -98,9 +105,9 @@ But "terrible" is a feeling, not an instruction. What actually moved the work wa
 
 ![Translucent gradient glass. The UI blurs behind the words instead of fighting them.](/essays/building-a-promo-without-code/shot-glasscard.png)
 
-The cards themselves were built as code I could actually read, an HTML composition with the gradient, the glass blur, and the easing all spelled out, rendered to a transparent layer. For that I used a tool that authors motion graphics like a web page. Getting real frosted glass meant a non-obvious trick: the footage had to sit *behind* the cards inside the composition, because a blur needs something to blur. A floating transparent layer has nothing behind it.
+The cards themselves were built as code I could actually read, an HTML composition with the gradient, the glass blur, and the easing all spelled out, rendered to a transparent layer. For that I used **HyperFrames**, which authors motion graphics as an HTML page you can read and then render straight to video. The whole caption-and-composite stage ran through the **video-use** skill, which owns the cut-and-overlay mechanics so I could stay focused on how it looked instead of how it was wired. Getting real frosted glass meant a non-obvious trick: the footage had to sit *behind* the cards inside the composition, because a blur needs something to blur. A floating transparent layer has nothing behind it.
 
-Then two tools did what each was good at. One drew the caption cards. The other married that layer onto the footage and kept the original audio intact. The render and composite commands are below, and that whole back half of the pipeline is work I described and checked but never wrote by hand.
+Then two tools did what each was good at. HyperFrames drew the caption cards. ffmpeg married that layer onto the footage and kept the original audio intact. The render and composite commands are below, and that whole back half of the pipeline is work I described and checked but never wrote by hand.
 
 ![Described, run, and verified. Not typed from memory.](/essays/building-a-promo-without-code/terminal-pipeline.png)
 
