@@ -2,7 +2,6 @@
 author: Abhiram Chakkiyar
 pubDatetime: 2026-06-25T09:00:00Z
 title: "How I Built a Product Promo, End to End, Without Writing the Code"
-ogImage: "/essays/building-a-promo-without-code/essay-banner.png"
 tags:
   - ai
   - video-production
@@ -89,9 +88,9 @@ Not every artifact was visual. The narration itself was generated, not recorded 
 
 The product footage is real. I recorded the app with a clean screen-recorder, beat by beat, matching the script's right-hand column. Slow, deliberate captures, one per moment the script calls for. Recording to the script, not freestyling, is what saves you in the edit.
 
-Then the assembly. This is the one stage where I sat in a traditional editor, on a timeline, laying clips across tracks, trimming each to its beat, and dropping smooth transitions between them so nothing hard-cuts. Generated b-roll on one track, screen captures on another, the voiceover underneath holding the timing. The editor is where the separate pieces finally become a film.
+Then the assembly. This is the one stage where I sat in a traditional editor, **Camtasia**, on a timeline, laying clips across tracks, trimming each to its beat, and dropping smooth transitions between them so nothing hard-cuts. Generated b-roll and screen captures on the upper track, the ElevenLabs voiceover and a bed of background music on the audio tracks below, holding the timing. The editor is where the separate pieces finally become a film.
 
-![Clips on tracks, transitions between, voiceover holding the timing.](/essays/building-a-promo-without-code/4-edit-timeline.png)
+![The real edit in Camtasia — clips and transitions up top, voiceover and music holding the timing below.](/essays/building-a-promo-without-code/shot-editor.png)
 
 ## Stage 8 — Caption and composite, where the polish lives
 
