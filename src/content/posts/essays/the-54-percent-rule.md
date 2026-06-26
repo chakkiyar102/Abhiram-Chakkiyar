@@ -12,7 +12,7 @@ description: "Roger Federer won eighty percent of his matches. He won only fifty
 
 ![The 54% Rule: Peak Protocol, decision-making. Five circuit-breakers I use to lead a writing team, beside a scoreboard showing eighty percent of matches won on just fifty-four percent of the points.](/essays/the-54-percent-rule/banner.gif)
 
-Roger Federer won eighty percent of his matches. He won only fifty-four percent of the points inside them. Once that gap sank in, I started managing myself differently.
+Roger Federer won eighty percent of his matches. He won only [fifty-four percent of the points](https://home.dartmouth.edu/news/2024/06/2024-commencement-address-roger-federer) inside them. Once that gap sank in, I started managing myself differently.
 
 Let me start with a small confession.
 

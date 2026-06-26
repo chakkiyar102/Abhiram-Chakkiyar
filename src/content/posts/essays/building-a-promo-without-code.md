@@ -33,7 +33,7 @@ Here is the shape of the work before we go deep. Nine stages, roughly in order, 
 
 ## Stage 1: Set up the workshop
 
-Before any of the fun, you wire the bench. This is the unglamorous part nobody blogs about, and skipping it is why people give up on day one. My setup: **Claude Code** running the Opus 4.8 model as the agent in the terminal that conducts everything, **ffmpeg** for every video operation, **HyperFrames** for the motion-graphics overlays, **ElevenLabs** for the voiceover, the open-source **Inter** typeface, and the real brand kit so the logo is never the garbled AI version.
+Before any of the fun, you wire the bench. This is the unglamorous part nobody blogs about, and skipping it is why people give up on day one. My setup: **[Claude Code](https://claude.com/claude-code)** running the Opus 4.8 model as the agent in the terminal that conducts everything, **[ffmpeg](https://ffmpeg.org)** for every video operation, **[HyperFrames](https://github.com/heygen-com/hyperframes)** for the motion-graphics overlays, **[ElevenLabs](https://elevenlabs.io)** for the voiceover, the open-source **[Inter](https://rsms.me/inter/)** typeface, and the real brand kit so the logo is never the garbled AI version.
 
 Two of those are worth a special note. HyperFrames and a video pipeline called **video-use** are structured *skills*, packaged recipes the agent loads on demand for one kind of job. A skill is the difference between asking an agent to wing it and handing it a checklist it has run a hundred times. On a job this sprawling, leaning on them is most of what kept it from sliding into chaos.
 
@@ -88,7 +88,7 @@ Not every artifact was visual. The narration itself was generated, not recorded 
 
 The product footage is real. I recorded the app with a clean screen-recorder, beat by beat, matching the script's right-hand column. Slow, deliberate captures, one per moment the script calls for. Recording to the script, not freestyling, is what saves you in the edit.
 
-Then the assembly. This is the one stage where I sat in a traditional editor, **Camtasia**, on a timeline, laying clips across tracks, trimming each to its beat, and dropping smooth transitions between them so nothing hard-cuts. Generated b-roll and screen captures on the upper track, the ElevenLabs voiceover and a bed of background music on the audio tracks below, holding the timing. The editor is where the separate pieces finally become a film.
+Then the assembly. This is the one stage where I sat in a traditional editor, **[Camtasia](https://www.techsmith.com/camtasia)**, on a timeline, laying clips across tracks, trimming each to its beat, and dropping smooth transitions between them so nothing hard-cuts. Generated b-roll and screen captures on the upper track, the ElevenLabs voiceover and a bed of background music on the audio tracks below, holding the timing. The editor is where the separate pieces finally become a film.
 
 ![The real edit in Camtasia, clips and transitions up top, voiceover and music holding the timing below.](/essays/building-a-promo-without-code/shot-editor.png)
 

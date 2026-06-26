@@ -17,7 +17,7 @@ I spent a bit over $1,700 in a month talking to a robot. Then I found out I only
 
 ![A monthly bill card stamping out $1.7K, about eighty dollars on the days I actually used it](/essays/ai-token-valves/receipt.gif)
 
-Last week I ran a small script that adds up what I spend inside Claude Code, the AI coding tool I live in. The number came back at a bit over $1,700 for the month. About eighty dollars on the days I actually used it. I am a documentation manager, not an engineer, so my first instinct was guilt. Maybe I should just use it less.
+Last week I ran a small script that adds up what I spend inside [Claude Code](https://claude.com/claude-code), the AI coding tool I live in. The number came back at a bit over $1,700 for the month. About eighty dollars on the days I actually used it. I am a documentation manager, not an engineer, so my first instinct was guilt. Maybe I should just use it less.
 
 That instinct is wrong. It took me a while to see why. A token is the unit an AI charges by. Every word you send it and every word it sends back has a price. The obvious way to spend less is to type less and ask for less. But that is willpower, and willpower fails by Wednesday. The thing that actually works is plumbing. You install a few valves in the pipe, set them once, and they keep saving while you forget they are there. I have five, plus two that were free the whole time.
 
@@ -31,9 +31,9 @@ A raw file search might hand back three thousand tokens of paths I will never re
 
 ## Cutting the *padding* out of the reply
 
-The second valve points the other way, at what the AI says back. I keep a mode switched on called caveman that strips replies down to the bone. No "I would be happy to help," no throat-clearing, no three sentences where one fragment will do. The substance stays. The padding dies. If you have ever watched an AI write a whole paragraph to say "yes," you know how much there is to cut. The answer lands shorter, the bill lands smaller, and honestly I read faster too.
+The second valve points the other way, at what the AI says back. I keep a mode switched on called [caveman](https://github.com/JuliusBrussee/caveman) that strips replies down to the bone. No "I would be happy to help," no throat-clearing, no three sentences where one fragment will do. The substance stays. The padding dies. If you have ever watched an AI write a whole paragraph to say "yes," you know how much there is to cut. The answer lands shorter, the bill lands smaller, and honestly I read faster too.
 
-Next to it runs a third persona named ponytail. It makes the AI behave like a tired senior developer who got paged at 3am and wants to write as little code as possible. Fewer lines generated means fewer tokens generated. But here is the part I did not expect. The laziest correct solution is usually the one I can actually maintain. Saving money and getting cleaner work turned out to be the same lever.
+Next to it runs a third persona named [ponytail](https://github.com/DietrichGebert/ponytail). It makes the AI behave like a tired senior developer who got paged at 3am and wants to write as little code as possible. Fewer lines generated means fewer tokens generated. But here is the part I did not expect. The laziest correct solution is usually the one I can actually maintain. Saving money and getting cleaner work turned out to be the same lever.
 
 > You do not save tokens by thinking smaller. You install a valve and forget it exists.
 
@@ -47,7 +47,7 @@ The skills are all still there. They just stop reciting themselves at length eve
 
 ## The valve on the way *in*
 
-The fifth one I almost forgot I had, which is the point. When I reference a heavy file, a PDF, a slide deck, a spreadsheet, a hook called markitdown catches it before it ever reaches the model. It converts the thing to clean markdown and quietly tells the AI to read that instead of the raw binary.
+The fifth one I almost forgot I had, which is the point. When I reference a heavy file, a PDF, a slide deck, a spreadsheet, a hook called [markitdown](https://github.com/microsoft/markitdown) catches it before it ever reaches the model. It converts the thing to clean markdown and quietly tells the AI to read that instead of the raw binary.
 
 ![Heavy PDF, DOCX and XLSX files passing through markitdown on input and arriving as one clean light markdown file](/essays/ai-token-valves/markitdown.gif)
 
@@ -55,7 +55,7 @@ RTK is a valve on what comes back. This is a valve on what goes in. A forty page
 
 ## The tools I don't *load*
 
-Claude Code can reach a whole shelf of outside tools through something called MCP. A browser driver, a design app, a support inbox, a chart maker. Each one comes with a manual the AI has to read before it can use it, and those manuals are not small. Load every one up front and they crowd the window before I have typed a word.
+Claude Code can reach a whole shelf of outside tools through something called [MCP](https://modelcontextprotocol.io). A browser driver, a design app, a support inbox, a chart maker. Each one comes with a manual the AI has to read before it can use it, and those manuals are not small. Load every one up front and they crowd the window before I have typed a word.
 
 So they sit deferred. Connected, listed by name, but their manuals stay on the shelf at almost no cost. The moment I actually need the browser tool, that one manual loads, the call runs, and the result comes back. I pay for the one I reached for, not the forty I did not.
 
@@ -65,7 +65,7 @@ It is the same idea as the menu cap, one floor down. Do not pay to hold a tool y
 
 ## The valve that was *free* all along
 
-Here is the one I missed completely, and it turned out to be the biggest. Every time the AI takes a turn, most of what it reads is the same as last turn. The system prompt, the tool definitions, my config, my saved memory. That stable block sits in a cache and gets re-read at about a tenth of full price. I did not install it. It was on the whole time.
+Here is the one I missed completely, and it turned out to be the biggest. Every time the AI takes a turn, most of what it reads is the same as last turn. The system prompt, the tool definitions, my config, my saved memory. That stable block sits in a [cache](https://www.anthropic.com/news/prompt-caching) and gets re-read at about a tenth of full price. I did not install it. It was on the whole time.
 
 ![A tall gold cached prefix re-read at about ten percent, with a red strip on top labelled fresh each turn that never gets a cache hit](/essays/ai-token-valves/caching.gif)
 
