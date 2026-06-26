@@ -1,0 +1,115 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "Abhiram Chakkiyar, home" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - navigation [ref=e7]:
+        - list [ref=e8]:
+          - listitem [ref=e9]:
+            - link "Writing" [ref=e10] [cursor=pointer]:
+              - /url: /writing/
+          - listitem [ref=e11]:
+            - link "Projects" [ref=e12] [cursor=pointer]:
+              - /url: /projects/
+          - listitem [ref=e13]:
+            - link "Tags" [ref=e14] [cursor=pointer]:
+              - /url: /tags/
+          - listitem [ref=e15]:
+            - link "About" [ref=e16] [cursor=pointer]:
+              - /url: /about/
+          - listitem [ref=e17]:
+            - link "Archives" [ref=e18] [cursor=pointer]:
+              - /url: /archives/
+              - img [ref=e19]
+              - generic [ref=e22]: Archives
+          - listitem [ref=e23]:
+            - link "Search" [ref=e24] [cursor=pointer]:
+              - /url: /search/
+              - img [ref=e25]
+              - generic [ref=e28]: Search
+          - listitem [ref=e29]:
+            - button "light" [ref=e30] [cursor=pointer]:
+              - img [ref=e31]
+              - img
+  - navigation "breadcrumb" [ref=e34]:
+    - list [ref=e35]:
+      - listitem [ref=e36]:
+        - link "Home" [ref=e37] [cursor=pointer]:
+          - /url: /
+        - text: »
+      - listitem [ref=e38]: writing
+  - main [ref=e39]:
+    - heading "Writing" [level=1] [ref=e40]
+    - img [ref=e41]
+    - paragraph [ref=e43]: Essays and notes. Long-form ideas and quick takes, newest first.
+    - list [ref=e44]:
+      - listitem [ref=e45]:
+        - link "EssayHow I Cut My AI Bill Without Talking Less" [ref=e46] [cursor=pointer]:
+          - /url: /posts/essays/ai-token-valves/
+          - heading "EssayHow I Cut My AI Bill Without Talking Less" [level=2] [ref=e47]
+        - generic [ref=e48]:
+          - img [ref=e49]
+          - time [ref=e52]: 26 Jun, 2026
+        - paragraph [ref=e53]: Five set-once valves in my Claude Code config, two free ones (one I was quietly leaking), and the subscription-vs-API math that dwarfs them all.
+      - listitem [ref=e54]:
+        - link "EssayHow I Built a Product Promo, End to End, Without Writing the Code" [ref=e55] [cursor=pointer]:
+          - /url: /posts/essays/building-a-promo-without-code/
+          - heading "EssayHow I Built a Product Promo, End to End, Without Writing the Code" [level=2] [ref=e56]
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - time [ref=e61]: 25 Jun, 2026
+        - paragraph [ref=e62]: A documentation manager built a sixty-second product promo end to end, with AI doing the hands-on work and me directing. The full nine-stage pipeline, and why the real skill turned out to be taste, not code.
+      - listitem [ref=e63]:
+        - 'link "EssayThe 54% Rule: Five Circuit-Breakers I Use to Lead a Writing Team" [ref=e64] [cursor=pointer]':
+          - /url: /posts/essays/the-54-percent-rule/
+          - 'heading "EssayThe 54% Rule: Five Circuit-Breakers I Use to Lead a Writing Team" [level=2] [ref=e65]'
+        - generic [ref=e66]:
+          - img [ref=e67]
+          - time [ref=e70]: 19 Jun, 2026
+        - paragraph [ref=e71]: Roger Federer won eighty percent of his matches. He won only fifty-four percent of the points inside them. Once that gap sank in, I started managing myself differently.
+      - listitem [ref=e72]:
+        - link "EssayColophon" [ref=e73] [cursor=pointer]:
+          - /url: /posts/essays/colophon/
+          - heading "EssayColophon" [level=2] [ref=e74]
+        - generic [ref=e75]:
+          - img [ref=e76]
+          - time [ref=e79]: 19 Jun, 2026
+        - paragraph [ref=e80]: What this site is, who made it, and how it was built.
+  - contentinfo [ref=e81]:
+    - generic [ref=e82]:
+      - generic [ref=e83]:
+        - link "Abhiram Chakkiyar on Github" [ref=e84] [cursor=pointer]:
+          - /url: https://github.com/chakkiyar102
+          - img [ref=e85]
+          - generic [ref=e88]: Abhiram Chakkiyar on Github
+        - link "Abhiram Chakkiyar on X" [ref=e89] [cursor=pointer]:
+          - /url: https://twitter.com/abhichakkiyar
+          - img [ref=e90]
+          - generic [ref=e93]: Abhiram Chakkiyar on X
+        - link "Abhiram Chakkiyar on Linkedin" [ref=e94] [cursor=pointer]:
+          - /url: https://linkedin.com/in/abhiramchakkiyar
+          - img [ref=e95]
+          - generic [ref=e99]: Abhiram Chakkiyar on Linkedin
+        - link "Send an email to Abhiram Chakkiyar" [ref=e100] [cursor=pointer]:
+          - /url: mailto:abhiram@chakkiyar.org
+          - img [ref=e101]
+          - generic [ref=e105]: Send an email to Abhiram Chakkiyar
+      - generic [ref=e106]:
+        - generic [ref=e107]: Copyright © 2026
+        - generic [ref=e108]: "|"
+        - generic [ref=e109]: All rights reserved.
+  - generic [ref=e112]:
+    - button "Menu" [ref=e113]:
+      - img [ref=e115]
+      - generic: Menu
+    - button "Inspect" [ref=e119]:
+      - img [ref=e121]
+      - generic: Inspect
+    - button "Audit" [ref=e123]:
+      - img [ref=e125]
+      - generic: Audit
+    - button "Settings" [ref=e128]:
+      - img [ref=e130]
+      - generic: Settings

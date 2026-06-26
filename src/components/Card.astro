@@ -14,7 +14,7 @@ const { title, description, tier, ...props } = data;
 const tierLabel = tier === "note" ? "Note" : "Essay";
 ---
 
-<li class="my-6">
+<li class="my-9">
   <a
     href={getPostUrl(id, filePath, Astro.currentLocale)}
     class:list={[
@@ -30,6 +30,6 @@ const tierLabel = tier === "note" ? "Note" : "Essay";
       >{title}
     </Heading>
   </a>
-  <Datetime {...props} />
-  <p>{description}</p>
+  <Datetime {...props} class="mt-2" />
+  <p class="mt-2.5 leading-relaxed">{description}</p>
 </li>

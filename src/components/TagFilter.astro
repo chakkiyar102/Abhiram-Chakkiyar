@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import { getUniqueTags } from "@/utils/getUniqueTags";
+
+// Self-contained: builds the tag list itself so pages just drop <TagFilter />.
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+const tags = getUniqueTags(posts);
+---
+
+<div class="mb-8 flex items-center gap-2">
+  <label for="tag-filter" class="text-muted-foreground text-sm font-medium">
+    Filter by tag
+  </label>
+  <select
+    id="tag-filter"
+    aria-label="Filter articles by tag"
+    class="border-border bg-background text-foreground focus-visible:ring-accent rounded-md border px-3 py-1.5 text-sm focus-visible:ring-2 focus-visible:outline-none"
+  >
+    <option value="">All articles</option>
+    {
+      tags.map(({ tag, tagName }) => (
+        <option value={`/tags/${tag}/`}>{tagName}</option>
+      ))
+    }
+  </select>
+</div>
+
+<script>
+  document.getElementById("tag-filter")?.addEventListener("change", e => {
+    const dest = (e.currentTarget as HTMLSelectElement).value;
+    if (dest) window.location.href = dest;
+  });
+</script>
