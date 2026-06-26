@@ -29,9 +29,9 @@ Here is the shape of the work before we go deep. Nine stages, roughly in order, 
 8. **Cut it together.** Assemble, trim, add transitions.
 9. **Caption and composite.** Text overlays, glass cards, the end card.
 
-![One conveyor belt. I stand at the controls, not on the line.](/essays/building-a-promo-without-code/1-pipeline-map.png)
+![One conveyor belt. I stand at the controls, not on the line.](/essays/building-a-promo-without-code/1-pipeline-map.gif)
 
-## Stage 1 — Set up the workshop
+## Stage 1: Set up the workshop
 
 Before any of the fun, you wire the bench. This is the unglamorous part nobody blogs about, and skipping it is why people give up on day one. My setup: **Claude Code** running the Opus 4.8 model as the agent in the terminal that conducts everything, **ffmpeg** for every video operation, **HyperFrames** for the motion-graphics overlays, **ElevenLabs** for the voiceover, the open-source **Inter** typeface, and the real brand kit so the logo is never the garbled AI version.
 
@@ -43,7 +43,7 @@ One real gotcha lives here. The overlay tool needed a newer runtime than my defa
 
 ![Sharpen every tool before you cut a single frame.](/essays/building-a-promo-without-code/2-workshop-bench.png)
 
-## Stage 2 & 3 — The use case, and a spec the AI can build from
+## Stage 2 & 3: The use case, and a spec the AI can build from
 
 A promo is only as good as the thing it shows. I picked one concrete, believable enterprise scenario, a hospital operations command center, the kind of app a real business user would actually need. One use case, shown well, beats five shown shallowly.
 
@@ -53,7 +53,7 @@ Then the part that surprised me most: the app was not mocked up. It was genuinel
 
 This matters for the promo because it is the actual claim of the product. So the film could show the real thing doing real work, not a pretty fake. If you are documenting a product, you already know how to write a spec. That skill ports straight over.
 
-## Stage 4 — Write the script, and respect the house style
+## Stage 4: Write the script, and respect the house style
 
 The script is where a promo lives or dies, and it is pure writing, no tools required. We had a house style locked from an earlier teaser, and I held to it hard. Subdued and confident, not loud. No manufactured frustration, no villain, no urgency cuts. The product meets the viewer where they already are. The voiceover is unhurried. You let the lines land.
 
@@ -61,7 +61,7 @@ Structurally it is a two-column beat sheet, script on the left, the exact visual
 
 > *Restraint is the brief. The confidence comes from stillness and clean product motion, not from energy.*
 
-## Stage 5 — Generate the artifacts, then clean them up
+## Stage 5: Generate the artifacts, then clean them up
 
 Not everything is a screen recording. The film opens on a person at a desk with the imagined app drifting around them as faint wireframes. There is no stock footage budget and no shoot. So those shots were generated. I used an image model for the invented stills and a video model for the short b-roll clips, described in plain language, the same way I would brief a photographer.
 
@@ -80,19 +80,19 @@ python3 fill.py scene4.mp4 --target 1920x1080
 
 One of those watermarks was not even static. It was a little badge that drifted and shrank as the shot zoomed, so a single fixed patch could not cover it. It had to be followed across two hundred-odd frames, each a different size and position, the background rebuilt underneath it every time. I could not have written that tracker. I could describe the problem precisely and check the result at four timestamps. That division of labor is the whole game.
 
-![The watermark that refused to hold still.](/essays/building-a-promo-without-code/3-badge-tracking.png)
+![The watermark that refused to hold still.](/essays/building-a-promo-without-code/3-badge-tracking.gif)
 
 Not every artifact was visual. The narration itself was generated, not recorded in a booth. I had **ElevenLabs** read the script back as text-to-speech, calm and even, matched to the restrained tone the house style asks for. One more asset described in a sentence and produced on demand.
 
-## Stage 6 & 7 — Record the screens, then cut it together
+## Stage 6 & 7: Record the screens, then cut it together
 
 The product footage is real. I recorded the app with a clean screen-recorder, beat by beat, matching the script's right-hand column. Slow, deliberate captures, one per moment the script calls for. Recording to the script, not freestyling, is what saves you in the edit.
 
 Then the assembly. This is the one stage where I sat in a traditional editor, **Camtasia**, on a timeline, laying clips across tracks, trimming each to its beat, and dropping smooth transitions between them so nothing hard-cuts. Generated b-roll and screen captures on the upper track, the ElevenLabs voiceover and a bed of background music on the audio tracks below, holding the timing. The editor is where the separate pieces finally become a film.
 
-![The real edit in Camtasia — clips and transitions up top, voiceover and music holding the timing below.](/essays/building-a-promo-without-code/shot-editor.png)
+![The real edit in Camtasia, clips and transitions up top, voiceover and music holding the timing below.](/essays/building-a-promo-without-code/shot-editor.png)
 
-## Stage 8 — Caption and composite, where the polish lives
+## Stage 8: Caption and composite, where the polish lives
 
 Now the part I obsessed over, and the part that taught me the most. The cut had no on-screen text, and a silent promo loses people. So it needed captions. The first pass was bad. White text on a dark strip along the bottom, every caption the same, the visual equivalent of a monotone. It was technically correct and completely lifeless.
 
@@ -116,7 +116,7 @@ That verifying question comes straight from documentation work. You do not trust
 
 > *In a loop with a machine, the most useful thing you can say is often the dumbest: prove it.*
 
-## Stage 9 — The end card, and knowing when to stop
+## Stage 9: The end card, and knowing when to stop
 
 The film closes on the product name resolving above the real logo. Simple, but it took three rounds. Too big and it crowded the logo. Too tight and it looked cramped. The fix was nothing clever, just looking, nudging the size and spacing, and looking again until the gap felt right. That loop, look and adjust and look, is most of what design actually is.
 
@@ -134,6 +134,6 @@ The work did not disappear when the tools got good. It moved up the stack, from 
 
 If you want to make a promo like this, the pipeline above is the whole map. Set up the bench, pick one real use case, build the real thing, write with restraint, generate and clean what you cannot film, record to the script, cut on a timeline, and caption with care. The tools will do the hands-on work. Your job is to keep looking until it is good. So learn to see. The seeing is the job now.
 
-![What's cheap now, and what just got priceless.](/essays/building-a-promo-without-code/5-eye-vs-hands.png)
+![What's cheap now, and what just got priceless.](/essays/building-a-promo-without-code/5-eye-vs-hands.gif)
 
 *Written the day a sixty-second promo taught me where my job actually lives.*

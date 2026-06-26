@@ -28,7 +28,7 @@ Doubt. Rumination. Over-analysis. Catastrophising. And the itch to pick a side b
 
 What follows is the set of circuit-breakers I now reach for. None of them started with me. I have just dragged each one into the world I actually live in, which is drafts, reviews, appraisal forms, and a Slack channel that never fully goes quiet. Here is the whole map first, then the five protocols one by one.
 
-![The map: five circuit-breakers — believable self-talk when doubt hits, the Federer reset after a mistake, first-thought when over-analysing, problem or not when catastrophising, and stay in the talk when picking a side.](/essays/the-54-percent-rule/slide-2.jpg)
+![The map: five circuit-breakers, believable self-talk when doubt hits, the Federer reset after a mistake, first-thought when over-analysing, problem or not when catastrophising, and stay in the talk when picking a side.](/essays/the-54-percent-rule/slide-2.gif)
 
 ## 1. The believable *lie*
 
@@ -44,7 +44,7 @@ So I stopped lying to it. The line I use now is small and true. *This is going t
 
 ## 2. The 54% *rule*
 
-![Circuit-breaker two, failure: the Federer reset. Feel it for five seconds, label it, exhale, re-enter.](/essays/the-54-percent-rule/slide-4.jpg)
+![Circuit-breaker two, failure: the Federer reset. Feel it for five seconds, label it, exhale, re-enter.](/essays/the-54-percent-rule/slide-4.gif)
 
 Back to that documentation article and the AI model that caught my mistake.
 
