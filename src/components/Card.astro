@@ -10,7 +10,8 @@ type Props = {
 
 const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
-const { title, description, ...props } = data;
+const { title, description, tier, ...props } = data;
+const tierLabel = tier === "note" ? "Note" : "Essay";
 ---
 
 <li class="my-6">
@@ -23,7 +24,10 @@ const { title, description, ...props } = data;
     ]}
   >
     <Heading transition:name={toTransitionName(title)}>
-      {title}
+      <span
+        class="border-border text-muted-foreground mr-2 rounded border px-1.5 py-0.5 align-middle text-xs font-medium tracking-wide uppercase"
+        >{tierLabel}</span
+      >{title}
     </Heading>
   </a>
   <Datetime {...props} />

@@ -10,22 +10,20 @@ import { getSortedPosts } from "@/utils/getSortedPosts";
 import config from "@/config";
 
 const allPosts = await getCollection("posts", ({ data }) => !data.draft);
-const essays = getSortedPosts(
-  allPosts.filter(post => post.id.startsWith("essays/"))
-);
+const writing = getSortedPosts(allPosts);
 ---
 
-<Layout title={`Essays | ${config.site.title}`}>
+<Layout title={`Writing | ${config.site.title}`}>
   <Header />
 
   <Breadcrumb />
 
   <Main
-    pageTitle="Essays"
-    pageDesc="Long-form writing. Ideas that need space to develop."
+    pageTitle="Writing"
+    pageDesc="Essays and notes. Long-form ideas and quick takes, newest first."
   >
     <ul>
-      {essays.map(data => <Card {...data} />)}
+      {writing.map(data => <Card {...data} />)}
     </ul>
   </Main>
 
