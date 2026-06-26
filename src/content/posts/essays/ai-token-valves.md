@@ -91,7 +91,7 @@ So the valves shave the metered cost, sure. But the subscription is the real lev
 
 If I am going to brag about valves, I owe you the leaks too. One setting on my account makes the AI add little teaching asides to its answers. I like them, but they are extra words, which is extra tokens, working directly against caveman and ponytail. The per-prompt reminders I mentioned do the same in miniature. And I run the model on its most thorough setting, which thinks longer and writes more by design.
 
-None of these are mistakes. They are choices, and some of them I will keep. But a post that only lists the savings and hides the spending is selling you something. There is also a tool I reach for by hand called graphify, which turns a whole codebase into a map I can query instead of opening forty files. That one genuinely saves, but it is a move I make, not a valve I forget. Worth knowing the difference.
+None of these are mistakes. They are choices, and some of them I will keep. But a post that only lists the savings and hides the spending is selling you something. There is also a tool I reach for by hand called [graphify](https://github.com/safishamsi/graphify), which turns a whole codebase into a map I can query instead of opening forty files. That one genuinely saves, but it is a move I make, not a valve I forget. Worth knowing the difference.
 
 ## Measure, then *forget*
 
