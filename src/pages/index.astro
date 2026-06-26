@@ -26,12 +26,6 @@ const essays = getSortedPosts(
 );
 const featuredEssay = essays[0] ?? null;
 
-// Recent notes: latest 3 under notes/
-const notes = getSortedPosts(
-  allPosts.filter(post => post.id.startsWith("notes/"))
-);
-const recentNotes = notes.slice(0, 3);
-
 // --- Projects ---
 const allProjects = await getCollection("projects", ({ data }) => {
   return import.meta.env.PROD ? !data.draft : true;
@@ -117,29 +111,6 @@ const homePath = getRelativeLocaleUrl(locale, "");
           </div>
           <ul>
             <Card variant="h3" {...featuredEssay} />
-          </ul>
-        </section>
-      )
-    }
-
-    <!-- Recent Notes -->
-    {
-      recentNotes.length > 0 && (
-        <section id="recent-notes" class="border-border border-b pt-10 pb-6">
-          <div class="flex items-baseline justify-between gap-4">
-            <h2 class="text-2xl font-semibold tracking-tight">Recent Notes</h2>
-            <LinkButton
-              href={getRelativeLocaleUrl(locale, "notes")}
-              class="text-sm opacity-70 hover:opacity-100 whitespace-nowrap"
-            >
-              View all
-              <IconArrowRight class="inline-block rtl:-rotate-180" />
-            </LinkButton>
-          </div>
-          <ul>
-            {recentNotes.map(data => (
-              <Card variant="h3" {...data} />
-            ))}
           </ul>
         </section>
       )
