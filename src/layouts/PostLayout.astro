@@ -63,4 +63,15 @@ const structuredData = {
   </Fragment>
 
   <slot />
+
+  <div
+    id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="YOUR_APP_ID"
+    data-page-id={Astro.url.pathname}
+    data-page-url={canonicalURL}
+    data-page-title={title}
+    class="mt-12"
+  ></div>
+  <script is:inline async src="https://cusdis.com/js/cusdis.es.js"></script>
 </Layout>
