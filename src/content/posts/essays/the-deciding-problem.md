@@ -12,7 +12,7 @@ description: "I spent a weekend roasting a website and rebuilding it from scratc
 ---
 ![Brand-colored ribbons of light assembling into the line: The Agentic OS for Business](/essays/the-deciding-problem/1-banner.gif)
 
-My team ran a contest. The brief was unusually honest: stop reviewing our own website and start roasting it. Pick a character, land on the homepage, and say the thing a real visitor would think but never email us. A small group had done it one morning and laughed hard enough that they opened it to the whole company.
+Our marketing team ran a contest, company-wide. The brief was unusually honest: stop reviewing our own website and start roasting it. Pick a character, land on the homepage, and say the thing a real visitor would think but never email us. A small group had done it one morning and laughed hard enough that they opened it to the whole company.
 
 ![A company-chat announcement headlined The Great Website Roast Is ON, inviting everyone to roast the company's own website](/essays/the-deciding-problem/2-the-brief.png)
 *The actual brief that kicked it off. Names masked, the dare was real.*
