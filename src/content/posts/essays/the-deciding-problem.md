@@ -40,7 +40,7 @@ A roast with no follow-through is just complaining with better timing. So I gave
 
 I cannot hand-write that. What I can do is direct it. I work with AI tools the way a documentation lead works with a room of fast, literal contributors. I decide, they execute, I check. The building was genuinely the easy half. I described a dark stage, a single living mark made of brand-colored light, one category line, and the AI produced [a working, animated site](https://abhiram-kissflow.github.io/kissflow-agentic-os/). When I asked for proof and trust sections it built those too.
 
-![A dark webpage with the headline The Agentic OS for Business](/essays/the-deciding-problem/3-the-reveal.png)
+![A dark webpage with the headline The Agentic OS for Business](/essays/the-deciding-problem/3-the-reveal.gif)
 *One category. One sentence. The whole rebuild was an argument for picking a lane.*
 
 The speed was almost a trap. When a tool can build anything in minutes, the bottleneck stops being effort and becomes judgment. I could generate ten heroes before lunch. Choosing one, and killing the other nine without flinching, was the actual work. Every time I stalled, the project stalled with me, and it was never because the AI was slow.
@@ -68,14 +68,14 @@ None of that was the disaster. The disaster would have been treating any one of 
 
 Here is the larger thing the weekend taught me, and it is bigger than one website. For years our category described how the work got made. Faster tools, fewer steps, less code. That was a real answer to a real question. But the question is changing. The new one is not how fast a person can build. It is whether the software can act on its own, safely, inside a business that has rules.
 
-![A diagram: traditional structured software, plus orchestration, memory and reasoning, becomes an agentic operating system](/essays/the-deciding-problem/4-blueprint.png)
+![A diagram: traditional structured software, plus orchestration, memory and reasoning, becomes an agentic operating system](/essays/the-deciding-problem/4-blueprint.gif)
 *The argument in one frame. The boring, structured foundation is exactly what an agent needs to act without breaking things.*
 
 The irony I enjoyed most is that the unglamorous parts turned out to be the advantage. Rules, permissions, structured data, audit trails. The stuff nobody puts on a banner is precisely the body an autonomous agent needs so it can act without doing something expensive and irreversible. A model can think. It cannot be trusted to act inside a company until something deterministic is holding the guardrails. The old, careful foundation is not the thing to apologise for. It is the thing to lead with.
 
 But you only get to make that argument if you decide to make it. The whole exercise kept rhyming with itself. The original sin was four answers to one question. The fix was not better words. The fix was the nerve to choose one answer and let the page be quiet about everything else.
 
-![The redesigned site shown in a tilted device frame next to the words One Category, One Flight](/essays/the-deciding-problem/5-redesign.png)
+![The redesigned site shown in a tilted device frame next to the words One Category, One Flight](/essays/the-deciding-problem/5-redesign.gif)
 *[The finished rebuild](https://abhiram-kissflow.github.io/kissflow-agentic-os/). Not because the design is clever. Because it picked one thing and meant it.*
 
 ## What I am taking back to the day job
