@@ -27,7 +27,7 @@ Here is the uncomfortable thing about looking at your own work as a stranger. Th
 
 Rather than itemise a colleague's hard work in public, I will keep the specifics in the family. The shape of it is what matters, and the shape is universal. A platform that does many things gets described many ways, once per team that owns a page, and the descriptions quietly compete instead of combining. Each one is true. Together they cancel out. The visitor does not get a richer picture. They get a blurrier one.
 
-![One product viewed through four different labels, each pulling in a different direction](/essays/the-deciding-problem/6-four-labels.png)
+![One product viewed through four different labels, each pulling in a different direction](/essays/the-deciding-problem/6-four-labels.gif)
 *Four true labels, pulling four ways. Each one is correct. Together they read as confusion.*
 
 I have lived this from the inside, so I am not throwing stones. Documentation has the same disease in a different outfit. Ten writers describe the same feature ten reasonable ways, and the reader pays for our refusal to pick one. The website just made the cost visible, on the front door, in marketing font.
