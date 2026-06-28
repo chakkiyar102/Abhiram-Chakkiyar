@@ -14,6 +14,9 @@ description: "I spent a weekend roasting a website and rebuilding it from scratc
 
 My team ran a contest. The brief was unusually honest: stop reviewing our own website and start roasting it. Pick a character, land on the homepage, and say the thing a real visitor would think but never email us. A small group had done it one morning and laughed hard enough that they opened it to the whole company.
 
+![A company-chat announcement headlined The Great Website Roast Is ON, inviting everyone to roast the company's own website](/essays/the-deciding-problem/2-the-brief.png)
+*The actual brief that kicked it off. Names masked, the dare was real.*
+
 I am a documentation manager, not an engineer. I do not ship the product. But I read for a living, and the one thing a reader cannot forgive is not knowing where they are. So I took the bait. I opened the site like a stranger with a budget and a short attention span, and I tried to answer one question. What is this?
 
 I could not. Not because the writing was bad. Because the site had not decided. One page spoke one language, the next page spoke another, and a careful visitor was left holding four half-answers and no whole one. I wrote it up, had a good laugh, and then a quieter thought arrived and would not leave. This was not a wording problem. It was a deciding problem. And deciding, it turns out, is the part nobody wants to do.
