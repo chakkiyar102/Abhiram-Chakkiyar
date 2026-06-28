@@ -9,7 +9,6 @@ tags:
   - writing
   - positioning
 description: "I spent a weekend roasting a website and rebuilding it from scratch. Every hard moment turned out to be a decision, not a line of code."
-ogImage: "/essays/the-deciding-problem/3-the-reveal.png"
 ---
 ![Brand-colored ribbons of light assembling into the line: The Agentic OS for Business](/essays/the-deciding-problem/1-banner.gif)
 
