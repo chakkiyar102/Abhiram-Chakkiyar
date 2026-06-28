@@ -8,7 +8,7 @@ tags:
   - ai
   - writing
   - positioning
-description: "I spent a weekend roasting a website and rebuilding it from scratch. Every hard moment turned out to be a decision, not a line of code."
+description: "Our marketing team dared the company to roast our own website. I spent the weekend building my own answer from scratch, and every hard moment turned out to be a decision, not a line of code."
 ---
 ![Brand-colored ribbons of light assembling into the line: The Agentic OS for Business](/essays/the-deciding-problem/1-banner.gif)
 
@@ -36,7 +36,7 @@ I have lived this from the inside, so I am not throwing stones. Documentation ha
 
 ## Roasting is cheap. Rebuilding is the tell
 
-A roast with no follow-through is just complaining with better timing. So I gave myself a harder version of the assignment. Do not tell them what is wrong. Show them what right could look like. By the weekend I wanted a real homepage, not a slide. Something a person could open in a browser and click.
+A roast with no follow-through is just complaining with better timing. The real revamp belongs to the marketing team, not to me. I sit in documentation, well outside that call, and nobody asked me to redraw their homepage. But the contest was open to everyone, so I gave myself a harder version of the assignment. Do not tell them what is wrong. Show them what right could look like. By the weekend I wanted a real homepage, not a slide. Something a person could open in a browser and click.
 
 I cannot hand-write that. What I can do is direct it. I work with AI tools the way a documentation lead works with a room of fast, literal contributors. I decide, they execute, I check. The building was genuinely the easy half. I described a dark stage, a single living mark made of brand-colored light, one category line, and the AI produced [a working, animated site](https://abhiram-kissflow.github.io/kissflow-agentic-os/). When I asked for proof and trust sections it built those too.
 
@@ -76,11 +76,11 @@ The irony I enjoyed most is that the unglamorous parts turned out to be the adva
 But you only get to make that argument if you decide to make it. The whole exercise kept rhyming with itself. The original sin was four answers to one question. The fix was not better words. The fix was the nerve to choose one answer and let the page be quiet about everything else.
 
 ![The redesigned site shown in a tilted device frame next to the words One Category, One Flight](/essays/the-deciding-problem/5-redesign.gif)
-*[The finished rebuild](https://abhiram-kissflow.github.io/kissflow-agentic-os/). Not because the design is clever. Because it picked one thing and meant it.*
+*[My weekend rebuild](https://abhiram-kissflow.github.io/kissflow-agentic-os/), not the shipped site. Not because the design is clever. Because it picked one thing and meant it.*
 
 ## What I am taking back to the day job
 
-I did not set out to learn anything. I set out to win a contest with a joke. But the lesson followed me back to the work I actually get paid for. Documentation is positioning at a smaller scale, one page at a time. Every help article is a tiny version of the same test. Did we decide what this page is for, or did we hedge and let the reader sort it out?
+I did not set out to learn anything. I wandered into another team's contest to win it with a joke. But the lesson followed me back to the work I actually get paid for, which is not theirs and not this. Documentation is positioning at a smaller scale, one page at a time. Every help article is a tiny version of the same test. Did we decide what this page is for, or did we hedge and let the reader sort it out?
 
 The tools will keep getting faster. Mine already build in minutes what used to take a week. That does not make the work easier. It moves the work. The scarce thing is no longer the making. It is the deciding, and the nerve to defend a decision through a few ugly hours without reopening it every time something breaks.
 
