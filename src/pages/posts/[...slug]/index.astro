@@ -162,10 +162,61 @@ const readingTime = Math.max(1, Math.round(wordCount / 200));
 
     <hr class="my-8 border-dashed" />
 
+    <section aria-labelledby="comments-heading" class="my-8">
+      <h2 id="comments-heading" class="text-accent text-2xl font-semibold">
+        Comments
+      </h2>
+      <div
+        id="cusdis_thread"
+        data-host="https://cusdis.com"
+        data-app-id="7349fb37-9461-4d88-ac2b-e5f0fb6274eb"
+        data-page-id={Astro.url.pathname}
+        data-page-url={canonicalURL}
+        data-page-title={title}
+        data-theme="auto"
+        class="mt-4"
+      >
+      </div>
+    </section>
+
+    <hr class="my-8 border-dashed" />
+
     <AdjacentPostNav {prevPost} {nextPost} />
   </main>
   <Footer />
 </PostLayout>
+
+<script is:inline async src="https://cusdis.com/js/cusdis.es.js"></script>
+<script is:inline>
+  // Keep the Cusdis iframe's theme in sync with the site's light/dark toggle.
+  (function () {
+    const siteTheme = () =>
+      document.documentElement.classList.contains("dark") ? "dark" : "light";
+    const tagThread = () =>
+      document
+        .getElementById("cusdis_thread")
+        ?.setAttribute("data-theme", siteTheme());
+
+    tagThread();
+
+    // Follow live toggle: theme.ts flips `.dark` on <html>.
+    new MutationObserver(() => {
+      tagThread();
+      window.CUSDIS?.setTheme?.(siteTheme());
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    // Re-render after client-side (view transition) nav.
+    document.addEventListener("astro:after-swap", () => {
+      if (document.getElementById("cusdis_thread")) {
+        tagThread();
+        window.CUSDIS?.initial?.();
+      }
+    });
+  })();
+</script>
 
 <script is:inline data-astro-rerun>
   function createProgressBar() {
