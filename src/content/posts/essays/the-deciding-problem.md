@@ -53,7 +53,7 @@ There is [a stat I keep coming back to](/posts/essays/the-54-percent-rule/). Acr
 
 A weekend rebuild runs on the same math. Hundreds of small choices barely move the result. A handful decide everything, and they are almost always decisions, not tasks. What is this one thing? What gets cut so the one thing can breathe? When do I stop polishing a section that was already good enough an hour ago? Win those few and the ordinary points take care of themselves. Lose them and no amount of pretty animation saves you.
 
-![A wide funnel of many small choices narrowing to a few decisions that determine the outcome](/essays/the-deciding-problem/7-funnel.png)
+![A wide funnel of many small choices narrowing to a few decisions that determine the outcome](/essays/the-deciding-problem/7-funnel.gif)
 *Most choices are coin flips. A few are the match. Spend your nerve on those.*
 
 ## The mistakes were not the disaster
