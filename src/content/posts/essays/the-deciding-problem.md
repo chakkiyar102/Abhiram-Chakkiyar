@@ -20,7 +20,7 @@ I could not. Not because the writing was bad. Because the site had not decided. 
 
 ## The roast wrote itself
 
-Here is the uncomfortable thing about looking at your own work as a stranger. The flaws are not hidden. They are sitting in plain sight, protected only by the fact that everyone who works there already knows what the company means, so nobody reads the page cold anymore. Familiarity is a kind of blindness. The roast was easy because I made myself forget.
+Here is the uncomfortable thing about looking at your own work as a stranger. The flaws are not hidden. They are sitting in plain sight, protected only by the fact that everyone who works there already knows what the company means, so nobody reads the page cold anymore. Familiarity is [a kind of blindness](https://hbr.org/2006/12/the-curse-of-knowledge). The roast was easy because I made myself forget.
 
 Rather than itemise a colleague's hard work in public, I will keep the specifics in the family. The shape of it is what matters, and the shape is universal. A platform that does many things gets described many ways, once per team that owns a page, and the descriptions quietly compete instead of combining. Each one is true. Together they cancel out. The visitor does not get a richer picture. They get a blurrier one.
 
@@ -35,7 +35,7 @@ I have lived this from the inside, so I am not throwing stones. Documentation ha
 
 A roast with no follow-through is just complaining with better timing. So I gave myself a harder version of the assignment. Do not tell them what is wrong. Show them what right could look like. By the weekend I wanted a real homepage, not a slide. Something a person could open in a browser and click.
 
-I cannot hand-write that. What I can do is direct it. I work with AI tools the way a documentation lead works with a room of fast, literal contributors. I decide, they execute, I check. The building was genuinely the easy half. I described a dark stage, a single living mark made of brand-colored light, one category line, and the AI produced a working, animated site. When I asked for proof and trust sections it built those too.
+I cannot hand-write that. What I can do is direct it. I work with AI tools the way a documentation lead works with a room of fast, literal contributors. I decide, they execute, I check. The building was genuinely the easy half. I described a dark stage, a single living mark made of brand-colored light, one category line, and the AI produced [a working, animated site](https://abhiram-kissflow.github.io/kissflow-agentic-os/). When I asked for proof and trust sections it built those too.
 
 ![A dark webpage with the headline The Agentic OS for Business](/essays/the-deciding-problem/3-the-reveal.png)
 *One category. One sentence. The whole rebuild was an argument for picking a lane.*
@@ -46,7 +46,7 @@ The speed was almost a trap. When a tool can build anything in minutes, the bott
 
 ## This is the part that maps to Federer
 
-There is a stat I keep coming back to. Across his career, Roger Federer won almost half his matches while winning barely more than half the individual points. The points are nearly a coin flip. The matches are not. The difference is not effort on every point. It is judgment on the few that decide the set.
+There is [a stat I keep coming back to](/posts/essays/the-54-percent-rule/). Across his career, Roger Federer won almost half his matches while [winning barely more than half the individual points](https://home.dartmouth.edu/news/2024/06/2024-commencement-address-roger-federer). The points are nearly a coin flip. The matches are not. The difference is not effort on every point. It is judgment on the few that decide the set.
 
 A weekend rebuild runs on the same math. Hundreds of small choices barely move the result. A handful decide everything, and they are almost always decisions, not tasks. What is this one thing? What gets cut so the one thing can breathe? When do I stop polishing a section that was already good enough an hour ago? Win those few and the ordinary points take care of themselves. Lose them and no amount of pretty animation saves you.
 
@@ -57,7 +57,7 @@ A weekend rebuild runs on the same math. Hundreds of small choices barely move t
 
 I want to be honest about the middle, because the clean version is a lie everyone tells. It did not go smoothly. The deploy broke on a setting I had wrong. A batch of my AI contributors quietly did nothing and reported success, so I had to notice the silence and send them back. Text from three sections stacked on top of itself and made the page look like a ransom note. A cache corrupted right before the final render.
 
-None of that was the disaster. The disaster would have been treating any one of them as proof the whole idea was bad. A setback at hour nine feels like a verdict. It is almost never a verdict. It is a task with a bad attitude. The move is to fix the one broken thing and protect the decision you already made, instead of reopening the whole case every time something snags. Catastrophising is just indecision wearing a costume.
+None of that was the disaster. The disaster would have been treating any one of them as proof the whole idea was bad. A setback at hour nine feels like a verdict. It is almost never a verdict. It is a task with a bad attitude. The move is to fix the one broken thing and [protect the decision you already made](https://s2.q4cdn.com/299287126/files/doc_financials/annual/2015-Letter-to-Shareholders.PDF), instead of reopening the whole case every time something snags. Catastrophising is just indecision wearing a costume.
 
 > **!** A broken deploy is a task. Deciding the project is doomed because the deploy broke is a mistake. Keep those two apart and most bad days get a lot shorter.
 
@@ -73,7 +73,7 @@ The irony I enjoyed most is that the unglamorous parts turned out to be the adva
 But you only get to make that argument if you decide to make it. The whole exercise kept rhyming with itself. The original sin was four answers to one question. The fix was not better words. The fix was the nerve to choose one answer and let the page be quiet about everything else.
 
 ![The redesigned site shown in a tilted device frame next to the words One Category, One Flight](/essays/the-deciding-problem/5-redesign.png)
-*The finished rebuild. Not because the design is clever. Because it picked one thing and meant it.*
+*[The finished rebuild](https://abhiram-kissflow.github.io/kissflow-agentic-os/). Not because the design is clever. Because it picked one thing and meant it.*
 
 ## What I am taking back to the day job
 
