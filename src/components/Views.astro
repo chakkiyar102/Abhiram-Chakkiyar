@@ -1,0 +1,49 @@
+---
+// View counter. No backend: hits abacus (free, no signup, auto-creates keys),
+// keyed off a post's URL path. The real post page (no `path` prop) increments
+// once per browser session; index cards (with `path`) only read.
+// Hidden until a number lands, hidden on error.
+// ponytail: hosted counter over self-hosted KV — swap NS/URL below if abacus dies.
+type Props = { path?: string };
+const { path } = Astro.props;
+---
+
+<span class="views" data-path={path} hidden>
+  <span aria-hidden="true">&middot;</span>
+  <span class="views-count"></span> views
+</span>
+
+<script is:inline>
+  (function () {
+    if (window.__viewsInit) return; // component renders per-card; run once
+    window.__viewsInit = true;
+    const NS = "abhiram-cyou"; // abacus namespace
+    const keyOf = p =>
+      p.replace(/[^a-z0-9]/gi, "_").replace(/^_+|_+$/g, "") || "home";
+
+    async function fill(el) {
+      const host = location.hostname;
+      if (host === "localhost" || host === "127.0.0.1") return; // don't touch dev
+
+      const self = !el.dataset.path; // real post page increments; cards read-only
+      const key = keyOf(el.dataset.path || location.pathname);
+      const seen = self && sessionStorage.getItem("v:" + key);
+      const verb = self && !seen ? "hit" : "get";
+
+      try {
+        const r = await fetch(`https://abacus.jasoncameron.dev/${verb}/${NS}/${key}`);
+        const { value } = await r.json();
+        if (typeof value !== "number") return;
+        if (self) sessionStorage.setItem("v:" + key, "1");
+        el.querySelector(".views-count").textContent = value.toLocaleString();
+        el.hidden = false;
+      } catch {
+        /* offline / service down: leave hidden */
+      }
+    }
+
+    const run = () => document.querySelectorAll(".views").forEach(fill);
+    run();
+    document.addEventListener("astro:after-swap", run); // re-run on client nav
+  })();
+</script>

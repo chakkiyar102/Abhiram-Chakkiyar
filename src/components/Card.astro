@@ -3,6 +3,8 @@ import type { CollectionEntry } from "astro:content";
 import { getPostUrl } from "@/utils/getPostPaths";
 import { toTransitionName } from "@/utils/toTransitionName";
 import Datetime from "./Datetime.astro";
+import Views from "./Views.astro";
+
 
 type Props = {
   variant?: "h2" | "h3";
@@ -12,11 +14,12 @@ const { variant: Heading = "h2", id, data, filePath } = Astro.props;
 
 const { title, description, tier, ...props } = data;
 const tierLabel = tier === "note" ? "Note" : "Essay";
+const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
 ---
 
 <li class="my-9">
   <a
-    href={getPostUrl(id, filePath, Astro.currentLocale)}
+    href={postUrl}
     class:list={[
       "text-accent inline-block text-lg font-medium",
       "decoration-dashed underline-offset-4 hover:underline",
@@ -30,6 +33,9 @@ const tierLabel = tier === "note" ? "Note" : "Essay";
       >{title}
     </Heading>
   </a>
-  <Datetime {...props} class="mt-2" />
+  <div class="text-muted-foreground mt-2 flex items-center gap-x-2">
+    <Datetime {...props} />
+    <Views path={postUrl} />
+  </div>
   <p class="mt-2.5 leading-relaxed">{description}</p>
 </li>

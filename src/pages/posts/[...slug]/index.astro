@@ -5,6 +5,7 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Datetime from "@/components/Datetime.astro";
 import Tag from "@/components/Tag.astro";
+import Views from "@/components/Views.astro";
 import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { slugifyStr } from "@/utils/slugify";
@@ -125,6 +126,8 @@ const readingTime = Math.max(1, Math.round(wordCount / 200));
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
       <span aria-hidden="true">&middot;</span>
       <span>{readingTime} min read</span>
+      <Views />
+
       <span
         aria-hidden="true"
         class:list={[
