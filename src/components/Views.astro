@@ -8,9 +8,22 @@ type Props = { path?: string };
 const { path } = Astro.props;
 ---
 
-<span class="views" data-path={path} hidden>
-  <span aria-hidden="true">&middot;</span>
-  <span class="views-count"></span> views
+<span class="views inline-flex items-center gap-x-1" data-path={path} hidden>
+  <svg
+    class="size-4"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+  <span class="views-count"></span>
+  <span class="sr-only">views</span>
 </span>
 
 <script is:inline>
