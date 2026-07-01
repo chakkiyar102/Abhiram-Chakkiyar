@@ -90,6 +90,10 @@ The product footage is real. I recorded the app with a clean screen-recorder, be
 
 Then the assembly. This is the one stage where I sat in a traditional editor, **[Camtasia](https://www.techsmith.com/camtasia)**, on a timeline, laying clips across tracks, trimming each to its beat, and dropping smooth transitions between them so nothing hard-cuts. Generated b-roll and screen captures on the upper track, the ElevenLabs voiceover and a bed of background music on the audio tracks below, holding the timing. The editor is where the separate pieces finally become a film.
 
+That editor could have been a browser tab. **[OpenCut](https://opencut.app)**, an open-source tool formerly called AppCut, gives you the same timeline, the same tracks and trims and transitions, running locally in the browser with nothing uploaded to a server. It is younger and rougher than a paid desktop app, and the transition set is thinner, but for a short promo it covers the job, and the privacy is genuine. The footage never leaves your machine.
+
+There is a stranger option, and it is the one I keep circling back to. You can drop the timeline and write the edit as code. **[Remotion](https://www.remotion.dev)** treats a video as a function of frames, built in React and rendered by a script instead of a mouse. **[ffmpeg.wasm](https://ffmpegwasm.netlify.app)** runs the ffmpeg command line inside the browser, so a cut becomes an instruction, not a drag. That is a different sense of "in the browser" than OpenCut. One puts a familiar editor in a new place; the other turns the assembly itself into something you generate, which is the same move the rest of this promo already made. I did not go that far this time. I sat in Camtasia and moved clips by hand. But the timeline is the last manual island in an otherwise generated pipeline, and it is the one I expect to close next.
+
 ![The real edit in Camtasia, clips and transitions up top, voiceover and music holding the timing below.](/essays/building-a-promo-without-code/shot-editor.png)
 
 ## Stage 8: Caption and composite, where the polish lives
