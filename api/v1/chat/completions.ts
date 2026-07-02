@@ -1,11 +1,5 @@
 const OPENAI_BASE_URL = "https://api.openai.com/v1";
 
-function getPathSegments(pathParam: string | string[] | undefined) {
-  if (!pathParam) return [];
-  if (Array.isArray(pathParam)) return pathParam;
-  return [pathParam];
-}
-
 export default async function handler(req: any, res: any) {
   if (req.method === "OPTIONS") {
     res.setHeader("Allow", "POST,OPTIONS");
@@ -29,14 +23,7 @@ export default async function handler(req: any, res: any) {
     return;
   }
 
-  const path = getPathSegments(req.query.path).join("/");
-
-  if (path !== "chat/completions") {
-    res.status(404).json({ error: "Only /chat/completions is supported" });
-    return;
-  }
-
-  const upstreamURL = `${OPENAI_BASE_URL}/${path}`;
+  const upstreamURL = `${OPENAI_BASE_URL}/chat/completions`;
   const requestBody =
     typeof req.body === "string" ? req.body : JSON.stringify(req.body ?? {});
 
