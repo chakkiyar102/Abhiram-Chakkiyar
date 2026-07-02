@@ -130,6 +130,7 @@ let pageAgentInstance: {
   dispose?: () => void;
 } | null = null;
 let clickHandlerBound = false;
+let lifecycleHandlersBound = false;
 let currentMode: AgentMode = DEFAULT_MODE;
 
 function isValidMode(mode: unknown): mode is AgentMode {
@@ -372,8 +373,27 @@ function handleDocumentClick(event: Event) {
 function bindPageAgentHandlers() {
   if (clickHandlerBound) return;
 
-  document.addEventListener("click", handleDocumentClick);
+  // Bind on window so handler survives Astro route swaps reliably.
+  window.addEventListener("click", handleDocumentClick);
   clickHandlerBound = true;
+}
+
+function bindLifecycleHandlers() {
+  if (lifecycleHandlersBound) return;
+
+  const onBeforeSwap = () => {
+    resetPageAgent();
+  };
+
+  const onAfterSwap = () => {
+    renderModeToggle();
+    maybeOpenFromQuery();
+  };
+
+  // Bind on window; Astro swap events bubble and this is resilient to document replacement.
+  window.addEventListener("astro:before-swap", onBeforeSwap as EventListener);
+  window.addEventListener("astro:after-swap", onAfterSwap as EventListener);
+  lifecycleHandlersBound = true;
 }
 
 function bootstrapPageAgent() {
@@ -390,19 +410,11 @@ function bootstrapPageAgent() {
   };
 
   bindPageAgentHandlers();
+  bindLifecycleHandlers();
   renderModeToggle();
   maybeOpenFromQuery();
 }
 
 bootstrapPageAgent();
-
-document.addEventListener("astro:before-swap", () => {
-  resetPageAgent();
-});
-
-document.addEventListener("astro:after-swap", () => {
-  renderModeToggle();
-  maybeOpenFromQuery();
-});
 
 export {};
