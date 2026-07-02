@@ -124,6 +124,9 @@ async function initPageAgent() {
 }
 
 async function showPageAgent() {
+  // PageAgent may dispose itself after a run; always reopen with a fresh instance.
+  resetPageAgent();
+
   const agent = await initPageAgent();
   agent?.panel?.show?.();
 }
