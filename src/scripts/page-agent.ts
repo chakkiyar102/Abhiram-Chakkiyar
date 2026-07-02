@@ -54,6 +54,7 @@ let pageAgentInstance: {
   execute?: (task: string) => Promise<unknown>;
   dispose?: () => void;
 } | null = null;
+let triggerBound = false;
 
 function getConfig() {
   return {
@@ -138,13 +139,29 @@ function resetPageAgent() {
   pageAgentInstance = null;
 }
 
-function bindPageAgentTrigger() {
-  const trigger = document.getElementById("page-agent-trigger");
+function maybeOpenFromQuery() {
+  const query = new URLSearchParams(window.location.search);
+  if (query.get("ask") === "1") {
+    void showPageAgent();
+  }
+}
+
+function handleTriggerClick(event: Event) {
+  const target = event.target as HTMLElement | null;
+  if (!target) return;
+
+  const trigger = target.closest("#page-agent-trigger");
   if (!trigger) return;
 
-  trigger.addEventListener("click", () => {
-    showPageAgent();
-  });
+  event.preventDefault();
+  void showPageAgent();
+}
+
+function bindPageAgentTrigger() {
+  if (triggerBound) return;
+
+  document.addEventListener("click", handleTriggerClick);
+  triggerBound = true;
 }
 
 function bootstrapPageAgent() {
@@ -156,17 +173,17 @@ function bootstrapPageAgent() {
   };
 
   bindPageAgentTrigger();
-
-  const query = new URLSearchParams(window.location.search);
-  if (query.get("ask") === "1") {
-    showPageAgent();
-  }
+  maybeOpenFromQuery();
 }
 
 bootstrapPageAgent();
 
+document.addEventListener("astro:before-swap", () => {
+  resetPageAgent();
+});
+
 document.addEventListener("astro:after-swap", () => {
-  bindPageAgentTrigger();
+  maybeOpenFromQuery();
 });
 
 export {};
