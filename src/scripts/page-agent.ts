@@ -30,11 +30,44 @@ declare global {
       baseURL?: string;
       model?: string;
       language?: string;
-      instructions?: Record<string, unknown>;
+      instructions?: {
+        system?: string;
+        getPageInstructions?: (url: string) => string | undefined;
+      };
       options?: Record<string, unknown>;
     };
   }
 }
+
+const DEFAULT_SYSTEM_INSTRUCTIONS = `You are Ask AI for Abhiram's personal website.
+Operate as a page-aware content assistant, not a blind web automation bot.
+
+Rules:
+- Prefer answering from the current page content first.
+- Do NOT click, type, navigate, or scroll unless the user explicitly asks for an action (e.g. click/open/go/navigate/scroll/fill/select).
+- If the request is ambiguous or subjective (for example "best/worst"), ask one clarifying question before deciding.
+- If required information is not present on the current page, clearly say that and ask whether you should navigate.
+- Avoid unnecessary retries and avoid repeating the same action loop.
+- Keep final answers concise and practical.`;
+
+const DEFAULT_INSTRUCTIONS = {
+  system: DEFAULT_SYSTEM_INSTRUCTIONS,
+  getPageInstructions: (url: string) => {
+    if (url.includes("/writing")) {
+      return "This is the writing index page. Focus on titles, dates, tags, and metadata shown here.";
+    }
+
+    if (url.includes("/posts/")) {
+      return "This is a single post page. Focus on article content, headings, and visible metadata on this page.";
+    }
+
+    if (url.includes("/tags")) {
+      return "This is the tags page. Focus on listing and grouping visible tags only.";
+    }
+
+    return undefined;
+  },
+};
 
 const DEFAULT_CONFIG = {
   enabled: true,
@@ -116,7 +149,16 @@ async function initPageAgent() {
     baseURL: config.baseURL,
     model: config.model,
     language: config.language,
-    instructions: config.instructions,
+    instructions: config.instructions || DEFAULT_INSTRUCTIONS,
+    promptForNextTask: false,
+    customTools: {
+      click_element_by_index: null,
+      input_text: null,
+      select_dropdown_option: null,
+      scroll: null,
+      scroll_horizontally: null,
+      execute_javascript: null,
+    },
     ...(config.options || {}),
   });
 
