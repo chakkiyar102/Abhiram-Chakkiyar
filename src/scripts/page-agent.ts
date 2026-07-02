@@ -337,8 +337,22 @@ function maybeOpenFromQuery() {
   }
 }
 
+function getEventElementTarget(event: Event): Element | null {
+  const path = event.composedPath?.();
+  if (path?.length) {
+    for (const node of path) {
+      if (node instanceof Element) return node;
+    }
+  }
+
+  const rawTarget = event.target;
+  if (rawTarget instanceof Element) return rawTarget;
+  if (rawTarget instanceof Node) return rawTarget.parentElement;
+  return null;
+}
+
 function handleDocumentClick(event: Event) {
-  const target = event.target as HTMLElement | null;
+  const target = getEventElementTarget(event);
   if (!target) return;
 
   const modeToggle = target.closest("#page-agent-mode-toggle");
