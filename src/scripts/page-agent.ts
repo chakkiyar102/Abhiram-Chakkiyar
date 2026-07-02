@@ -1,3 +1,10 @@
+type AgentMode = "assistant" | "action";
+
+type PageAgentInstructions = {
+  system?: string;
+  getPageInstructions?: (url: string) => string | undefined;
+};
+
 declare global {
   interface Window {
     PageAgent?: new (config: Record<string, unknown>) => {
@@ -23,6 +30,9 @@ declare global {
       show: () => Promise<void>;
       execute: (task: string) => Promise<unknown>;
       reset: () => void;
+      getMode: () => AgentMode;
+      setMode: (mode: AgentMode) => AgentMode;
+      toggleMode: () => AgentMode;
     };
     __ABHIRAM_PAGE_AGENT__?: {
       enabled?: boolean;
@@ -30,16 +40,17 @@ declare global {
       baseURL?: string;
       model?: string;
       language?: string;
-      instructions?: {
-        system?: string;
-        getPageInstructions?: (url: string) => string | undefined;
-      };
+      mode?: AgentMode;
+      instructions?: PageAgentInstructions;
       options?: Record<string, unknown>;
     };
   }
 }
 
-const DEFAULT_SYSTEM_INSTRUCTIONS = `You are Ask AI for Abhiram's personal website.
+const MODE_STORAGE_KEY = "abhiram_page_agent_mode";
+const DEFAULT_MODE: AgentMode = "assistant";
+
+const ASSISTANT_SYSTEM_INSTRUCTIONS = `You are Ask AI for Abhiram's personal website.
 Operate as a page-aware content assistant, not a blind web automation bot.
 
 Rules:
@@ -50,23 +61,53 @@ Rules:
 - Avoid unnecessary retries and avoid repeating the same action loop.
 - Keep final answers concise and practical.`;
 
-const DEFAULT_INSTRUCTIONS = {
-  system: DEFAULT_SYSTEM_INSTRUCTIONS,
-  getPageInstructions: (url: string) => {
-    if (url.includes("/writing")) {
-      return "This is the writing index page. Focus on titles, dates, tags, and metadata shown here.";
-    }
+const ACTION_SYSTEM_INSTRUCTIONS = `You are Ask AI for Abhiram's personal website.
+Operate as a practical browser assistant.
 
-    if (url.includes("/posts/")) {
-      return "This is a single post page. Focus on article content, headings, and visible metadata on this page.";
-    }
+Rules:
+- Prefer answering from visible page content first.
+- You may click, type, navigate, and scroll when needed to complete user requests.
+- Avoid destructive actions (submit, purchase, delete, publish, checkout, send) unless the user explicitly asks.
+- Avoid loops and repeated retries; if blocked, explain why and ask for clarification.
+- Keep final answers concise and practical.`;
 
-    if (url.includes("/tags")) {
-      return "This is the tags page. Focus on listing and grouping visible tags only.";
-    }
+const SHARED_PAGE_INSTRUCTIONS = (url: string) => {
+  if (url.includes("/writing")) {
+    return "This is the writing index page. Focus on titles, dates, tags, and metadata shown here.";
+  }
 
-    return undefined;
-  },
+  if (url.includes("/posts/")) {
+    return "This is a single post page. Focus on article content, headings, and visible metadata on this page.";
+  }
+
+  if (url.includes("/tags")) {
+    return "This is the tags page. Focus on listing and grouping visible tags only.";
+  }
+
+  return undefined;
+};
+
+const ASSISTANT_INSTRUCTIONS: PageAgentInstructions = {
+  system: ASSISTANT_SYSTEM_INSTRUCTIONS,
+  getPageInstructions: SHARED_PAGE_INSTRUCTIONS,
+};
+
+const ACTION_INSTRUCTIONS: PageAgentInstructions = {
+  system: ACTION_SYSTEM_INSTRUCTIONS,
+  getPageInstructions: SHARED_PAGE_INSTRUCTIONS,
+};
+
+const ASSISTANT_CUSTOM_TOOLS = {
+  click_element_by_index: null,
+  input_text: null,
+  select_dropdown_option: null,
+  scroll: null,
+  scroll_horizontally: null,
+  execute_javascript: null,
+};
+
+const ACTION_CUSTOM_TOOLS = {
+  execute_javascript: null,
 };
 
 const DEFAULT_CONFIG = {
@@ -76,6 +117,7 @@ const DEFAULT_CONFIG = {
   baseURL: "/api/v1",
   model: "gpt-5.4-mini",
   language: "en-US",
+  mode: DEFAULT_MODE as AgentMode,
 };
 
 let pageAgentScriptPromise: Promise<void> | null = null;
@@ -87,7 +129,12 @@ let pageAgentInstance: {
   execute?: (task: string) => Promise<unknown>;
   dispose?: () => void;
 } | null = null;
-let triggerBound = false;
+let clickHandlerBound = false;
+let currentMode: AgentMode = DEFAULT_MODE;
+
+function isValidMode(mode: unknown): mode is AgentMode {
+  return mode === "assistant" || mode === "action";
+}
 
 function getConfig() {
   return {
@@ -100,6 +147,112 @@ function getPageAgentClass() {
   if (window.PageAgent) return window.PageAgent;
   if (window.pageAgent?.PageAgent) return window.pageAgent.PageAgent;
   return null;
+}
+
+function getModeLabel(mode: AgentMode) {
+  return mode === "assistant" ? "AI: Assist" : "AI: Action";
+}
+
+function readStoredMode(): AgentMode | null {
+  try {
+    const stored = localStorage.getItem(MODE_STORAGE_KEY);
+    return isValidMode(stored) ? stored : null;
+  } catch {
+    return null;
+  }
+}
+
+function persistMode(mode: AgentMode) {
+  try {
+    localStorage.setItem(MODE_STORAGE_KEY, mode);
+  } catch {
+    // Ignore storage errors (private mode / disabled storage).
+  }
+}
+
+function getModeToggleButton() {
+  return document.getElementById("page-agent-mode-toggle");
+}
+
+function renderModeToggle() {
+  const button = getModeToggleButton();
+  if (!button) return;
+
+  button.textContent = getModeLabel(currentMode);
+  button.setAttribute(
+    "aria-label",
+    currentMode === "assistant"
+      ? "Ask AI mode: assistant"
+      : "Ask AI mode: action"
+  );
+  button.setAttribute(
+    "title",
+    currentMode === "assistant"
+      ? "Assistant mode: answer from visible page content"
+      : "Action mode: allow navigation and interactions"
+  );
+  button.dataset.mode = currentMode;
+}
+
+function resolveInstructions(config: ReturnType<typeof getConfig>, mode: AgentMode) {
+  const defaults = mode === "assistant" ? ASSISTANT_INSTRUCTIONS : ACTION_INSTRUCTIONS;
+  const incoming = config.instructions;
+
+  if (!incoming) return defaults;
+
+  return {
+    system: incoming.system ?? defaults.system,
+    getPageInstructions:
+      incoming.getPageInstructions ?? defaults.getPageInstructions,
+  };
+}
+
+function resolveCustomTools(
+  config: ReturnType<typeof getConfig>,
+  mode: AgentMode
+) {
+  const modeTools =
+    mode === "assistant" ? ASSISTANT_CUSTOM_TOOLS : ACTION_CUSTOM_TOOLS;
+  const optionTools =
+    (config.options?.customTools as Record<string, unknown> | undefined) || {};
+
+  return {
+    ...modeTools,
+    ...optionTools,
+  };
+}
+
+function getOptionsWithoutCustomTools(options?: Record<string, unknown>) {
+  if (!options) return {};
+  const next = { ...options };
+  delete next.customTools;
+  return next;
+}
+
+function setMode(mode: AgentMode, persist = true) {
+  if (!isValidMode(mode)) return currentMode;
+  currentMode = mode;
+
+  if (persist) {
+    persistMode(mode);
+  }
+
+  resetPageAgent();
+  renderModeToggle();
+  return currentMode;
+}
+
+function toggleMode() {
+  const nextMode = currentMode === "assistant" ? "action" : "assistant";
+  return setMode(nextMode, true);
+}
+
+function initializeMode() {
+  const config = getConfig();
+  const stored = readStoredMode();
+  const configMode = isValidMode(config.mode) ? config.mode : DEFAULT_MODE;
+  const initialMode = stored || configMode;
+  setMode(initialMode, !stored);
 }
 
 function loadPageAgentScript(src: string) {
@@ -141,25 +294,18 @@ async function initPageAgent() {
 
   const PageAgent = getPageAgentClass();
 
-  if (!PageAgent) {
-    return null;
-  }
+  if (!PageAgent) return null;
+
+  const options = getOptionsWithoutCustomTools(config.options);
 
   pageAgentInstance = new PageAgent({
     baseURL: config.baseURL,
     model: config.model,
     language: config.language,
-    instructions: config.instructions || DEFAULT_INSTRUCTIONS,
+    instructions: resolveInstructions(config, currentMode),
     promptForNextTask: false,
-    customTools: {
-      click_element_by_index: null,
-      input_text: null,
-      select_dropdown_option: null,
-      scroll: null,
-      scroll_horizontally: null,
-      execute_javascript: null,
-    },
-    ...(config.options || {}),
+    customTools: resolveCustomTools(config, currentMode),
+    ...options,
   });
 
   return pageAgentInstance;
@@ -191,9 +337,16 @@ function maybeOpenFromQuery() {
   }
 }
 
-function handleTriggerClick(event: Event) {
+function handleDocumentClick(event: Event) {
   const target = event.target as HTMLElement | null;
   if (!target) return;
+
+  const modeToggle = target.closest("#page-agent-mode-toggle");
+  if (modeToggle) {
+    event.preventDefault();
+    toggleMode();
+    return;
+  }
 
   const trigger = target.closest("#page-agent-trigger");
   if (!trigger) return;
@@ -202,22 +355,28 @@ function handleTriggerClick(event: Event) {
   void showPageAgent();
 }
 
-function bindPageAgentTrigger() {
-  if (triggerBound) return;
+function bindPageAgentHandlers() {
+  if (clickHandlerBound) return;
 
-  document.addEventListener("click", handleTriggerClick);
-  triggerBound = true;
+  document.addEventListener("click", handleDocumentClick);
+  clickHandlerBound = true;
 }
 
 function bootstrapPageAgent() {
+  initializeMode();
+
   window.kfPageAgent = {
     init: initPageAgent,
     show: showPageAgent,
     execute: executePageAgent,
     reset: resetPageAgent,
+    getMode: () => currentMode,
+    setMode: mode => setMode(mode, true),
+    toggleMode,
   };
 
-  bindPageAgentTrigger();
+  bindPageAgentHandlers();
+  renderModeToggle();
   maybeOpenFromQuery();
 }
 
@@ -228,6 +387,7 @@ document.addEventListener("astro:before-swap", () => {
 });
 
 document.addEventListener("astro:after-swap", () => {
+  renderModeToggle();
   maybeOpenFromQuery();
 });
 
