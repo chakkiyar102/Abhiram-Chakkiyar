@@ -14,6 +14,7 @@ declare global {
       };
       execute?: (task: string) => Promise<unknown>;
       dispose?: () => void;
+      disposed?: boolean;
     };
     pageAgent?: {
       PageAgent?: new (config: Record<string, unknown>) => {
@@ -23,6 +24,7 @@ declare global {
         };
         execute?: (task: string) => Promise<unknown>;
         dispose?: () => void;
+        disposed?: boolean;
       };
     };
     kfPageAgent?: {
@@ -128,10 +130,12 @@ let pageAgentInstance: {
   };
   execute?: (task: string) => Promise<unknown>;
   dispose?: () => void;
+  disposed?: boolean;
 } | null = null;
 let clickHandlerBound = false;
 let lifecycleHandlersBound = false;
 let currentMode: AgentMode = DEFAULT_MODE;
+let disposalListenerBound = false;
 
 function isValidMode(mode: unknown): mode is AgentMode {
   return mode === "assistant" || mode === "action";
@@ -284,8 +288,33 @@ function loadPageAgentScript(src: string) {
   return pageAgentScriptPromise;
 }
 
+function hasRuntimePanelMounted() {
+  return Boolean(document.getElementById("page-agent-runtime_agent-panel"));
+}
+
+function bindDisposalListener(instance: NonNullable<typeof pageAgentInstance>) {
+  if (disposalListenerBound) return;
+  const eventTarget = instance as EventTarget;
+  if (typeof eventTarget.addEventListener !== "function") return;
+
+  const onDispose = () => {
+    if (pageAgentInstance === instance) {
+      pageAgentInstance = null;
+    }
+    disposalListenerBound = false;
+    cleanupOrphanPageAgentUI();
+  };
+
+  eventTarget.addEventListener("dispose", onDispose as EventListener);
+  disposalListenerBound = true;
+}
+
 async function initPageAgent() {
-  if (pageAgentInstance) return pageAgentInstance;
+  if (pageAgentInstance && !pageAgentInstance.disposed) {
+    if (hasRuntimePanelMounted()) return pageAgentInstance;
+    resetPageAgent();
+  }
+  pageAgentInstance = null;
 
   const config = getConfig();
 
@@ -308,15 +337,22 @@ async function initPageAgent() {
     customTools: resolveCustomTools(config, currentMode),
     ...options,
   });
+  bindDisposalListener(pageAgentInstance);
 
   return pageAgentInstance;
 }
 
 async function showPageAgent() {
-  // PageAgent may dispose itself after a run; always reopen with a fresh instance.
-  resetPageAgent();
+  cleanupOrphanPageAgentUI();
 
   const agent = await initPageAgent();
+  if (agent?.disposed) {
+    resetPageAgent();
+    const freshAgent = await initPageAgent();
+    freshAgent?.panel?.show?.();
+    return;
+  }
+
   agent?.panel?.show?.();
 }
 
@@ -327,8 +363,22 @@ async function executePageAgent(task: string) {
 }
 
 function resetPageAgent() {
-  pageAgentInstance?.dispose?.();
+  const existing = pageAgentInstance;
   pageAgentInstance = null;
+  disposalListenerBound = false;
+
+  try {
+    existing?.dispose?.();
+  } catch (error) {
+    console.warn("[AskAI] dispose failed; forcing cleanup.", error);
+  }
+
+  cleanupOrphanPageAgentUI();
+}
+
+function cleanupOrphanPageAgentUI() {
+  document.getElementById("page-agent-runtime_agent-panel")?.remove();
+  document.getElementById("playwright-highlight-container")?.remove();
 }
 
 function maybeOpenFromQuery() {
