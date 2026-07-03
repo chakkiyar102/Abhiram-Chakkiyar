@@ -17,7 +17,9 @@ const posts = defineCollection({
       featured: z.boolean().optional(),
       draft: z.boolean().optional(),
       tags: z.array(z.string()).default(["others"]),
-      ogImage: image().or(z.string()).optional(),
+      // Plain string only: a public/ path or absolute URL. Not image() — that
+      // importer can't resolve public/ assets and fails the build (ImageNotFound).
+      ogImage: z.string().optional(),
       description: z.string(),
       canonicalURL: z.string().optional(),
       hideEditPost: z.boolean().optional(),
