@@ -369,8 +369,8 @@ function resetPageAgent() {
 
   try {
     existing?.dispose?.();
-  } catch (error) {
-    console.warn("[AskAI] dispose failed; forcing cleanup.", error);
+  } catch {
+    // Ignore runtime disposal failures and force DOM cleanup below.
   }
 
   cleanupOrphanPageAgentUI();

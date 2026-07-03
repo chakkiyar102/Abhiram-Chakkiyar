@@ -8,7 +8,6 @@ tags:
   - ai-tools
   - knowledge-graphs
 description: "I don't write code. I just built a fact-checker for my own documentation job, and the first thing it caught was a documentation bug hiding in plain sight."
-ogImage: "/essays/the-same-lie-twelve-times/1-leap-of-faith.png"
 ---
 # The Same Lie, Twelve Times
 

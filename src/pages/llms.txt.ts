@@ -4,7 +4,7 @@ import { getSortedPosts } from "@/utils/getSortedPosts";
 import { getPostUrl } from "@/utils/getPostPaths";
 import config from "@/config";
 
-export const GET: APIRoute = ({ site }) => {
+export const GET: APIRoute = async ({ site }) => {
   const origin = site?.origin ?? config.site.url;
   const posts = getSortedPosts(await getCollection("posts"));
 

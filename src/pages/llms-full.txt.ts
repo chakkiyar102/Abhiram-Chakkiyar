@@ -10,7 +10,7 @@ import config from "@/config";
  * whole writing set (~13K tokens) fits in a single context window, so no vector
  * store is needed.
  */
-export const GET: APIRoute = ({ site }) => {
+export const GET: APIRoute = async ({ site }) => {
   const origin = site?.origin ?? config.site.url;
   const posts = getSortedPosts(await getCollection("posts"));
 
