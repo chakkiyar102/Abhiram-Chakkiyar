@@ -54,18 +54,19 @@ function ensurePanel(): HTMLElement {
     <div id="ask-ai-log" class="flex max-h-[50vh] flex-col gap-3 overflow-y-auto px-4 py-3 text-sm text-neutral-800 dark:text-neutral-200">
       <p class="text-neutral-500 dark:text-neutral-400">Ask me anything about Abhiram's essays and notes.</p>
     </div>
-    <form id="ask-ai-form" class="flex gap-2 border-t border-neutral-200 p-3 dark:border-neutral-700">
+    <div id="ask-ai-form" class="flex gap-2 border-t border-neutral-200 p-3 dark:border-neutral-700">
       <input id="ask-ai-input" type="text" autocomplete="off" placeholder="Ask a question…"
         class="flex-1 rounded-lg border border-neutral-300 bg-white px-3 py-2 text-sm text-neutral-900 outline-none focus:border-neutral-500 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100" />
-      <button type="submit" aria-label="Send"
+      <button id="ask-ai-send" type="button" aria-label="Send"
         class="rounded-lg bg-neutral-900 px-3 py-2 text-sm font-semibold text-white hover:bg-neutral-700 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-neutral-300">Send</button>
-    </form>`;
+    </div>`;
   document.body.appendChild(panel);
   return panel;
 }
 
-function addBubble(text: string, who: "user" | "ai"): HTMLElement {
-  const log = document.getElementById("ask-ai-log")!;
+function addBubble(text: string, who: "user" | "ai"): HTMLElement | null {
+  const log = document.getElementById("ask-ai-log");
+  if (!log) return null;
   const el = document.createElement("div");
   el.className =
     who === "user"
@@ -80,6 +81,7 @@ function addBubble(text: string, who: "user" | "ai"): HTMLElement {
 async function ask(question: string) {
   addBubble(question, "user");
   const answer = addBubble("…", "ai");
+  if (!answer) return; // panel gone — bail rather than throw
   history.push({ role: "user", content: question });
 
   try {
@@ -105,7 +107,16 @@ async function ask(question: string) {
     }`.trim();
     history.pop(); // drop the unanswered user turn so retry isn't polluted
   }
-  document.getElementById("ask-ai-log")!.scrollTop = 1e9;
+  const log = document.getElementById("ask-ai-log");
+  if (log) log.scrollTop = log.scrollHeight;
+}
+
+function submitInput() {
+  const input = document.getElementById("ask-ai-input") as HTMLInputElement | null;
+  const q = input?.value.trim();
+  if (!input || !q) return;
+  input.value = "";
+  ask(q);
 }
 
 function togglePanel(open?: boolean) {
@@ -124,16 +135,16 @@ if (!(window as any).__askAIWired) {
     const t = e.target as HTMLElement;
     if (t.closest("#ask-ai-trigger")) togglePanel();
     else if (t.closest("#ask-ai-close")) togglePanel(false);
+    else if (t.closest("#ask-ai-send")) submitInput();
   });
 
-  document.addEventListener("submit", e => {
-    const form = (e.target as HTMLElement).closest("#ask-ai-form");
-    if (!form) return;
-    e.preventDefault();
-    const input = document.getElementById("ask-ai-input") as HTMLInputElement;
-    const q = input.value.trim();
-    if (!q) return;
-    input.value = "";
-    ask(q);
+  // No <form> on purpose: Astro's ClientRouter hijacks form submits as
+  // navigations, which swaps the body and destroys this panel mid-request.
+  // Plain Enter-to-send avoids that entirely.
+  document.addEventListener("keydown", e => {
+    if (e.key === "Enter" && (e.target as HTMLElement).id === "ask-ai-input") {
+      e.preventDefault();
+      submitInput();
+    }
   });
 }
