@@ -1,6 +1,6 @@
-# abhiram.cyou
+ # abhiram.cyou
 
-Personal site of Abhiram Chakkiyar, a writer who codes. Essays and notes on
+Personal site of Abhiram Chakkiyar, a technical writer focused on simplifying technical concepts for non-technical audiences. Essays and notes on
 making complex things clear, in docs, code, and pixels.
 
 Built on [AstroPaper](https://github.com/satnaing/astro-paper), recolored to a
