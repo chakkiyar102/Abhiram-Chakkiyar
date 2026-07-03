@@ -8,13 +8,13 @@ tags:
   - ai-tools
   - knowledge-graphs
 description: "I don't write code. I just built a fact-checker for my own documentation job, and the first thing it caught was a documentation bug hiding in plain sight."
-ogImage: "/essays/the-same-lie-twelve-times/1-leap-of-faith.png"
+ogImage: "/essays/the-same-lie-twelve-times/og-poster.png"
 ---
 # The Same Lie, Twelve Times
 
 I don't write code. I just built a fact-checker for my own job, and the first thing it caught was a documentation bug hiding in plain sight.
 
-![Every documentation job runs on a small act of faith.](/essays/the-same-lie-twelve-times/1-leap-of-faith.png)
+![Every documentation job runs on a small act of faith.](/essays/the-same-lie-twelve-times/1-leap-of-faith.gif)
 
 Somewhere near the start of every help article I have ever written, there is a moment where I stop verifying and start trusting. A developer hands me a README, or I open a spec, or I read a code comment someone left behind, and I take it at its word. I am not a programmer. I cannot open the actual component and check whether the prose in front of me still matches it. So I write the article on faith, and I have done this for years, and it has mostly gone fine.
 
@@ -32,7 +32,7 @@ Once both graphs existed, I asked for one more thing: proof that a different AI 
 
 ## Twelve pages, one truth
 
-![Twelve component folders. One documentation page, copy-pasted and never updated.](/essays/the-same-lie-twelve-times/2-twelve-docs.png)
+![Twelve component folders. One documentation page, copy-pasted and never updated.](/essays/the-same-lie-twelve-times/2-twelve-docs.gif)
 
 Once the graph had read every documentation file in the frontend, I asked for anything that looked like a data-quality problem. Not a bug in the code. A problem in the words.
 
@@ -42,13 +42,13 @@ It came back with something I would never have found by hand. A set of twelve sm
 
 ## It wasn't the only one
 
-![Two official documents, same repository, opposite instructions.](/essays/the-same-lie-twelve-times/3-contradiction.png)
+![Two official documents, same repository, opposite instructions.](/essays/the-same-lie-twelve-times/3-contradiction.gif)
 
 That was the headline catch. It was not alone. The same pass found our own contributor guide instructing people to bypass a safety check during commits, while a separate internal policy document, sitting in the same repository, explicitly forbade doing exactly that. Two official documents, same codebase, opposite instructions, and neither one referenced the other. Nobody had noticed, for the same reason nobody noticed the twelve identical widgets: reading one document feels complete. Reading it against everything else that claims to be true is the part we skip, because there was never a cheap way to do it.
 
 ## Then the tool did the same thing to me
 
-![Right number of answers. Wrong two answers. The same bug, wearing a different shirt.](/essays/the-same-lie-twelve-times/4-mirror-bug.png)
+![Right number of answers. Wrong two answers. The same bug, wearing a different shirt.](/essays/the-same-lie-twelve-times/4-mirror-bug.gif)
 
 Once the graph existed, I wanted it to be readable by an actual human, not just by another tool. That meant giving plain names to roughly two thousand clusters of related code and content the graph had found on its own. Too many for me to read one by one, so I had Claude Code delegate the naming to a batch of smaller helper agents, each one handed a slice of the clusters and asked to return a short label for every single one.
 
@@ -60,7 +60,7 @@ I found that almost funny. I had built a tool to catch documentation that looked
 
 ## What this actually buys me, day to day
 
-![Not a guess. A cited answer, pointed at the actual line.](/essays/the-same-lie-twelve-times/5-cited-answer.png)
+![Not a guess. A cited answer, pointed at the actual line.](/essays/the-same-lie-twelve-times/5-cited-answer.gif)
 
 This is the part that matters for the job I do, which is writing help articles and feature guides, not code. In practice, before I start a new article, I ask for an outline pulled straight from the graph: what exists in this area, what connects to it, what else touches it that I might otherwise never think to mention. It reads like research done overnight by someone who never gets bored halfway through a codebase.
 
