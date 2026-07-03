@@ -1,6 +1,7 @@
 ---
 title: "Colophon"
 pubDatetime: 2026-06-19T00:00:00.000Z
+modDatetime: 2026-07-03T11:15:00.000Z
 description: "What this site is, who made it, and how it was built."
 tags:
   - meta
@@ -20,7 +21,17 @@ The essays here are for longer thoughts. The kind that don't fit in a doc commen
 
 I started with AstroPaper (version 6.1.0), a minimal Astro theme that handled the structural heavy lifting. Then I recolored it. The original is clean but dark and fairly monochrome. I wanted something that felt warmer and more coastal, so I gave it a marine teal for the primary tone and kept everything else deliberately plain. Body copy is set in Inter, a clean sans-serif that gets out of the way. I tried a few heavier treatments along the way, textures and a serif display face, and then took them all back out. Simpler read better.
 
-The site is deployed on Vercel. Build times are fast, the setup is minimal, and it gets out of the way.
+The site is deployed on [Vercel](https://vercel.com). Build times are fast, the setup is minimal, and it gets out of the way.
+
+---
+
+**There's a robot that reads it back.**
+
+Recently I added a button that says Ask AI. It isn't a chatbot with a personality, and it isn't a support desk pretending to be a person. It's an answering machine pointed at my own writing. Every time the site builds, it bundles every essay and note into a single plain-text file, and when you ask a question, that whole file goes along as context. The site literally hands the model everything I've written and says answer from this, and if it isn't in here, say so. You can read that file yourself, it's [right here](/llms-full.txt).
+
+No database, no search index, no vector store. The entire body of writing is small enough to fit in one pass, so the simplest possible version works. It runs on the cheapest model I could find, through a small function on Vercel, on my own key. About a hundred and fifty lines of code, no framework.
+
+I like that it can only speak from what's actually here. Ask it about something I've written and it points you at the essay. Ask it about something I haven't, and it tells you it doesn't know. That's the same rule I try to hold myself to.
 
 ---
 
