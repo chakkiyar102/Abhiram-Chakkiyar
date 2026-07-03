@@ -11,7 +11,11 @@
 
 const API_URL = "/api/v1/chat/completions";
 const CORPUS_URL = "/llms-full.txt";
-const MODEL = "gpt-5.4-mini";
+// Cheapest OpenAI tier — this is grounded extraction over a supplied corpus,
+// so nano is enough. Input dominates cost (the corpus ships every call), and
+// nano has the lowest input price. OpenAI auto-caches the identical corpus
+// prefix (>1024 tokens) at a discount, so repeat questions are cheaper still.
+const MODEL = "gpt-5-nano";
 
 const SYSTEM_PROMPT = `You are Ask AI for Abhiram Chakkiyar's personal website.
 Answer the reader's question using ONLY the site content provided below as CONTEXT.
@@ -87,7 +91,8 @@ async function ask(question: string) {
     const res = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model: MODEL, messages, temperature: 0.3, stream: false }),
+      // No temperature: gpt-5-nano only accepts the default. Fine for grounded Q&A.
+      body: JSON.stringify({ model: MODEL, messages, stream: false }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data?.error?.message || data?.error || `HTTP ${res.status}`);
