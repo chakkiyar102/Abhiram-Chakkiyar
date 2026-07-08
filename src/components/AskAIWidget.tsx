@@ -256,47 +256,49 @@ export default function AskAIWidget() {
             </div>
           </header>
 
-          <Conversation key={conversationEpoch} className="min-h-0 flex-1">
-            <ConversationContent className="gap-4 px-4 py-3">
-              {messages.length === 0 ? (
-                <div className="relative flex min-h-[18rem] flex-col items-center justify-center overflow-visible rounded-xl border border-neutral-200/80 bg-gradient-to-br from-cyan-50 to-amber-50 px-5 py-8 text-center dark:border-neutral-700 dark:from-cyan-950/30 dark:to-amber-950/30">
-                  <div className="pointer-events-none absolute -top-8 -left-6 h-20 w-20 rounded-full bg-cyan-200/60 blur-xl dark:bg-cyan-700/30" />
-                  <div className="pointer-events-none absolute -right-6 -bottom-10 h-24 w-24 rounded-full bg-amber-200/70 blur-xl dark:bg-amber-700/30" />
+          {messages.length === 0 ? (
+            <div className="min-h-0 flex-1 px-4 py-3">
+              <div className="relative flex h-full min-h-[18rem] flex-col items-center justify-start overflow-visible rounded-xl border border-neutral-200/80 bg-gradient-to-br from-cyan-50 to-amber-50 px-5 py-6 text-center dark:border-neutral-700 dark:from-cyan-950/30 dark:to-amber-950/30">
+                <div className="pointer-events-none absolute -top-8 -left-6 h-20 w-20 rounded-full bg-cyan-200/60 blur-xl dark:bg-cyan-700/30" />
+                <div className="pointer-events-none absolute -right-6 -bottom-10 h-24 w-24 rounded-full bg-amber-200/70 blur-xl dark:bg-amber-700/30" />
 
-                  <div className="relative z-10 flex flex-col items-center gap-4">
-                    <div className="flex h-28 w-28 items-center justify-center rounded-3xl border-2 border-white bg-white/95 p-2 shadow-md dark:border-neutral-800 dark:bg-neutral-900">
-                      <img
-                        src="/avatar.jpg"
-                        alt="Abhiram"
-                        className="h-full w-full rounded-2xl object-contain object-top"
-                        loading="lazy"
-                      />
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="text-2xl font-semibold tracking-tight text-slate-800 dark:text-neutral-100">
-                        Ask me about this site
-                      </h3>
-                      <p className="text-sm text-slate-600 dark:text-neutral-300">
-                        Grounded mode uses only content from Abhiram&apos;s site
-                        corpus.
-                      </p>
-                    </div>
+                <div className="relative z-10 flex flex-col items-center gap-4 pt-1">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-3xl border-2 border-white bg-white/95 p-2 shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+                    <img
+                      src="/avatar.jpg"
+                      alt="Abhiram"
+                      className="h-full w-full rounded-2xl object-contain object-top"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-2xl font-semibold tracking-tight text-slate-800 dark:text-neutral-100">
+                      Ask me about this site
+                    </h3>
+                    <p className="text-sm text-slate-600 dark:text-neutral-300">
+                      Grounded mode uses only content from Abhiram&apos;s site
+                      corpus.
+                    </p>
+                  </div>
 
-                    <div className="flex flex-wrap items-center justify-center gap-2">
-                      {EMPTY_STATE_EMOJIS.map((emoji, index) => (
-                        <span
-                          key={`${emoji}-${index}`}
-                          className="inline-flex h-8 w-8 animate-bounce items-center justify-center rounded-full border border-cyan-200/80 bg-white/75 text-base shadow-sm dark:border-cyan-700 dark:bg-neutral-900/70"
-                          style={{ animationDelay: `${index * 140}ms` }}
-                        >
-                          {emoji}
-                        </span>
-                      ))}
-                    </div>
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    {EMPTY_STATE_EMOJIS.map((emoji, index) => (
+                      <span
+                        key={`${emoji}-${index}`}
+                        className="inline-flex h-8 w-8 animate-bounce items-center justify-center rounded-full border border-cyan-200/80 bg-white/75 text-base shadow-sm dark:border-cyan-700 dark:bg-neutral-900/70"
+                        style={{ animationDelay: `${index * 140}ms` }}
+                      >
+                        {emoji}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              ) : (
-                messages.map(message => {
+              </div>
+            </div>
+          ) : (
+            <Conversation key={conversationEpoch} className="min-h-0 flex-1">
+              <ConversationContent className="gap-4 px-4 py-3">
+                {messages.map(message => {
                   const text = getMessageText(message);
                   if (message.role === "assistant" && text.trim().length === 0) {
                     return null;
@@ -315,32 +317,31 @@ export default function AskAIWidget() {
                       </MessageContent>
                     </Message>
                   );
-                })
-              )}
+                })}
+                {showProgressIndicator ? (
+                  <Message from="assistant">
+                    <MessageContent>
+                      <AssistantTypingIndicator
+                        phase={progressPhase}
+                        onStop={() => {
+                          void stop();
+                        }}
+                      />
+                    </MessageContent>
+                  </Message>
+                ) : null}
 
-              {showProgressIndicator ? (
-                <Message from="assistant">
-                  <MessageContent>
-                    <AssistantTypingIndicator
-                      phase={progressPhase}
-                      onStop={() => {
-                        void stop();
-                      }}
-                    />
-                  </MessageContent>
-                </Message>
-              ) : null}
-
-              {error ? (
-                <Message from="assistant">
-                  <MessageContent>
-                    <MessageResponse>{`Sorry, I couldn't reach the assistant. ${error.message}`}</MessageResponse>
-                  </MessageContent>
-                </Message>
-              ) : null}
-            </ConversationContent>
-            <ConversationScrollButton />
-          </Conversation>
+                {error ? (
+                  <Message from="assistant">
+                    <MessageContent>
+                      <MessageResponse>{`Sorry, I couldn't reach the assistant. ${error.message}`}</MessageResponse>
+                    </MessageContent>
+                  </Message>
+                ) : null}
+              </ConversationContent>
+              <ConversationScrollButton />
+            </Conversation>
+          )}
 
           <div className="grid gap-3 border-t border-neutral-200 p-3 dark:border-neutral-700">
             <Suggestions className="pb-1">
