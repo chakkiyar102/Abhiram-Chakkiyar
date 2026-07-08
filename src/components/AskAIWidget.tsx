@@ -52,6 +52,8 @@ export default function AskAIWidget() {
   });
 
   const isBusy = status === "submitted" || status === "streaming";
+  const lastMessage = messages.at(-1);
+  const showPendingAssistant = isBusy && lastMessage?.role !== "assistant";
   const placeholder = "Ask about Abhiram's essays and notes…";
 
   const handleSubmit = useCallback(
@@ -118,16 +120,32 @@ export default function AskAIWidget() {
                     .filter(part => part.type === "text")
                     .map(part => part.text)
                     .join("");
+                  const isStreamingAssistant =
+                    status === "streaming" &&
+                    message.role === "assistant" &&
+                    message.id === lastMessage?.id;
 
                   return (
                     <Message from={message.role} key={message.id}>
                       <MessageContent>
-                        <MessageResponse>{text}</MessageResponse>
+                        <MessageResponse isAnimating={isStreamingAssistant}>
+                          {text}
+                        </MessageResponse>
                       </MessageContent>
                     </Message>
                   );
                 })
               )}
+
+              {showPendingAssistant ? (
+                <Message from="assistant">
+                  <MessageContent>
+                    <div className="text-muted-foreground animate-pulse text-sm">
+                      Thinking...
+                    </div>
+                  </MessageContent>
+                </Message>
+              ) : null}
 
               {error ? (
                 <Message from="assistant">
