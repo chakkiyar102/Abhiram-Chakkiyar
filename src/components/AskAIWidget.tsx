@@ -258,7 +258,7 @@ export default function AskAIWidget() {
 
           {messages.length === 0 ? (
             <div className="min-h-0 flex-1 px-4 py-3">
-              <div className="relative flex h-full min-h-[18rem] flex-col items-center justify-start overflow-visible rounded-xl border border-neutral-200/80 bg-gradient-to-br from-cyan-50 to-amber-50 px-5 py-6 text-center dark:border-neutral-700 dark:from-cyan-950/30 dark:to-amber-950/30">
+              <div className="relative flex h-full min-h-[18rem] flex-col items-center justify-start overflow-hidden rounded-xl border border-neutral-200/80 bg-gradient-to-br from-cyan-50 to-amber-50 px-5 pt-6 pb-10 text-center dark:border-neutral-700 dark:from-cyan-950/30 dark:to-amber-950/30">
                 <div className="pointer-events-none absolute -top-8 -left-6 h-20 w-20 rounded-full bg-cyan-200/60 blur-xl dark:bg-cyan-700/30" />
                 <div className="pointer-events-none absolute -right-6 -bottom-10 h-24 w-24 rounded-full bg-amber-200/70 blur-xl dark:bg-amber-700/30" />
 
@@ -285,7 +285,7 @@ export default function AskAIWidget() {
                     {EMPTY_STATE_EMOJIS.map((emoji, index) => (
                       <span
                         key={`${emoji}-${index}`}
-                        className="inline-flex h-8 w-8 animate-bounce items-center justify-center rounded-full border border-cyan-200/80 bg-white/75 text-base shadow-sm dark:border-cyan-700 dark:bg-neutral-900/70"
+                        className="inline-flex h-8 w-8 animate-pulse items-center justify-center rounded-full border border-cyan-200/80 bg-white/75 text-base shadow-sm dark:border-cyan-700 dark:bg-neutral-900/70"
                         style={{ animationDelay: `${index * 140}ms` }}
                       >
                         {emoji}
