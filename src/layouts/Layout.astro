@@ -4,6 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
 import { getAssetPath } from "@/utils/withBase";
+import AskAIWidget from "@/components/AskAIWidget";
 import config from "@/config";
 import Analytics from "@vercel/analytics/astro";
 import "@/styles/global.css";
@@ -135,21 +136,14 @@ const rssHref = getRelativeLocaleUrl(
     <slot />
     <Analytics />
 
-    <button
-      id="ask-ai-trigger"
-      type="button"
-      aria-label="Ask AI"
-      class="fixed bottom-24 right-5 z-50 rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-lg transition-transform hover:scale-105 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
-    >
-      Ask AI
-    </button>
+    <AskAIWidget client:load />
 
     <a
       href="https://wa.me/919567121494"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      class="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110 focus-visible:scale-110"
+      class="fixed right-5 bottom-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110 focus-visible:scale-110"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +160,6 @@ const rssHref = getRelativeLocaleUrl(
 
     <script>
       import "@/scripts/theme";
-      import "@/scripts/ask-ai";
     </script>
   </body>
 </html>
