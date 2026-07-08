@@ -43,7 +43,10 @@ export default function TagFilterSelect({
         >
           <SelectValue placeholder="All articles" />
         </SelectTrigger>
-        <SelectContent align="start">
+        <SelectContent
+          align="start"
+          className="border-neutral-300/80 bg-white/95 backdrop-blur-md dark:border-neutral-700/80 dark:bg-neutral-950/90"
+        >
           <SelectItem value={ALL_VALUE}>All articles</SelectItem>
           {options.map(option => (
             <SelectItem key={option.href} value={option.href}>
