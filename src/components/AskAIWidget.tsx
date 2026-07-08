@@ -21,19 +21,12 @@ import {
   PromptInputTools,
 } from "@/components/ai-elements/prompt-input";
 import { Suggestion, Suggestions } from "@/components/ai-elements/suggestion";
+import { DefaultChatTransport } from "ai";
+import { useChat } from "@ai-sdk/react";
 import { XIcon } from "lucide-react";
-import { useCallback, useState } from "react";
-import type { ChatStatus } from "ai";
+import { useCallback, useMemo, useState } from "react";
 
-const API_URL = "/api/v1/chat/completions";
-const CORPUS_URL = "/llms-full.txt";
-const MODEL = "gpt-5-nano";
-
-const GROUNDED_SYSTEM_PROMPT = `You are Ask AI for Abhiram Chakkiyar's personal website.
-Answer the reader's question using ONLY the site content provided below as CONTEXT.
-- If the answer isn't in the context, say so plainly and point to the closest relevant essay.
-- Cite essay titles, and include their URL when useful.
-- Keep answers concise and practical. Never invent facts that aren't in the context.`;
+const API_URL = "/api/v1/chat/stream";
 
 const SUGGESTIONS = [
   "Summarize Abhiram's writing themes",
@@ -42,120 +35,42 @@ const SUGGESTIONS = [
   "Give me 3 actionable ideas from this site",
 ];
 
-type Role = "user" | "assistant";
-type ChatMessage = { id: string; role: Role; content: string };
-type UpstreamMessage = {
-  role: "system" | "user" | "assistant";
-  content: string;
-};
-
-let corpusPromise: Promise<string> | null = null;
-
-const loadCorpus = async (): Promise<string> => {
-  if (!corpusPromise) {
-    corpusPromise = fetch(CORPUS_URL)
-      .then(res => (res.ok ? res.text() : ""))
-      .catch(() => "");
-  }
-  return corpusPromise;
-};
-
-const makeId = () => `${Date.now()}-${Math.random().toString(16).slice(2, 10)}`;
-
 export default function AskAIWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [status, setStatus] = useState<ChatStatus>("ready");
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+
+  const transport = useMemo(
+    () =>
+      new DefaultChatTransport({
+        api: API_URL,
+      }),
+    []
+  );
+
+  const { messages, sendMessage, status, stop, error } = useChat({
+    transport,
+  });
 
   const isBusy = status === "submitted" || status === "streaming";
   const placeholder = "Ask about Abhiram's essays and notes…";
 
-  const submitQuestion = useCallback(
-    async (question: string) => {
-      if (isBusy) return;
-
-      const userMessage: ChatMessage = {
-        id: makeId(),
-        role: "user",
-        content: question,
-      };
-      const nextMessages = [...messages, userMessage];
-      setMessages(nextMessages);
-      setStatus("submitted");
-
-      try {
-        const corpus = await loadCorpus();
-        const systemPrompt = `${GROUNDED_SYSTEM_PROMPT}\n\n=== CONTEXT ===\n${corpus}`;
-
-        const upstreamMessages: UpstreamMessage[] = [
-          { role: "system", content: systemPrompt },
-          ...nextMessages.map(msg => ({
-            role: msg.role,
-            content: msg.content,
-          })),
-        ];
-
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: MODEL,
-            messages: upstreamMessages,
-            stream: false,
-          }),
-        });
-
-        const data = await res.json();
-        if (!res.ok) {
-          throw new Error(
-            data?.error?.message || data?.error || `HTTP ${res.status}`
-          );
-        }
-
-        const answer =
-          data?.choices?.[0]?.message?.content?.trim() || "No answer returned.";
-        setMessages(prev => [
-          ...prev,
-          {
-            id: makeId(),
-            role: "assistant",
-            content: answer,
-          },
-        ]);
-        setStatus("ready");
-      } catch (error) {
-        const detail = error instanceof Error ? error.message : "";
-        setMessages(prev => [
-          ...prev,
-          {
-            id: makeId(),
-            role: "assistant",
-            content: `Sorry, I couldn't reach the assistant. ${detail}`.trim(),
-          },
-        ]);
-        setStatus("error");
-      }
-    },
-    [isBusy, messages]
-  );
-
   const handleSubmit = useCallback(
     (message: PromptInputMessage) => {
       const question = message.text.trim();
-      if (!question) return;
+      if (!question || isBusy) return;
       setInput("");
-      void submitQuestion(question);
+      void sendMessage({ text: question });
     },
-    [submitQuestion]
+    [isBusy, sendMessage]
   );
 
   const handleSuggestion = useCallback(
     (suggestion: string) => {
+      if (isBusy) return;
       setInput("");
-      void submitQuestion(suggestion);
+      void sendMessage({ text: suggestion });
     },
-    [submitQuestion]
+    [isBusy, sendMessage]
   );
 
   return (
@@ -177,11 +92,9 @@ export default function AskAIWidget() {
           aria-label="Ask AI panel"
         >
           <header className="flex items-center justify-between border-b border-neutral-200 px-4 py-3 dark:border-neutral-700">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                Ask AI
-              </span>
-            </div>
+            <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              Ask AI
+            </span>
             <button
               type="button"
               aria-label="Close Ask AI"
@@ -200,14 +113,29 @@ export default function AskAIWidget() {
                   description="Grounded mode uses only content from Abhiram's site corpus."
                 />
               ) : (
-                messages.map(message => (
-                  <Message from={message.role} key={message.id}>
-                    <MessageContent>
-                      <MessageResponse>{message.content}</MessageResponse>
-                    </MessageContent>
-                  </Message>
-                ))
+                messages.map(message => {
+                  const text = message.parts
+                    .filter(part => part.type === "text")
+                    .map(part => part.text)
+                    .join("");
+
+                  return (
+                    <Message from={message.role} key={message.id}>
+                      <MessageContent>
+                        <MessageResponse>{text}</MessageResponse>
+                      </MessageContent>
+                    </Message>
+                  );
+                })
               )}
+
+              {error ? (
+                <Message from="assistant">
+                  <MessageContent>
+                    <MessageResponse>{`Sorry, I couldn't reach the assistant. ${error.message}`}</MessageResponse>
+                  </MessageContent>
+                </Message>
+              ) : null}
             </ConversationContent>
             <ConversationScrollButton />
           </Conversation>
@@ -236,7 +164,10 @@ export default function AskAIWidget() {
                 <PromptInputTools />
                 <PromptInputSubmit
                   status={status}
-                  disabled={isBusy || input.trim().length === 0}
+                  onStop={() => {
+                    void stop();
+                  }}
+                  disabled={!isBusy && input.trim().length === 0}
                 />
               </PromptInputFooter>
             </PromptInput>
