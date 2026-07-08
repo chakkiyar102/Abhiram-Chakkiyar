@@ -249,12 +249,14 @@ export default function AskAIWidget() {
                   <div className="pointer-events-none absolute -right-6 -bottom-10 h-24 w-24 rounded-full bg-amber-200/70 blur-xl dark:bg-amber-700/30" />
 
                   <div className="relative z-10 flex flex-col items-center gap-4">
-                    <img
-                      src="/avatar.jpg"
-                      alt="Abhiram"
-                      className="h-24 w-24 rounded-2xl border-2 border-white bg-white object-contain p-1 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
-                      loading="lazy"
-                    />
+                    <div className="flex h-28 w-28 items-center justify-center rounded-3xl border-2 border-white bg-white/95 p-2 shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+                      <img
+                        src="/avatar.jpg"
+                        alt="Abhiram"
+                        className="h-full w-full rounded-2xl object-contain object-top"
+                        loading="lazy"
+                      />
+                    </div>
                     <div className="space-y-1">
                       <h3 className="text-2xl font-semibold tracking-tight text-slate-800 dark:text-neutral-100">
                         Ask me about this site
