@@ -30,6 +30,22 @@ It was doing work in the background. It just did not *feel* like it.
 
 That gap is why I rebuilt it.
 
+## Why a blog needs a chatbot at all
+
+Before the UX story, the more basic question deserves an answer: why does a personal site need a chatbot in the first place?
+
+This is not a large archive. Right now it is eleven documents: a handful of long essays and a few project notes. Small enough to read in an evening. Too small, on its own, to justify "AI-powered search" as a category.
+
+But most visitors do not arrive at the front page and read in order. They land on one essay from a share, a search result, or a link inside some other post. From there, the rest of the site is invisible to them. Tags help if the reader already knows the word to search for. Tags do not help with "has he written about X," when X is not a tag, or when the answer sits split across two essays that never link to each other.
+
+That is the actual gap: not information overload, but information the reader cannot see from where they are standing.
+
+A chatbot grounded in my own writing closes that gap. Ask the specific question, get pointed at the specific answer, or get told plainly that it is not covered. It does not replace reading an essay. It replaces skimming everything hoping one piece happens to match, or leaving without checking at all.
+
+If this site's only job were to look good, the chatbot would not be worth building. But its job is to be read, and to be useful to someone with one specific question. For that job, even a small, honest corpus needs something at the door that can point.
+
+Once I accepted the chatbot itself was worth having, the next problem showed up immediately: the first version was not good enough to keep that promise.
+
 ## Working is not the same as believable
 
 The first version was a small custom script wired into my [Astro](https://astro.build/) layout. It used direct `fetch` calls to my serverless endpoint and rendered full answers when they came back.
