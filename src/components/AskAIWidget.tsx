@@ -93,9 +93,10 @@ export default function AskAIWidget() {
     []
   );
 
-  const { messages, sendMessage, status, stop, error } = useChat({
-    transport,
-  });
+  const { messages, sendMessage, setMessages, status, stop, clearError, error } =
+    useChat({
+      transport,
+    });
 
   const getMessageText = useCallback(
     (message: (typeof messages)[number]) =>
@@ -130,6 +131,15 @@ export default function AskAIWidget() {
     [isBusy, sendMessage]
   );
 
+  const handleNewChat = useCallback(() => {
+    if (isBusy) {
+      void stop();
+    }
+    setInput("");
+    setMessages([]);
+    clearError();
+  }, [clearError, isBusy, setMessages, stop]);
+
   return (
     <>
       <button
@@ -152,14 +162,24 @@ export default function AskAIWidget() {
             <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
               Ask AI
             </span>
-            <button
-              type="button"
-              aria-label="Close Ask AI"
-              onClick={() => setIsOpen(false)}
-              className="text-neutral-400 transition-colors hover:text-neutral-700 dark:hover:text-neutral-200"
-            >
-              <XIcon className="size-4" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleNewChat}
+                disabled={messages.length === 0 && !error}
+                className="rounded-md border border-neutral-300 px-2 py-1 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-100 disabled:cursor-not-allowed disabled:opacity-40 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-800"
+              >
+                New chat
+              </button>
+              <button
+                type="button"
+                aria-label="Close Ask AI"
+                onClick={() => setIsOpen(false)}
+                className="text-neutral-400 transition-colors hover:text-neutral-700 dark:hover:text-neutral-200"
+              >
+                <XIcon className="size-4" />
+              </button>
+            </div>
           </header>
 
           <Conversation className="min-h-0 flex-1">
