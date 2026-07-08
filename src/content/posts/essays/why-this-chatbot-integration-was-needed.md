@@ -110,11 +110,30 @@ Streaming was technically on, but if the model took a moment before the first to
 
 That is where perception and implementation diverge.
 
-So I added an explicit pending assistant row (`Thinking...`) during the pre-token window, then switched to streamed content as soon as tokens arrived.
+So I replaced that gap with a pinned assistant waiting row that appears immediately on submit and stays visible until actual assistant text arrives, with rotating status lines tied to the site's own content context.
 
 > The user does not grade your architecture. They grade what the interface does in the first second after they press Enter.
 
-That one line changed the feel of the whole system.
+That one state transition changed the feel of the whole system.
+
+## What the metrics said (July 8, 2026)
+
+I ran a small production benchmark against the live endpoint (`/api/v1/chat/stream`) for the same prompt, 12 times:
+
+`"Summarize Abhiram writing themes in one sentence"`
+
+| Metric | Median | P95 |
+| --- | ---: | ---: |
+| Stream open (response headers) | 296.76 ms | 469.42 ms |
+| First text delta | 9.82 s | 15.53 s |
+| Full streamed completion | 10.63 s | 16.72 s |
+
+Two things are clear from this:
+
+1. Transport startup is fast and stable.
+2. First-token latency can still be high and variable.
+
+That is exactly why the waiting-state UX mattered. If first token can take 10+ seconds, users need continuous, trustworthy progress feedback from the first click, not a blank panel.
 
 ## Why this integration was actually necessary
 
