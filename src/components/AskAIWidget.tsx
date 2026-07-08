@@ -23,7 +23,7 @@ import { Suggestion, Suggestions } from "@/components/ai-elements/suggestion";
 import { DefaultChatTransport } from "ai";
 import { useChat } from "@ai-sdk/react";
 import { XIcon } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const API_URL = "/api/v1/chat/stream";
 
@@ -36,8 +36,26 @@ const SUGGESTIONS = [
 
 const EMPTY_STATE_EMOJIS = ["✨", "🤖", "📚", "🚀", "💡"];
 
+const WAITING_STATUS_LINES = {
+  submitted: [
+    "Loading the grounded site corpus...",
+    "Preparing context from essays and notes...",
+    "Starting the response pipeline...",
+  ],
+  streaming: [
+    "Synthesizing ideas from published posts...",
+    "Cross-checking themes before final wording...",
+    "Drafting a concise grounded answer...",
+  ],
+  waiting: [
+    "Still aligning your question with relevant posts...",
+    "Connecting themes across writing, UX, and engineering notes...",
+    "Working through the corpus to avoid a shallow answer...",
+  ],
+} as const;
+
 type AssistantTypingIndicatorProps = {
-  phase: "submitted" | "streaming";
+  phase: "submitted" | "streaming" | "waiting";
   onStop: () => void;
 };
 
@@ -45,6 +63,17 @@ function AssistantTypingIndicator({
   phase,
   onStop,
 }: AssistantTypingIndicatorProps) {
+  const lines = WAITING_STATUS_LINES[phase];
+  const [lineIndex, setLineIndex] = useState(0);
+
+  useEffect(() => {
+    setLineIndex(0);
+    const timer = window.setInterval(() => {
+      setLineIndex(current => (current + 1) % lines.length);
+    }, 2200);
+    return () => window.clearInterval(timer);
+  }, [lines]);
+
   return (
     <div className="flex items-center gap-3 rounded-xl border border-cyan-200/70 bg-cyan-50/60 px-3 py-2 dark:border-cyan-800 dark:bg-cyan-950/20">
       <div
@@ -64,10 +93,12 @@ function AssistantTypingIndicator({
         <p className="truncate text-xs font-medium text-cyan-900 dark:text-cyan-100">
           {phase === "submitted"
             ? "Connecting to assistant..."
-            : "Generating response..."}
+            : phase === "streaming"
+              ? "Generating response..."
+              : "Still working on your answer..."}
         </p>
         <p className="truncate text-[11px] text-cyan-700/90 dark:text-cyan-200/80">
-          Grounding from Abhiram&apos;s site corpus
+          {lines[lineIndex]}
         </p>
       </div>
       <button
@@ -109,8 +140,36 @@ export default function AskAIWidget() {
 
   const isBusy = status === "submitted" || status === "streaming";
   const lastMessage = messages.at(-1);
-  const showPendingAssistant = status === "submitted";
   const placeholder = "Ask about Abhiram's essays and notes…";
+
+  const latestUserIndex = useMemo(() => {
+    for (let index = messages.length - 1; index >= 0; index -= 1) {
+      if (messages[index]?.role === "user") {
+        return index;
+      }
+    }
+    return -1;
+  }, [messages]);
+
+  const latestAssistantWithTextIndex = useMemo(() => {
+    for (let index = messages.length - 1; index >= 0; index -= 1) {
+      const message = messages[index];
+      if (message?.role !== "assistant") continue;
+      if (getMessageText(message).trim().length > 0) {
+        return index;
+      }
+    }
+    return -1;
+  }, [getMessageText, messages]);
+
+  const waitingForAssistant = latestUserIndex > latestAssistantWithTextIndex;
+  const showProgressIndicator = waitingForAssistant && !error;
+  const progressPhase =
+    status === "submitted"
+      ? "submitted"
+      : status === "streaming"
+        ? "streaming"
+        : "waiting";
 
   const handleSubmit = useCallback(
     (message: PromptInputMessage) => {
@@ -193,7 +252,7 @@ export default function AskAIWidget() {
                     <img
                       src="/avatar.jpg"
                       alt="Abhiram"
-                      className="h-20 w-20 rounded-full border-2 border-white object-cover shadow-md dark:border-neutral-800"
+                      className="h-24 w-24 rounded-2xl border-2 border-white bg-white object-contain p-1 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
                       loading="lazy"
                     />
                     <div className="space-y-1">
@@ -222,27 +281,19 @@ export default function AskAIWidget() {
               ) : (
                 messages.map(message => {
                   const text = getMessageText(message);
+                  if (message.role === "assistant" && text.trim().length === 0) {
+                    return null;
+                  }
                   const isStreamingAssistant =
                     status === "streaming" &&
                     message.role === "assistant" &&
                     message.id === lastMessage?.id;
-                  const showInlineTypingIndicator =
-                    isStreamingAssistant && text.trim().length === 0;
 
                   return (
                     <Message from={message.role} key={message.id}>
                       <MessageContent>
                         <MessageResponse isAnimating={isStreamingAssistant}>
-                          {showInlineTypingIndicator ? (
-                            <AssistantTypingIndicator
-                              phase="streaming"
-                              onStop={() => {
-                                void stop();
-                              }}
-                            />
-                          ) : (
-                            text
-                          )}
+                          {text}
                         </MessageResponse>
                       </MessageContent>
                     </Message>
@@ -250,11 +301,11 @@ export default function AskAIWidget() {
                 })
               )}
 
-              {showPendingAssistant ? (
+              {showProgressIndicator ? (
                 <Message from="assistant">
                   <MessageContent>
                     <AssistantTypingIndicator
-                      phase="submitted"
+                      phase={progressPhase}
                       onStop={() => {
                         void stop();
                       }}
