@@ -1,6 +1,6 @@
 ---
 author: Abhiram Chakkiyar
-pubDatetime: 2026-07-08T18:00:00.000Z
+pubDatetime: 2026-07-08T17:00:00.000Z
 title: "Why This Site Needed a Real Chatbot Integration"
 draft: false
 tags:
