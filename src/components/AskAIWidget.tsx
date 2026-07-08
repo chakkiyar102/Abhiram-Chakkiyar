@@ -115,6 +115,7 @@ function AssistantTypingIndicator({
 export default function AskAIWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [conversationEpoch, setConversationEpoch] = useState(0);
 
   const transport = useMemo(
     () =>
@@ -197,7 +198,21 @@ export default function AskAIWidget() {
     setInput("");
     setMessages([]);
     clearError();
+    setConversationEpoch(prev => prev + 1);
   }, [clearError, isBusy, setMessages, stop]);
+
+  const handleTogglePanel = useCallback(() => {
+    setIsOpen(prev => {
+      const next = !prev;
+      if (next) {
+        setInput("");
+        setMessages([]);
+        clearError();
+        setConversationEpoch(epoch => epoch + 1);
+      }
+      return next;
+    });
+  }, [clearError, setMessages]);
 
   return (
     <>
@@ -205,7 +220,7 @@ export default function AskAIWidget() {
         id="ask-ai-trigger"
         type="button"
         aria-label="Ask AI"
-        onClick={() => setIsOpen(prev => !prev)}
+        onClick={handleTogglePanel}
         className="fixed right-5 bottom-24 z-50 rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-semibold text-neutral-900 shadow-lg transition-transform hover:scale-105 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
       >
         Ask AI
@@ -241,10 +256,10 @@ export default function AskAIWidget() {
             </div>
           </header>
 
-          <Conversation className="min-h-0 flex-1">
+          <Conversation key={conversationEpoch} className="min-h-0 flex-1">
             <ConversationContent className="gap-4 px-4 py-3">
               {messages.length === 0 ? (
-                <div className="relative flex min-h-[18rem] flex-col items-center justify-center overflow-hidden rounded-xl border border-neutral-200/80 bg-gradient-to-br from-cyan-50 to-amber-50 px-5 py-8 text-center dark:border-neutral-700 dark:from-cyan-950/30 dark:to-amber-950/30">
+                <div className="relative flex min-h-[18rem] flex-col items-center justify-center overflow-visible rounded-xl border border-neutral-200/80 bg-gradient-to-br from-cyan-50 to-amber-50 px-5 py-8 text-center dark:border-neutral-700 dark:from-cyan-950/30 dark:to-amber-950/30">
                   <div className="pointer-events-none absolute -top-8 -left-6 h-20 w-20 rounded-full bg-cyan-200/60 blur-xl dark:bg-cyan-700/30" />
                   <div className="pointer-events-none absolute -right-6 -bottom-10 h-24 w-24 rounded-full bg-amber-200/70 blur-xl dark:bg-amber-700/30" />
 
