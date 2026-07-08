@@ -36,6 +36,51 @@ const SUGGESTIONS = [
 
 const EMPTY_STATE_EMOJIS = ["✨", "🤖", "📚", "🚀", "💡"];
 
+type AssistantTypingIndicatorProps = {
+  phase: "submitted" | "streaming";
+  onStop: () => void;
+};
+
+function AssistantTypingIndicator({
+  phase,
+  onStop,
+}: AssistantTypingIndicatorProps) {
+  return (
+    <div className="flex items-center gap-3 rounded-xl border border-cyan-200/70 bg-cyan-50/60 px-3 py-2 dark:border-cyan-800 dark:bg-cyan-950/20">
+      <div
+        className="inline-flex items-center gap-1"
+        aria-hidden="true"
+        aria-label="Assistant is typing"
+      >
+        {[0, 1, 2].map(index => (
+          <span
+            key={index}
+            className="h-1.5 w-1.5 animate-bounce rounded-full bg-cyan-600 dark:bg-cyan-300"
+            style={{ animationDelay: `${index * 120}ms` }}
+          />
+        ))}
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-xs font-medium text-cyan-900 dark:text-cyan-100">
+          {phase === "submitted"
+            ? "Connecting to assistant..."
+            : "Generating response..."}
+        </p>
+        <p className="truncate text-[11px] text-cyan-700/90 dark:text-cyan-200/80">
+          Grounding from Abhiram&apos;s site corpus
+        </p>
+      </div>
+      <button
+        type="button"
+        onClick={onStop}
+        className="shrink-0 rounded-md border border-cyan-300 px-2 py-1 text-[11px] font-medium text-cyan-800 transition-colors hover:bg-cyan-100 dark:border-cyan-700 dark:text-cyan-200 dark:hover:bg-cyan-900/40"
+      >
+        Stop
+      </button>
+    </div>
+  );
+}
+
 export default function AskAIWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -52,9 +97,18 @@ export default function AskAIWidget() {
     transport,
   });
 
+  const getMessageText = useCallback(
+    (message: (typeof messages)[number]) =>
+      message.parts
+        .filter(part => part.type === "text")
+        .map(part => part.text)
+        .join(""),
+    []
+  );
+
   const isBusy = status === "submitted" || status === "streaming";
   const lastMessage = messages.at(-1);
-  const showPendingAssistant = isBusy && lastMessage?.role !== "assistant";
+  const showPendingAssistant = status === "submitted";
   const placeholder = "Ask about Abhiram's essays and notes…";
 
   const handleSubmit = useCallback(
@@ -147,20 +201,28 @@ export default function AskAIWidget() {
                 </div>
               ) : (
                 messages.map(message => {
-                  const text = message.parts
-                    .filter(part => part.type === "text")
-                    .map(part => part.text)
-                    .join("");
+                  const text = getMessageText(message);
                   const isStreamingAssistant =
                     status === "streaming" &&
                     message.role === "assistant" &&
                     message.id === lastMessage?.id;
+                  const showInlineTypingIndicator =
+                    isStreamingAssistant && text.trim().length === 0;
 
                   return (
                     <Message from={message.role} key={message.id}>
                       <MessageContent>
                         <MessageResponse isAnimating={isStreamingAssistant}>
-                          {text}
+                          {showInlineTypingIndicator ? (
+                            <AssistantTypingIndicator
+                              phase="streaming"
+                              onStop={() => {
+                                void stop();
+                              }}
+                            />
+                          ) : (
+                            text
+                          )}
                         </MessageResponse>
                       </MessageContent>
                     </Message>
@@ -171,9 +233,12 @@ export default function AskAIWidget() {
               {showPendingAssistant ? (
                 <Message from="assistant">
                   <MessageContent>
-                    <div className="text-muted-foreground animate-pulse text-sm">
-                      Thinking...
-                    </div>
+                    <AssistantTypingIndicator
+                      phase="submitted"
+                      onStop={() => {
+                        void stop();
+                      }}
+                    />
                   </MessageContent>
                 </Message>
               ) : null}
