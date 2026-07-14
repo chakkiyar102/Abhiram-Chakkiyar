@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" role="img" aria-label="The migration path drawn as three stations: a Postman collection of 106 requests, converted and sanitized into an OpenAPI spec of 87 paths and 105 operations, then enriched module by module and rendered as a Scalar reference with a live Try It panel">
+  <style>
+    .ln{fill:none;stroke:#1a1a1a;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+    .ln2{fill:none;stroke:#1a1a1a;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+    .fl{fill:#1a1a1a;stroke:none}
+    .bgf{fill:#F5F0EB;stroke:none}
+    .txi{font:700 15px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#1a1a1a}
+    .txs{font:600 11.5px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#555}
+    .txa{font:700 11px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#1a1a1a;letter-spacing:.06em}
+  </style>
+  <!-- parchment card -->
+  <rect x="1" y="1" width="798" height="338" rx="10" fill="#F5F0EB" stroke="#e6dfd1" stroke-width="2"/>
+
+  <!-- title strip -->
+  <text x="400" y="52" text-anchor="middle" style="font:700 13px 'Plus Jakarta Sans','Segoe UI',sans-serif;letter-spacing:.18em;fill:#1a1a1a">ONE CONTRACT, THREE FORMS</text>
+
+  <!-- baseline -->
+  <line class="ln2" x1="40" y1="170" x2="760" y2="170" stroke-dasharray="1 10"/>
+
+  <!-- STATION 1: POSTMAN COLLECTION — a stack of request cards -->
+  <rect class="bgf" x="52" y="90" width="136" height="120" rx="10"/>
+  <rect class="ln" x="52" y="90" width="136" height="120" rx="10"/>
+  <!-- stacked cards -->
+  <rect class="bgf" x="86" y="106" width="76" height="24" rx="5"/>
+  <rect class="ln2" x="86" y="106" width="76" height="24" rx="5"/>
+  <rect class="bgf" x="78" y="138" width="76" height="24" rx="5"/>
+  <rect class="ln2" x="78" y="138" width="76" height="24" rx="5"/>
+  <rect class="bgf" x="70" y="170" width="76" height="24" rx="5"/>
+  <rect class="ln2" x="70" y="170" width="76" height="24" rx="5"/>
+  <!-- method chips on each card -->
+  <text class="txa" x="94" y="123">GET</text>
+  <line class="ln2" x1="124" y1="118" x2="152" y2="118"/>
+  <text class="txa" x="86" y="155">POST</text>
+  <line class="ln2" x1="122" y1="150" x2="144" y2="150"/>
+  <text class="txa" x="78" y="187">GET</text>
+  <line class="ln2" x1="108" y1="182" x2="136" y2="182"/>
+  <text class="txi" x="120" y="238" text-anchor="middle">POSTMAN</text>
+  <text class="txs" x="120" y="258" text-anchor="middle">106 requests, 10 folders</text>
+
+  <!-- arrow 1: convert + sanitize -->
+  <line class="ln" x1="200" y1="150" x2="248" y2="150"/>
+  <path class="ln" d="M238 140 l12 10 l-12 10"/>
+  <text class="txs" x="225" y="128" text-anchor="middle">convert +</text>
+  <text class="txs" x="225" y="142" text-anchor="middle">sanitize</text>
+
+  <!-- STATION 2: OPENAPI SPEC — a document with braces and a seal -->
+  <rect class="bgf" x="262" y="90" width="136" height="120" rx="10"/>
+  <rect class="ln" x="262" y="90" width="136" height="120" rx="10"/>
+  <!-- document with folded corner -->
+  <path class="bgf" d="M292 104 h52 l16 16 v76 h-68 z"/>
+  <path class="ln2" d="M292 104 h52 l16 16 v76 h-68 z"/>
+  <path class="ln2" d="M344 104 v16 h16"/>
+  <!-- braces -->
+  <path class="ln2" d="M312 136 q-8 2 -8 12 q0 8 -6 10 q6 2 6 10 q0 10 8 12"/>
+  <path class="ln2" d="M340 136 q8 2 8 12 q0 8 6 10 q-6 2 -6 10 q0 10 -8 12"/>
+  <circle class="fl" cx="326" cy="152" r="2.6"/>
+  <circle class="fl" cx="326" cy="166" r="2.6"/>
+  <text class="txi" x="330" y="238" text-anchor="middle">OPENAPI</text>
+  <text class="txs" x="330" y="258" text-anchor="middle">87 paths / 105 operations</text>
+
+  <!-- arrow 2: enrich, module by module -->
+  <line class="ln" x1="410" y1="150" x2="458" y2="150"/>
+  <path class="ln" d="M448 140 l12 10 l-12 10"/>
+  <text class="txs" x="434" y="128" text-anchor="middle">enrich, one agent</text>
+  <text class="txs" x="434" y="142" text-anchor="middle">per module</text>
+
+  <!-- STATION 3: SCALAR REFERENCE — a browser frame with sidebar and Try It -->
+  <rect class="bgf" x="472" y="90" width="276" height="120" rx="10"/>
+  <rect class="ln" x="472" y="90" width="276" height="120" rx="10"/>
+  <!-- browser window -->
+  <rect class="bgf" x="496" y="104" width="228" height="92" rx="7"/>
+  <rect class="ln2" x="496" y="104" width="228" height="92" rx="7"/>
+  <line class="ln2" x1="496" y1="122" x2="724" y2="122"/>
+  <circle class="fl" cx="508" cy="113" r="2.8"/>
+  <circle class="fl" cx="519" cy="113" r="2.8"/>
+  <circle class="fl" cx="530" cy="113" r="2.8"/>
+  <!-- sidebar -->
+  <line class="ln2" x1="548" y1="122" x2="548" y2="196"/>
+  <line class="ln2" x1="506" y1="136" x2="538" y2="136"/>
+  <line class="ln2" x1="506" y1="150" x2="532" y2="150"/>
+  <line class="ln2" x1="506" y1="164" x2="538" y2="164"/>
+  <line class="ln2" x1="506" y1="178" x2="528" y2="178"/>
+  <!-- content: schema lines + Try It button -->
+  <line class="ln2" x1="560" y1="138" x2="646" y2="138"/>
+  <line class="ln2" x1="560" y1="152" x2="628" y2="152"/>
+  <!-- Try It button with play glyph -->
+  <rect class="bgf" x="656" y="130" width="58" height="26" rx="6"/>
+  <rect class="ln2" x="656" y="130" width="58" height="26" rx="6"/>
+  <path class="fl" d="M666 137 l9 6 l-9 6 z"/>
+  <text class="txa" x="680" y="147">TRY</text>
+  <!-- response line with check -->
+  <path class="ln2" d="M562 176 l5 6 l9 -11"/>
+  <line class="ln2" x1="586" y1="178" x2="700" y2="178"/>
+  <text class="txi" x="610" y="238" text-anchor="middle">SCALAR</text>
+  <text class="txs" x="610" y="258" text-anchor="middle">rendered reference, Try It live</text>
+
+  <!-- honesty callout under arrow 2 -->
+  <text x="434" y="292" text-anchor="middle" style="fill:#1a1a1a;font:700 11.5px 'Plus Jakarta Sans','Segoe UI',sans-serif">enrichment rule: never invent data</text>
+</svg>
