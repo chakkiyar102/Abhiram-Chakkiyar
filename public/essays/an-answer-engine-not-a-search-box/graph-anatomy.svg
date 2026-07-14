@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" role="img" aria-label="Anatomy of the content graph: a question token enters at a help-article node, hops an authored cross-link edge to a neighboring node, and a citation comes back out. A legend counts 586 help articles, 105 API operations, 29 SDK pages, and 1,044 edges.">
+  <style>
+    .ln{fill:none;stroke:#1a1a1a;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+    .ln2{fill:none;stroke:#1a1a1a;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+    .edge{fill:none;stroke:#b9ae99;stroke-width:2.6;stroke-linecap:round}
+    .hot{fill:none;stroke:#F58220;stroke-width:4;stroke-linecap:round}
+    .fl{fill:#1a1a1a;stroke:none}
+    .bgf{fill:#F5F0EB;stroke:none}
+    .of{fill:#F58220;stroke:none}
+    .txi{font:700 15px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#1a1a1a}
+    .txs{font:600 11.5px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#555}
+    .txo{font:700 13px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#F58220}
+    .txw{font:800 26px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#fff}
+    .txg{font:700 16px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#1a1a1a}
+  </style>
+  <!-- parchment card -->
+  <rect x="1" y="1" width="798" height="378" rx="10" fill="#F5F0EB" stroke="#e6dfd1" stroke-width="2"/>
+
+  <!-- quiet edges -->
+  <line class="edge" x1="272" y1="128" x2="341" y2="86"/>
+  <line class="edge" x1="386" y1="212" x2="452" y2="146"/>
+  <line class="edge" x1="497" y1="132" x2="560" y2="196"/>
+  <line class="edge" x1="392" y1="232" x2="546" y2="222"/>
+  <line class="edge" x1="366" y1="84" x2="447" y2="112"/>
+
+  <!-- hot path: question -> entry node -> neighbor -->
+  <line class="hot" x1="116" y1="192" x2="222" y2="158"/>
+  <line class="hot" x1="268" y1="164" x2="336" y2="212"/>
+
+  <!-- question token -->
+  <circle class="of" cx="92" cy="200" r="26"/>
+  <circle class="ln" cx="92" cy="200" r="26" stroke="#1a1a1a"/>
+  <text class="txw" x="92" y="209" text-anchor="middle">?</text>
+  <text class="txs" x="92" y="248" text-anchor="middle">the question</text>
+
+  <!-- entry node: help article (semantic entry) -->
+  <circle class="bgf" cx="246" cy="146" r="34"/>
+  <circle class="ln" cx="246" cy="146" r="34"/>
+  <line class="ln2" x1="232" y1="136" x2="260" y2="136"/>
+  <line class="ln2" x1="232" y1="148" x2="260" y2="148"/>
+  <line class="ln2" x1="232" y1="160" x2="250" y2="160"/>
+  <text class="txs" x="246" y="102" text-anchor="middle">entry node</text>
+  <text class="txo" x="168" y="136" text-anchor="middle">semantic</text>
+  <text class="txo" x="168" y="151" text-anchor="middle">match</text>
+
+  <!-- neighbor node: help article with the evidence -->
+  <circle class="bgf" cx="362" cy="230" r="30"/>
+  <circle class="ln" cx="362" cy="230" r="30"/>
+  <line class="ln2" x1="350" y1="221" x2="374" y2="221"/>
+  <line class="ln2" x1="350" y1="232" x2="374" y2="232"/>
+  <line class="ln2" x1="350" y1="243" x2="366" y2="243"/>
+  <text class="txo" x="318" y="185" text-anchor="middle">authored</text>
+  <text class="txo" x="318" y="200" text-anchor="middle">cross-link</text>
+
+  <!-- far node: small article -->
+  <circle class="bgf" cx="352" cy="72" r="20"/>
+  <circle class="ln2" cx="352" cy="72" r="20"/>
+  <line class="ln2" x1="344" y1="66" x2="360" y2="66"/>
+  <line class="ln2" x1="344" y1="76" x2="360" y2="76"/>
+
+  <!-- API operation node -->
+  <circle class="bgf" cx="474" cy="126" r="28"/>
+  <circle class="ln" cx="474" cy="126" r="28"/>
+  <text class="txg" x="474" y="133" text-anchor="middle">{ }</text>
+
+  <!-- SDK page node -->
+  <circle class="bgf" cx="574" cy="212" r="28"/>
+  <circle class="ln" cx="574" cy="212" r="28"/>
+  <text class="txg" x="574" y="219" text-anchor="middle">&lt;/&gt;</text>
+
+  <!-- citation chip coming back out -->
+  <line class="hot" x1="394" y1="248" x2="472" y2="288"/>
+  <rect class="bgf" x="480" y="272" width="222" height="44" rx="10"/>
+  <rect class="ln" x="480" y="272" width="222" height="44" rx="10"/>
+  <rect class="of" x="494" y="286" width="16" height="16" rx="3"/>
+  <text class="txi" x="522" y="300" text-anchor="start">cited: the exact article</text>
+  <text class="txs" x="592" y="304" text-anchor="middle"> </text>
+
+  <!-- legend -->
+  <line class="ln2" x1="40" y1="336" x2="760" y2="336" stroke-dasharray="1 10"/>
+  <circle class="ln2" cx="72" cy="358" r="9"/>
+  <text class="txs" x="90" y="362" text-anchor="start">help article ×586</text>
+  <text class="txg" x="242" y="364" text-anchor="middle" font-size="13">{ }</text>
+  <text class="txs" x="262" y="362" text-anchor="start">API operation ×105</text>
+  <text class="txg" x="432" y="364" text-anchor="middle" font-size="13">&lt;/&gt;</text>
+  <text class="txs" x="452" y="362" text-anchor="start">SDK page ×29</text>
+  <line class="edge" x1="596" y1="358" x2="632" y2="358"/>
+  <text class="txs" x="642" y="362" text-anchor="start">cross-link edge ×1,044</text>
+</svg>
