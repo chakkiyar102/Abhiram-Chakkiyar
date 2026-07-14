@@ -22,7 +22,7 @@ It was documenting the Portals module of our new API reference, filling in reque
 
 That refusal is my favorite moment of the entire rebuild. Not the 456 schemas that got written. The four that didn't.
 
-I run the documentation team at [Kissflow](https://kissflow.com), and this is part 2 of four on how we rebuilt our docs from scratch with AI agents doing the hands-on work and me directing. [Part 1](/posts/essays/we-replaced-our-9000-dollar-docs-platform) covered moving 556 help articles off a rented platform and into a git repo. This one covers the other half of the estate: our REST API documentation, which lived in a [Postman](https://www.postman.com) collection, and which had to become something better without a single invented field on the way.
+I run the documentation team at [Kissflow](https://kissflow.com), and this is part 2 of this series on how we rebuilt our docs from scratch with AI agents doing the hands-on work and me directing. [Part 1](/posts/essays/we-replaced-our-9000-dollar-docs-platform) covered moving 556 help articles off a rented platform and into a git repo. This one covers the other half of the estate: our REST API documentation, which lived in a [Postman](https://www.postman.com) collection, and which had to become something better without a single invented field on the way.
 
 ## A contract, not a *brochure*
 
@@ -141,7 +141,7 @@ We had just spent weeks making the corpus true. The next move was making it answ
 That is part 3.
 
 <hr />
-<p><em>This is part 2 of <strong>The Docs Rebuild</strong>, a four-part series on rebuilding Kissflow's help docs with Claude Code.</em></p>
+<p><em>This is part 2 of <strong>The Docs Rebuild</strong>, a series on rebuilding Kissflow's help docs with Claude Code.</em></p>
 <p>
 <em>← Previous: <a href="/posts/essays/we-replaced-our-9000-dollar-docs-platform">We Replaced Our $9,000-a-Year Docs Platform with a Git Repo</a></em><br />
 <em>Next: <a href="/posts/essays/an-answer-engine-not-a-search-box">An Answer Engine, Not a Search Box</a> →</em>

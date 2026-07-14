@@ -19,7 +19,7 @@ I typed "How do I add a user to Kissflow?" into our own documentation homepage a
 
 ![The answer mid-stream: a role rule, then numbered steps assembling one at a time, with a rail of relevant articles filling in on the right.](/essays/an-answer-engine-not-a-search-box/hero-answer-streaming.png)
 
-I run the documentation team at [Kissflow](https://kissflow.com). I am a writer, not an engineer, and everything below was built by AI agents I directed and reviewed. This is part 3 of four on rebuilding our help docs from scratch. Part 1 moved 556 articles into a git repo and put them through a quality pipeline. Part 2 rebuilt the API reference so it stopped lying to developers. This part is the payoff of owning all that text: turning a static docs site into something that answers questions, with receipts.
+I run the documentation team at [Kissflow](https://kissflow.com). I am a writer, not an engineer, and everything below was built by AI agents I directed and reviewed. This is part 3 of this series on rebuilding our help docs from scratch. Part 1 moved 556 articles into a git repo and put them through a quality pipeline. Part 2 rebuilt the API reference so it stopped lying to developers. This part is the payoff of owning all that text: turning a static docs site into something that answers questions, with receipts.
 
 Because here is the quiet embarrassment of every documentation site, including ours until this month. A reader arrives holding a question. We hand them a search box. The search box does not answer questions. It finds pages that contain words, and then the reader, who came to us precisely because they did not know the answer, gets to guess which of ten maybes holds it.
 
@@ -75,7 +75,7 @@ The last touches were words, which is to say, my actual job. The page had launch
 
 Under the new title sat a subtitle promising answers across "every guide, API, and SDK." Confident. Also, at that moment, false.
 
-The graph held 586 nodes, and all 586 were help articles. Our SDK section in the repo was navigation stubs pointing at an external developer portal; the API reference lived in its own OpenAPI spec, unread by the engine. Ask the engine an SDK question and the best it could do was point at where SDK docs lived. The agent flagged it in plain terms: the hero overclaims. Two ways out. Soften the copy, or make the copy true.
+The graph held 586 nodes, and all 586 were help articles — the corpus from part one, grown and reworked into its current shape. Our SDK section in the repo was navigation stubs pointing at an external developer portal; the API reference lived in its own OpenAPI spec, unread by the engine. Ask the engine an SDK question and the best it could do was point at where SDK docs lived. The agent flagged it in plain terms: the hero overclaims. Two ways out. Soften the copy, or make the copy true.
 
 We made it true, and it took about 45 minutes. One script parsed our [OpenAPI](https://www.openapis.org) spec and turned all 105 API operations into graph nodes, each carrying its method, path, parameters, and response fields. Another used [Firecrawl](https://www.firecrawl.dev) to crawl the 29 SDK method pages on the developer portal into nodes of their own. The graph went from 586 nodes to 720. Then we asked it "how do I get user details via the API" and it came back with the exact GET endpoint, cited. Ask how to add a row via the SDK, and it cites the SDK page. Ask a how-to in plain product terms, and it still favors the guides, which is exactly the right instinct.
 
@@ -148,7 +148,7 @@ The obvious fix is a Spanish docs site, and the obvious objection is cost, becau
 That is part 4.
 
 <hr />
-<p><em>This is part 3 of <strong>The Docs Rebuild</strong>, a four-part series on rebuilding Kissflow's help docs with Claude Code.</em></p>
+<p><em>This is part 3 of <strong>The Docs Rebuild</strong>, a series on rebuilding Kissflow's help docs with Claude Code.</em></p>
 <p>
 <em>← Previous: <a href="/posts/essays/api-docs-that-dont-lie">API Docs That Don't Lie</a></em><br />
 <em>Next: <a href="/posts/essays/588-docs-in-spanish-for-5-dollars">588 Docs in Spanish for $5.07</a> →</em>

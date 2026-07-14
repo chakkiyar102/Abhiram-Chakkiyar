@@ -20,7 +20,7 @@ Our help corpus is about 314,000 words. Price that at any per-word rate you've s
 
 The number we actually paid to put all of it into Spanish is the title of this post. $5.07, itemized on an API bill, one time.
 
-This is the last part of a four-part series on rebuilding [Kissflow](https://kissflow.com)'s help docs. Part 1 moved 556 articles off a rented platform and into a git repo. Part 2 rebuilt the API reference so it could not lie. Part 3 turned the docs into an answer engine. This part asks the question every docs lead eventually gets from upstairs: what would it take to do all this in another language?
+This is the fourth part of a series on rebuilding [Kissflow](https://kissflow.com)'s help docs. Part 1 moved 556 articles off a rented platform and into a git repo. Part 2 rebuilt the API reference so it could not lie. Part 3 turned the docs into an answer engine. This part asks the question every docs lead eventually gets from upstairs: what would it take to do all this in another language?
 
 The answer turned out to be a config entry, a script, a glossary, and a weekend. And then, because nothing in this series has shipped without a fight, a day-two bug report that looked exactly like the AI falling apart, and wasn't. As in every part of this series, I wrote none of the code. I wrote the briefs, made the calls, and reviewed what shipped.
 
@@ -56,7 +56,7 @@ The traditional layout mirrors the whole content tree: `content/` for English, `
 
 Fumadocs supports a different convention, and we took it: the dot suffix. The Spanish version of `page.mdx` is `page.es.mdx`, sitting in the same folder, next to the same images, in the same git history. Navigation files get the same treatment, `meta.json` beside `meta.es.json`. There is no second tree. A folder is simply bilingual.
 
-![Two ways to localize a docs repo: a mirrored second content tree that must be kept in sync, crossed out, versus the dot suffix, where page.es.mdx sits beside page.mdx in the same folder.](/essays/588-docs-in-spanish-for-5-dollars/dot-suffix-layout.svg)
+![Two ways to localize a docs repo: a mirrored second content tree that must be kept in sync, marked as the path not taken, versus the dot suffix, where page.es.mdx sits beside page.mdx in the same folder.](/essays/588-docs-in-spanish-for-5-dollars/dot-suffix-layout.svg)
 
 Same philosophy for URLs: English ones did not change, no `/en/` prefix appeared, so every existing link and bookmark kept working. Spanish lives under `/es/`. Middleware sorts readers to the right side; the language switcher in the sidebar does the rest.
 
@@ -106,7 +106,7 @@ Day two delivered the better story.
 
 ## The AI that seemed to make *typos*
 
-Actually, day two delivered twice. The first bite was quiet: our sidebar's API Reference link died, because the new locale middleware excluded `/api/*` routes by prefix and `/api-reference` starts with the same letters. One character class in a regex fixed it. It's the perfect specimen of an i18n migration bug: no test suite was watching for a route name colliding with an exclusion pattern. Shipping i18n is easy. The seams bite the next day.
+Day two delivered twice. The first bite was quiet: our sidebar's API Reference link died, because the new locale middleware excluded `/api/*` routes by prefix and `/api-reference` starts with the same letters. One character class in a regex fixed it. It's the perfect specimen of an i18n migration bug: no test suite was watching for a route name colliding with an exclusion pattern. Shipping i18n is easy. The seams bite the next day.
 
 Then came the report that earned this post its subtitle. A screenshot of our answer engine, the subject of part 3, showing an answer in visible distress. Bullets truncated mid-sentence: "Webhooks by Kissflow lets a". Words fused together where italics used to be, "sends from Kissflow" rendered as "sendsfromKiss". The request attached was reasonable: add a guardrail that checks and fixes the AI's output, and while you're in there, make sure markdown renders as rich text, tables included.
 
@@ -150,10 +150,10 @@ The numbers say the reflection better than adjectives can. Everything in that ta
 
 I didn't become an engineer this summer. That's the part I most want other writers to hear. Every skill that mattered was already on my side of the desk: writing the brief, smelling the wrong answer, refusing "it works" when the bar is "it is true," and knowing when a bug report is really a story about something else. The agents did the hands. The judgment stayed human, and the judgment was the job.
 
-The docs are rebuilt. The invoice is not coming back.
+The docs are rebuilt, and the invoice is not coming back. But rebuilt is not the same as finished. Everything in this series is the working version: the proof that earned the right to go further, running where it could prove itself. The step still ahead is the one that makes it official — migrating the whole corpus onto Google Cloud Storage and hardening it into a true production home, the piece that turns a rebuild the team believes in into infrastructure the company actually runs on. That story isn't written yet. When it ships, it will be the part that closes this series for real.
 
 <hr />
-<p><em>This is part 4 of <strong>The Docs Rebuild</strong>, a four-part series on rebuilding Kissflow's help docs with Claude Code.</em></p>
+<p><em>This is part 4 of <strong>The Docs Rebuild</strong>, a series on rebuilding Kissflow's help docs with Claude Code.</em></p>
 <p>
 <em>← Previous: <a href="/posts/essays/an-answer-engine-not-a-search-box">An Answer Engine, Not a Search Box</a></em><br />
 <em>New here? The story starts at part 1: <a href="/posts/essays/we-replaced-our-9000-dollar-docs-platform">We Replaced Our $9,000-a-Year Docs Platform with a Git Repo</a></em>

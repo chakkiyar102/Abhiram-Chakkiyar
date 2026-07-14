@@ -19,7 +19,7 @@ Two artifacts sat in front of me this summer. One was a renewal line for our doc
 
 For nine thousand dollars a year, we got a place to type. For the cost of an empty folder, we got everything the last decade of software practice has learned about text: version control, diffs, review, pipelines, deploy previews. The gap between those two artifacts is what this series is about.
 
-I run the documentation team at [Kissflow](https://kissflow.com). I am a writer, not an engineer. I did not write the code for any of what follows, and that is the point. I directed a fleet of AI agents, reviewed what they produced, and made the calls a docs lead makes anyway: what is true, what is good enough, what ships. This post is the first of four on how we rebuilt Kissflow's help docs from scratch, and it covers the move itself: 556 articles out of a rented platform and into a repository, plus the quality pipeline that made the migrated content trustworthy. Also the things that broke, because things broke.
+I run the documentation team at [Kissflow](https://kissflow.com). I am a writer, not an engineer. I did not write the code for any of what follows, and that is the point. I directed a fleet of AI agents, reviewed what they produced, and made the calls a docs lead makes anyway: what is true, what is good enough, what ships. This post opens a series on how we rebuilt Kissflow's help docs from scratch, and it covers the move itself: 556 articles out of a rented platform and into a repository, plus the quality pipeline that made the migrated content trustworthy. Also the things that broke, because things broke.
 
 ## Why we *left*
 
@@ -130,7 +130,7 @@ The help articles were only half the estate. Our API documentation was, at this 
 That is part 2.
 
 <hr />
-<p><em>This is part 1 of <strong>The Docs Rebuild</strong>, a four-part series on rebuilding Kissflow's help docs with Claude Code.</em></p>
+<p><em>This is part 1 of <strong>The Docs Rebuild</strong>, a series on rebuilding Kissflow's help docs with Claude Code.</em></p>
 <p>
 <em>Next: <a href="/posts/essays/api-docs-that-dont-lie">API Docs That Don't Lie</a> →</em>
 </p>
