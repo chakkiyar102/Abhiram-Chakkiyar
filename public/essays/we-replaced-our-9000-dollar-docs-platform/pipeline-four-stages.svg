@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" role="img" aria-label="The four-stage rework pipeline: fact-check, rework, review, and reader-test, drawn as four stations on a line, with the reader-test station marked as having zero context">
+  <style>
+    .ln{fill:none;stroke:#1a1a1a;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+    .ln2{fill:none;stroke:#1a1a1a;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+    .fl{fill:#1a1a1a;stroke:none}
+    .bgf{fill:#F5F0EB;stroke:none}
+    .txi{font:700 15px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#1a1a1a}
+    .txs{font:600 11.5px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#555}
+  </style>
+  <!-- parchment card -->
+  <rect x="1" y="1" width="798" height="338" rx="10" fill="#F5F0EB" stroke="#e6dfd1" stroke-width="2"/>
+
+  <!-- conveyor line -->
+  <line class="ln2" x1="40" y1="170" x2="760" y2="170" stroke-dasharray="1 10"/>
+
+  <!-- STAGE 1: FACT-CHECK — magnifier over a document -->
+  <rect class="bgf" x="52" y="90" width="120" height="120" rx="10"/>
+  <rect class="ln" x="52" y="90" width="120" height="120" rx="10"/>
+  <rect class="ln2" x="76" y="112" width="52" height="66" rx="4"/>
+  <line class="ln2" x1="84" y1="126" x2="120" y2="126"/>
+  <line class="ln2" x1="84" y1="140" x2="120" y2="140"/>
+  <line class="ln2" x1="84" y1="154" x2="106" y2="154"/>
+  <circle class="ln" cx="128" cy="156" r="17"/>
+  <line class="ln" x1="140" y1="169" x2="152" y2="181"/>
+  <text class="txi" x="112" y="238" text-anchor="middle">FACT-CHECK</text>
+  <text class="txs" x="112" y="258" text-anchor="middle">every claim vs the code</text>
+
+  <!-- arrow -->
+  <line class="ln" x1="184" y1="150" x2="222" y2="150"/>
+  <path class="ln" d="M212 140 l12 10 l-12 10"/>
+
+  <!-- STAGE 2: REWORK — pen writing a line -->
+  <rect class="bgf" x="236" y="90" width="120" height="120" rx="10"/>
+  <rect class="ln" x="236" y="90" width="120" height="120" rx="10"/>
+  <path class="ln" d="M262 178 l52 -52 l14 14 l-52 52 l-19 5 z"/>
+  <line class="ln2" x1="306" y1="134" x2="320" y2="148"/>
+  <line class="ln2" x1="262" y1="192" x2="330" y2="192"/>
+  <text class="txi" x="296" y="238" text-anchor="middle">REWORK</text>
+  <text class="txs" x="296" y="258" text-anchor="middle">house voice, one reference</text>
+
+  <!-- arrow -->
+  <line class="ln" x1="368" y1="150" x2="406" y2="150"/>
+  <path class="ln" d="M396 140 l12 10 l-12 10"/>
+
+  <!-- STAGE 3: REVIEW — checklist with ticks -->
+  <rect class="bgf" x="420" y="90" width="120" height="120" rx="10"/>
+  <rect class="ln" x="420" y="90" width="120" height="120" rx="10"/>
+  <rect class="ln2" x="444" y="108" width="72" height="86" rx="6"/>
+  <path class="ln2" d="M454 126 l5 6 l9 -11"/>
+  <line class="ln2" x1="476" y1="126" x2="506" y2="126"/>
+  <path class="ln2" d="M454 150 l5 6 l9 -11"/>
+  <line class="ln2" x1="476" y1="150" x2="506" y2="150"/>
+  <circle class="ln2" cx="459" cy="176" r="6"/>
+  <line class="ln2" x1="476" y1="176" x2="506" y2="176"/>
+  <text class="txi" x="480" y="238" text-anchor="middle">REVIEW</text>
+  <text class="txs" x="480" y="258" text-anchor="middle">fresh agent, checks the diff</text>
+
+  <!-- arrow -->
+  <line class="ln" x1="552" y1="150" x2="590" y2="150"/>
+  <path class="ln" d="M580 140 l12 10 l-12 10"/>
+
+  <!-- STAGE 4: READER-TEST — a fresh face with a question bubble -->
+  <rect class="bgf" x="604" y="90" width="144" height="120" rx="10"/>
+  <rect class="ln" x="604" y="90" width="144" height="120" rx="10"/>
+  <circle class="bgf" cx="654" cy="150" r="26"/>
+  <circle class="ln" cx="654" cy="150" r="26"/>
+  <path class="ln2" d="M630 144 q6 -22 24 -22 q18 0 24 22"/>
+  <circle class="fl" cx="646" cy="150" r="3.4"/>
+  <circle class="fl" cx="662" cy="150" r="3.4"/>
+  <line class="ln2" x1="647" y1="163" x2="661" y2="163"/>
+  <path class="bgf" d="M690 104 h42 q8 0 8 8 v22 q0 8 -8 8 h-22 l-10 12 v-12 h-10 q-8 0 -8 -8 v-22 q0 -8 8 -8 z"/>
+  <path class="ln2" d="M690 104 h42 q8 0 8 8 v22 q0 8 -8 8 h-22 l-10 12 v-12 h-10 q-8 0 -8 -8 v-22 q0 -8 8 -8 z"/>
+  <text x="711" y="130" text-anchor="middle" style="font:800 20px 'Plus Jakarta Sans','Segoe UI',sans-serif;fill:#1a1a1a">?</text>
+  <text class="txi" x="676" y="238" text-anchor="middle">READER-TEST</text>
+  <text class="txs" x="676" y="258" text-anchor="middle">zero context, reads like a customer</text>
+
+  <!-- title strip -->
+  <text class="txs" x="400" y="52" text-anchor="middle" style="font:700 13px 'Plus Jakarta Sans','Segoe UI',sans-serif;letter-spacing:.18em;fill:#1a1a1a">EVERY MIGRATED ARTICLE RIDES THE SAME LINE</text>
+
+  <!-- callout under stage 4 -->
+  <text class="txs" x="676" y="292" text-anchor="middle" style="fill:#1a1a1a;font:700 11.5px 'Plus Jakarta Sans','Segoe UI',sans-serif">the only stage with no prior bias</text>
+</svg>
