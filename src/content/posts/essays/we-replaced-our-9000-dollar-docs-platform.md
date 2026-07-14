@@ -1,9 +1,9 @@
 ---
 author: Abhiram Chakkiyar
-pubDatetime: 2026-07-15T09:00:00Z
+pubDatetime: 2026-07-10T09:00:00Z
 title: "We Replaced Our $9,000-a-Year Docs Platform with a Git Repo"
 featured: true
-draft: true
+draft: false
 tags:
   - docs-rebuild
   - ai

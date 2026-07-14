@@ -1,9 +1,9 @@
 ---
 author: Abhiram Chakkiyar
-pubDatetime: 2026-07-16T09:00:00Z
+pubDatetime: 2026-07-10T09:00:00Z
 title: "API Docs That Don't Lie"
 featured: false
-draft: true
+draft: false
 tags:
   - docs-rebuild
   - ai

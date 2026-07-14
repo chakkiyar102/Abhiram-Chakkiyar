@@ -1,9 +1,9 @@
 ---
 author: Abhiram Chakkiyar
-pubDatetime: 2026-07-18T09:00:00Z
+pubDatetime: 2026-07-10T09:00:00Z
 title: "588 Docs in Spanish for $5.07"
 featured: true
-draft: true
+draft: false
 tags:
   - docs-rebuild
   - ai
