@@ -21,7 +21,7 @@
 - Commits in abhiram-site end with:
   `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>` and
   `Claude-Session: https://claude.ai/code/session_017LTVR97KW7W11az2GcEgMN`
-- Site build check: `cd /Users/abhiram/abhiram-site && npm run build` must exit 0.
+- Site build check: `cd /Users/abhiram/abhiram-site && source ~/.nvm/nvm.sh && nvm use 22.22.1 && npx astro build` must exit 0.
 - Source records directory (read-only input): `MEMDIR=/Users/abhiram/.claude/projects/-Users-abhiram-Documents-KF-code-kissflow-docs/memory`
 - Live docs site for screenshots: try `https://kissflow-docs.vercel.app` first; if not 200 or auth-walled, build locally in `/Users/abhiram/Documents/KF-code/kissflow-docs` (`npm run build && npx next start -p 3458`) and shoot `http://localhost:3458`. Never run `next dev` after a build there (corrupts `.next`).
 
@@ -108,7 +108,7 @@ Read each PNG in `_shots/`. Same checklist. Kissflow product UI and public docs 
 - [ ] **Step 6: Verify build unaffected + commit**
 
 ```bash
-cd /Users/abhiram/abhiram-site && npm run build
+cd /Users/abhiram/abhiram-site && source ~/.nvm/nvm.sh && nvm use 22.22.1 && npx astro build
 ```
 Expected: exit 0. Then:
 
@@ -231,7 +231,7 @@ Invoke Skill `skilled-writer`; make it read like a human telling a story, kill a
 - [ ] **Step 5: Build + visual check**
 
 ```bash
-cd /Users/abhiram/abhiram-site && npm run build
+cd /Users/abhiram/abhiram-site && source ~/.nvm/nvm.sh && nvm use 22.22.1 && npx astro build
 ```
 Expected: exit 0. Then `npm run preview` (or `astro dev`) + Playwright: screenshot the rendered post top-fold and one mid-section; confirm hero plays, images load, series-nav renders.
 
@@ -356,7 +356,7 @@ Expected: both "clean". (Vendor list = common docs platforms; the real incumbent
 - [ ] **Step 3: Full build + preview deploy**
 
 ```bash
-npm run build
+source ~/.nvm/nvm.sh && nvm use 22.22.1 && npx astro build
 ```
 Expected: exit 0. Deploy preview (Vercel CLI; install if missing per plugin note):
 
