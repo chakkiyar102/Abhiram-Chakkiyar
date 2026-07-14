@@ -85,7 +85,7 @@ This is the beat I would keep if I had to cut everything else in this post. Docs
 
 ## The *bake-off*
 
-Was any of the graph business worth it? There is a well-known way to build docs Q&A, and it is genuinely elegant: about 185 lines of [LangChain](https://www.langchain.com) and [Chroma](https://www.trychroma.com) wiring a vector store to a chat model. A conventional LangChain baseline existed over essentially the same corpus lineage as ours, 484 articles of the older help center, 436 titles in common with our graph. Too close a match to pass up. We ran both engines live on the same thirteen questions.
+Was any of the graph business worth it? There is a well-known way to build docs Q&A, and it is elegant: about 185 lines of [LangChain](https://www.langchain.com) and [Chroma](https://www.trychroma.com) wiring a vector store to a chat model. A conventional LangChain baseline existed over essentially the same corpus lineage as ours, 484 articles of the older help center, 436 titles in common with our graph. Too close a match to pass up. We ran both engines live on the same thirteen questions.
 
 ```text
 $ node bench/run-benchmark.mjs --live --questions 13
@@ -112,7 +112,7 @@ Three failures this time, and all three are the same failure wearing different c
 
 **Tables rendered as raw pipe characters, and the model was innocent again.** When answers included comparison tables, readers saw the markdown source, pipes and dashes, instead of a table. Everyone's first theory was that the model writes broken markdown. The actual culprit: the component rendering answers had no table support, because the plugin that parses table syntax, `remark-gfm`, was never installed. One dependency, added to both places answers render, and the same answer that looked broken displayed a clean bordered table.
 
-**The same question got two different answers depending on which box you typed it into.** Our floating chat widget and the new hero looked like one product and were secretly two: the hero used the graph engine while the widget still used old keyword retrieval, so the widget abstained on questions the hero answered confidently, three feet away on the same page. The fix kept the widget's interface and swapped its internals to the same engine. One corpus, one engine, however many coats.
+**The same question got two different answers depending on which box you typed it into.** Our floating chat widget and the new hero looked like one product and were secretly two: the hero used the graph engine while the widget still used old keyword retrieval, so the widget abstained on questions the hero answered confidently, three feet away on the same page. The fix kept the widget's interface and swapped its internals to the same engine. One corpus, one engine, however many doors.
 
 > Debugging AI systems is mostly debugging the plumbing around the AI. Read the config before you blame the model.
 
@@ -135,7 +135,7 @@ Three failures this time, and all three are the same failure wearing different c
 
 The habit that mattered most this round: agents verified their own front-end work in a real browser, every iteration. [Playwright](https://playwright.dev) is wired in as a tool, so after each change the agent boots the dev server, drives the page, and screenshots it on the light theme and the dark one before I ever look. When the physics background went in, the agent captured two frames four seconds apart to prove to both of us that the glass was actually moving. "It works" is not a sentence I accept from an agent without a screenshot attached, for the same reason I stopped accepting it from myself.
 
-Design taste got its own procedure. Rather than me writing "make it prettier" forty times, a design-review skill called impeccable carries the standards, spacing, hierarchy, restraint, and the agent runs it against its own work. And before anything shipped, a second, heavier model ran a verification pass over the work: same discipline as part 1's review stage, where no agent grades its own homework.
+Design taste got its own procedure. Rather than me writing "make it prettier" forty times, a design-review skill called impeccable carries the standards — spacing, hierarchy, restraint — and the agent runs it against its own work. And before anything shipped, a second, heavier model ran a verification pass over the work: same discipline as part 1's review stage, where no agent grades its own homework.
 
 My job description did not change: write the briefs, veto the petals, refuse the overclaim, and keep asking the question a reader would ask.
 
