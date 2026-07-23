@@ -28,6 +28,13 @@ The [Claude Code plugin](https://code.claude.com/docs/en/plugins) worked. That w
 
 I had automated the craft out of the result.
 
+<figure>
+  <div style="position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:12px;">
+    <iframe src="https://www.youtube.com/embed/OmQnlXqtjiQ" title="Claude Code plugins and the Structure Invention workflow" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
+  </div>
+  <figcaption>A short walkthrough of the plugin workflow behind this essay.</figcaption>
+</figure>
+
 ## When success becomes a *template*
 
 The plugin started as my attempt to preserve a difficult build. I had spent hours getting scroll-scrubbed video to feel smooth, keeping the browser from seeking too many frames, synchronizing smooth scrolling with animation, and cleaning up the strange failures that appear only after [React](https://react.dev/) mounts twice in development.
