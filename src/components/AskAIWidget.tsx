@@ -334,7 +334,13 @@ export default function AskAIWidget() {
                 {error ? (
                   <Message from="assistant">
                     <MessageContent>
-                      <MessageResponse>{`Sorry, I couldn't reach the assistant. ${error.message}`}</MessageResponse>
+                      <MessageResponse>
+                        {/OPENAI_API_KEY|Server misconfiguration|AI_NOT_CONFIGURED/i.test(
+                          error.message
+                        )
+                          ? "Ask AI is temporarily unavailable while its server connection is being configured. Please try again later."
+                          : `Sorry, I couldn't reach the assistant. ${error.message}`}
+                      </MessageResponse>
                     </MessageContent>
                   </Message>
                 ) : null}

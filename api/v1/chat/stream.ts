@@ -79,9 +79,9 @@ export default async function handler(req: any, res: any) {
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    res.status(500).json({
-      error:
-        "Server misconfiguration: OPENAI_API_KEY is not set. Add it in Vercel project environment variables.",
+    res.status(503).json({
+      error: "Ask AI is temporarily unavailable while the server is being configured.",
+      code: "AI_NOT_CONFIGURED",
     });
     return;
   }

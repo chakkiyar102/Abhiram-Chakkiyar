@@ -30,13 +30,18 @@ I had automated the craft out of the result.
 
 ## When success becomes a *template*
 
-The plugin started as my attempt to preserve a difficult build. I had spent hours getting scroll-scrubbed video to feel smooth, keeping the browser from seeking too many frames, synchronizing smooth scrolling with animation, and cleaning up the strange failures that appear only after React mounts twice in development.
+The plugin started as my attempt to preserve a difficult build. I had spent hours getting scroll-scrubbed video to feel smooth, keeping the browser from seeking too many frames, synchronizing smooth scrolling with animation, and cleaning up the strange failures that appear only after [React](https://react.dev/) mounts twice in development.
 
 Those lessons deserved to become instructions. I am a documentation manager at [Kissflow](https://kissflow.com), so this instinct is almost impossible for me to resist. If a failure taught me something expensive, I want the next person, or the next agent, to begin after that lesson instead of before it.
 
 I wrote the working page structure into the instructions along with the performance rules. That was the mistake. The physics were evidence. The page structure was merely one design that had survived.
 
-![Two browser windows with identical internal layouts, showing how different themes can hide the same structural template.](/essays/the-plugin-worked-every-website-looked-the-same/1-same-skeleton.png)
+<figure>
+  <video autoplay loop muted playsinline preload="metadata" poster="/essays/the-plugin-worked-every-website-looked-the-same/1-same-skeleton.png" aria-label="Two browser windows with identical internal layouts" style="width:100%;border-radius:12px;">
+    <source src="/essays/the-plugin-worked-every-website-looked-the-same/1-same-skeleton.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Two browser windows with identical internal layouts, showing how different themes can hide the same structural template.</figcaption>
+</figure>
 
 Templates are useful because they remove decisions. That is also how they erase identity. Once the plugin knew that a centered hero, two floating panels, a card grid, and a familiar footer were safe, it had no reason to risk anything else. A creative brief entered at the top. A reskinned skeleton came out at the bottom.
 
@@ -52,7 +57,12 @@ These were invariants. Ignoring them did not make a more original site. It made 
 
 Everything else was negotiable: how the visitor enters, what scrolling does, how scenes exchange control, where information appears, what navigation feels like, what follows the main experience, and which interaction belongs only to this build.
 
-![A balance separating hard-won performance invariants from seven flexible structural decisions.](/essays/the-plugin-worked-every-website-looked-the-same/2-invariants.png)
+<figure>
+  <video autoplay loop muted playsinline preload="metadata" poster="/essays/the-plugin-worked-every-website-looked-the-same/2-invariants.png" aria-label="A balance separating performance invariants from flexible structural decisions" style="width:100%;border-radius:12px;">
+    <source src="/essays/the-plugin-worked-every-website-looked-the-same/2-invariants.mp4" type="video/mp4" />
+  </video>
+  <figcaption>A balance separating hard-won performance invariants from seven flexible structural decisions.</figcaption>
+</figure>
 
 > Preserve the rules paid for by failure. Reopen the decisions paid for only by habit.
 
@@ -60,7 +70,7 @@ That sentence became the architecture. The plugin would keep the engine and stop
 
 ## Seven questions before any *components*
 
-I called the new stage Structure Invention. It runs after the plugin understands the idea and chooses the asset medium, but before it writes components.
+I called the new stage [Structure Invention](https://github.com/chakkiyar102/immersive-oneshot-plugin#structure-invention). It runs after the plugin understands the idea and chooses the asset medium, but before it writes components.
 
 Instead of reaching for a page skeleton, the system must answer seven questions.
 
@@ -72,7 +82,12 @@ Instead of reaching for a page skeleton, the system must answer seven questions.
 6. **Below-fold rhythm:** Which sections deserve to exist, and in what order?
 7. **Signature move:** What is the one interaction this build alone owns?
 
-![Seven labeled cards orbiting a central Structure DNA document.](/essays/the-plugin-worked-every-website-looked-the-same/3-seven-axes.png)
+<figure>
+  <video autoplay loop muted playsinline preload="metadata" poster="/essays/the-plugin-worked-every-website-looked-the-same/3-seven-axes.png" aria-label="Seven labeled cards orbiting a central Structure DNA document" style="width:100%;border-radius:12px;">
+    <source src="/essays/the-plugin-worked-every-website-looked-the-same/3-seven-axes.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Seven labeled cards orbiting a central Structure DNA document.</figcaption>
+</figure>
 
 The distinction between asset medium and experience structure matters. A site can use still images and still behave like a horizontal gallery, a field guide, a product disassembly, or a sequence of theatrical curtains. Video does not require a pinned scrub. Three-dimensional assets do not require a configurator. Medium gives the system material. Structure decides what the visitor does with it.
 
@@ -88,7 +103,12 @@ This is exactly the kind of decision I can make worse by staring at it for an ho
 
 So the plugin drafts three experience scripts, recommends one, and explains the recommendation in a sentence. The user can choose another, but nobody has to compare ten vaguely different directions.
 
-![Three candidate experience scripts narrowing into one recommended Structure DNA.](/essays/the-plugin-worked-every-website-looked-the-same/4-three-candidates.png)
+<figure>
+  <video autoplay loop muted playsinline preload="metadata" poster="/essays/the-plugin-worked-every-website-looked-the-same/4-three-candidates.png" aria-label="Three candidate experience scripts narrowing into one recommended Structure DNA" style="width:100%;border-radius:12px;">
+    <source src="/essays/the-plugin-worked-every-website-looked-the-same/4-three-candidates.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Three candidate experience scripts narrowing into one recommended Structure DNA.</figcaption>
+</figure>
 
 That recommendation is important. “Here are three options” often transfers the hardest part of the work back to the person who asked for help. “I recommend this one because the reveal mirrors the product’s transformation” gives them a decision they can accept or challenge.
 
@@ -102,7 +122,12 @@ Language models are excellent at producing three options that sound different wh
 
 The plugin needed memory outside the prompt. After each successful build, it records the seven structural axes in a small local log. Before presenting a new candidate, it compares that candidate with the last five builds. If two or more axes match one recent build, those axes must change.
 
-![A build log comparing seven structural axes across five recent projects and flagging a repeat.](/essays/the-plugin-worked-every-website-looked-the-same/5-build-memory.png)
+<figure>
+  <video autoplay loop muted playsinline preload="metadata" poster="/essays/the-plugin-worked-every-website-looked-the-same/5-build-memory.png" aria-label="A build log comparing seven structural axes across five recent projects" style="width:100%;border-radius:12px;">
+    <source src="/essays/the-plugin-worked-every-website-looked-the-same/5-build-memory.mp4" type="video/mp4" />
+  </video>
+  <figcaption>A build log comparing seven structural axes across five recent projects and flagging a repeat.</figcaption>
+</figure>
 
 The threshold is intentionally simple. It does not pretend to measure creativity. It catches repetition early enough to force another pass. The log cannot tell whether an idea is good, but it can prove that “different” is not merely a new adjective.
 
@@ -126,7 +151,12 @@ Full invention creates a new risk: originality can become an excuse for nonsense
 
 The fix was not to retreat to templates. It was to add judgment at two points. Before coding, the plugin audits the proposed Structure DNA for familiar AI-design habits, weak hierarchy, borrowed navigation, empty spectacle, and interactions that cannot be explained. After coding, it audits the real pages again. A clever plan can still collapse into conventional components during implementation.
 
-![A Structure DNA passing through a design gate, becoming a website, and passing through a second quality gate.](/essays/the-plugin-worked-every-website-looked-the-same/6-two-gates.png)
+<figure>
+  <video autoplay loop muted playsinline preload="metadata" poster="/essays/the-plugin-worked-every-website-looked-the-same/6-two-gates.png" aria-label="A Structure DNA passing through two quality gates" style="width:100%;border-radius:12px;">
+    <source src="/essays/the-plugin-worked-every-website-looked-the-same/6-two-gates.mp4" type="video/mp4" />
+  </video>
+  <figcaption>A Structure DNA passing through a design gate, becoming a website, and passing through a second quality gate.</figcaption>
+</figure>
 
 The two gates have different evidence. The first asks whether the idea has a coherent reason to exist. The second asks whether the browser actually delivers it. A build does not ship with an open critical finding.
 
