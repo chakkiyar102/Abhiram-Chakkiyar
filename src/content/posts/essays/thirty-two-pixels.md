@@ -1,8 +1,8 @@
 ---
 author: Abhiram Chakkiyar
 pubDatetime: 2026-10-14T18:50:59.000Z
-modDatetime: 2026-10-15T11:48:06.000Z
-title: "How I Built Kissflow Academy, a Desktop Training App, with Claude Code"
+modDatetime: 2026-10-15T11:56:35.000Z
+title: "How I Built Kissflow Academy, a Desktop Training App"
 draft: false
 tags:
   - ai
