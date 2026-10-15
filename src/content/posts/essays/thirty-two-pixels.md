@@ -1,7 +1,7 @@
 ---
 author: Abhiram Chakkiyar
 pubDatetime: 2026-10-14T18:50:59.000Z
-modDatetime: 2026-10-15T11:56:35.000Z
+modDatetime: 2026-10-15T15:31:47.000Z
 title: "How I Built Kissflow Academy, a Desktop Training App"
 draft: false
 tags:
@@ -32,6 +32,7 @@ I'm the documentation manager at Kissflow, and I built it end to end with [Claud
 - **Quick checks and six session checks**, graded instantly by the app, with an explanation for every answer.
 - **Six hands-on exercises**, built in your own Kissflow training account with Kiko coaching you through each one.
 - **Kiko's screen helper**: ask about what's on your screen, let Kiko do a step for you, or check your build against the exercise's criteria.
+- **Your choice of AI**: an OpenAI or Anthropic key, a local model, or the ChatGPT plan you already pay for.
 - **A sixty-minute final assessment** and a certificate.
 
 Free downloads: [kf-academy-releases](https://github.com/abhiram-kissflow/kf-academy-releases).
@@ -104,7 +105,7 @@ Then the window started eating clicks. A hidden native window on macOS can still
 
 One rule I set early and never relaxed: the AI never decides a score.
 
-Every quiz answer, every session check and the sixty-minute final are marked by plain Rust code against answer keys bundled inside the app. Kiko runs on whichever AI provider the learner picks (OpenAI, Anthropic, or a local model through Ollama, plus any OpenAI-compatible address), and Kiko never sees an answer key. The interface never sees them either. It gets the question and the options; the keys stay in Rust.
+Every quiz answer, every session check and the sixty-minute final are marked by plain Rust code against answer keys bundled inside the app. Kiko runs on whichever AI the learner picks (OpenAI, Anthropic, a local model through Ollama, any OpenAI-compatible address, or their own ChatGPT plan), and Kiko never sees an answer key. The interface never sees them either. It gets the question and the options; the keys stay in Rust.
 
 <figure>
   <video autoplay loop muted playsinline preload="metadata" poster="/essays/thirty-two-pixels/3-vault.png" aria-label="A chat bubble reaches for a locked box of answer keys and is turned away. A small gear marks the quiz instead." style="width:100%;border-radius:12px;">
@@ -121,6 +122,8 @@ It sounds paranoid. It's how you'd want an exam to work. A language model that g
 </figure>
 
 API keys get the same treatment. They live in the operating system's keychain and are attached to requests in one Rust file. The Kissflow window, which runs someone else's website, can't call the app at all.
+
+The ChatGPT option needed the same care. Many consultants already pay for ChatGPT Plus or Pro, and it made sense to let Kiko use that. OpenAI's "Sign in with ChatGPT" for other apps is open only to approved partners, so the app doesn't borrow a login. It hands each conversation to OpenAI's own [Codex](https://github.com/openai/codex) command-line tool, which the learner signs in to once with their ChatGPT account. **The app never holds a ChatGPT token**, and replies count against the learner's plan. The screen helper still needs an OpenAI key: Codex runs its own agent and can't use Kiko's tools.
 
 <figure>
   <img src="/essays/thirty-two-pixels/app-certificate.webp" alt="Pass every session check and the final, and the app issues the certificate." loading="lazy" style="width:100%;border-radius:12px;border:1px solid rgba(0,0,0,.08);" />
