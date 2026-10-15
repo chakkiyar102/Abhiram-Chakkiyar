@@ -1,7 +1,7 @@
 ---
 author: Abhiram Chakkiyar
 pubDatetime: 2026-10-14T18:50:59.000Z
-modDatetime: 2026-10-15T11:45:19.000Z
+modDatetime: 2026-10-15T11:48:06.000Z
 title: "How I Built Kissflow Academy, a Desktop Training App, with Claude Code"
 draft: false
 tags:
@@ -24,15 +24,19 @@ I'm the documentation manager at Kissflow, and I built it end to end with [Claud
   <figcaption>A one-minute walkthrough recorded from the real app: the course, a lesson, a quick check, a coaching session with Kiko, and the certificate.</figcaption>
 </figure>
 
-> **What's in the app**
->
-> - **37 lessons in six sessions**, from "what is a process" to "why did this integration fail at 2am".
-> - **Quick checks and six session checks**, graded instantly by the app, with an explanation for every answer.
-> - **Six hands-on exercises**, built in your own Kissflow training account with Kiko coaching you through each one.
-> - **Kiko's screen helper**: ask about what's on your screen, let Kiko do a step for you, or check your build against the exercise's criteria.
-> - **A sixty-minute final assessment** and a certificate.
->
-> Free downloads: [kf-academy-releases](https://github.com/abhiram-kissflow/kf-academy-releases).
+<aside style="margin:2rem 0;padding:1.1rem 1.4rem;border-left:4px solid #D4A843;background:rgba(212,168,67,.10);border-radius:0 12px 12px 0;font-style:normal;">
+
+**What's in the app**
+
+- **37 lessons in six sessions**, from "what is a process" to "why did this integration fail at 2am".
+- **Quick checks and six session checks**, graded instantly by the app, with an explanation for every answer.
+- **Six hands-on exercises**, built in your own Kissflow training account with Kiko coaching you through each one.
+- **Kiko's screen helper**: ask about what's on your screen, let Kiko do a step for you, or check your build against the exercise's criteria.
+- **A sixty-minute final assessment** and a certificate.
+
+Free downloads: [kf-academy-releases](https://github.com/abhiram-kissflow/kf-academy-releases).
+
+</aside>
 
 ## Why build an *app*
 
@@ -90,7 +94,11 @@ The page measures from just below the title bar. The native window measures from
 
 Then the window started eating clicks. A hidden native window on macOS can still sit invisibly on top of the page and swallow every click aimed at the lesson underneath. The fix there was even dumber: don't hide it. Move it twenty thousand pixels off-screen. It's still the most effective line in the codebase.
 
-> **!** When the result is wrong but every part checks out, log both sides of the seam.
+<aside style="margin:2rem 0;padding:1.1rem 1.4rem;border-left:4px solid #D4A843;background:rgba(212,168,67,.10);border-radius:0 12px 12px 0;font-style:normal;">
+
+**Key point.** When the result is wrong but every part checks out, log both sides of the seam.
+
+</aside>
 
 ## The coach that couldn't *peek*
 
@@ -119,7 +127,11 @@ API keys get the same treatment. They live in the operating system's keychain an
   <figcaption>Pass every session check and the final, and the app issues the certificate.</figcaption>
 </figure>
 
-> **!** Let the AI coach. Let code grade.
+<aside style="margin:2rem 0;padding:1.1rem 1.4rem;border-left:4px solid #D4A843;background:rgba(212,168,67,.10);border-radius:0 12px 12px 0;font-style:normal;">
+
+**Key point.** Let the AI coach. Let code grade.
+
+</aside>
 
 ## Kiko's *hands*
 
@@ -154,7 +166,11 @@ It now has three buttons. **Look at my screen** answers questions about what you
 
 The research said the future is [WebMCP](https://github.com/webmachinelearning/webmcp), where a site publishes typed tools for agents instead of making them guess at buttons. It's right, but it's something a site's owner does, and Kissflow hasn't yet. That one's a note for my day job.
 
-> **!** Read what you embed, and keep the agent's brain on your side of the boundary.
+<aside style="margin:2rem 0;padding:1.1rem 1.4rem;border-left:4px solid #D4A843;background:rgba(212,168,67,.10);border-radius:0 12px 12px 0;font-style:normal;">
+
+**Key point.** Read what you embed, and keep the agent's brain on your side of the boundary.
+
+</aside>
 
 ## Real Kissflow screens in the *lessons*
 
@@ -184,7 +200,11 @@ Then I pointed the same habit at the course. One agent per session went through 
 
 Some were stale, not wrong: the training material predates features like automatic retries for integrations. Some were wrong. One lesson said that when someone leaves, only a flow admin can hand their pending tasks to someone else. The documentation says an account admin can too. Another said a visibility rule on a table column hides it row by row, and built a quiz answer on that; a rule based on a header field actually hides the whole column. **Those twenty-one are fixed**, each citing the article it came from.
 
-> **!** Documentation drifts from the thing it describes, always. Check it against the source, and check the course against the documentation.
+<aside style="margin:2rem 0;padding:1.1rem 1.4rem;border-left:4px solid #D4A843;background:rgba(212,168,67,.10);border-radius:0 12px 12px 0;font-style:normal;">
+
+**Key point.** Documentation drifts from the thing it describes, always. Check it against the source, and check the course against the documentation.
+
+</aside>
 
 ## Four *doors*
 
