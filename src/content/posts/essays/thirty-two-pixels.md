@@ -1,6 +1,7 @@
 ---
 author: Abhiram Chakkiyar
 pubDatetime: 2026-10-14T18:50:59.000Z
+modDatetime: 2026-10-15T10:48:42.000Z
 title: "Thirty-Two Pixels"
 draft: false
 tags:
@@ -26,6 +27,8 @@ So I asked [Claude Code](https://www.claude.com/product/claude-code) to build me
 It got built. Rust from top to bottom: [Tauri](https://tauri.app) for the desktop shell, [Leptos](https://leptos.dev) for the interface, compiled to WebAssembly. The Mac download is under 20 MB. The Electron app I'd been using as a reference weighs about 500.
 
 But the story is about thirty-two pixels.
+
+*Updated 15 October 2026: an Android app, real Kissflow screens inside the lessons, a fact-check of the course itself, and a screen helper rebuilt from scratch. The new sections start after the README.*
 
 ## Kissflow said *no*
 
@@ -99,7 +102,7 @@ Except Claude read the bundle first. The demo build, when it's injected into a p
   <figcaption>A bundle with an antenna sends a dotted line out of the window. Scissors cut the line, and a clean bundle takes its place.</figcaption>
 </figure>
 
-Nothing about this was malicious. It's a demo bundle doing what demo bundles do. But "it's just the demo" is exactly the kind of sentence that ends up in an incident report. So the app ships its own copy, built from the library's source package, with no demo server anywhere in it. And page-agent's tools for clicking and typing are switched off. Kiko explains; the learner acts.
+Nothing about this was malicious. It's a demo bundle doing what demo bundles do. But "it's just the demo" is exactly the kind of sentence that ends up in an incident report. So the app ships its own copy, built from the library's source package, with no demo server anywhere in it. And in that first version, page-agent's tools for clicking and typing were switched off. Kiko explained; the learner acted. That didn't last, and the reason why is further down.
 
 > **!** Read what you embed. The convenient build and the safe build are often not the same file.
 
@@ -120,7 +123,9 @@ Linux can't be built from a Mac at all, because it links against libraries that 
   <figcaption>Three doors labelled macOS, Windows and Linux open one after another, each with a small signed seal.</figcaption>
 </figure>
 
-All three are on the [releases page](https://github.com/abhiram-kissflow/kf-academy-releases) now, and every installed copy checks for updates on its own.
+Then a fourth door. The same Rust code builds an Android app, which needed one structural change (the app became a library Android can load) and a handful of honest compromises. A phone allows one web view per app, so the Kissflow tenant opens in the browser instead of beside the course. There's no self-update, so you install the new file over the old one. The certificate can't be printed from a phone's web view, so Rust writes the PDF by hand. The first APK was 64 MB because it carried code for every kind of phone chip; [splitting it per chip](https://developer.android.com/studio/build/configure-apk-splits) brought the common one down to 25.
+
+All four are on the [releases page](https://github.com/abhiram-kissflow/kf-academy-releases) now, and the desktop copies check for updates on their own.
 
 ## The README that *lied* a little
 
@@ -139,11 +144,57 @@ It came back with a short, slightly embarrassing list. The README said Settings 
 
 None of those were hallucinations in the dramatic sense. They were the ordinary drift between what a system does and what someone believes it does. Which is, I'm aware, my entire job description.
 
+## The lessons that showed *nothing*
+
+The course was all words. Thirty-seven lessons telling consultants where to click, and not one picture of where that was.
+
+Kissflow's [community documentation](https://community.kissflow.com) has hundreds of screenshots and short screen recordings. Claude pulled ninety articles with [Firecrawl](https://www.firecrawl.dev), then I handed it an export of all 559. Six agents, one per session, looked at every image before placing it next to the paragraph it illustrates, and wrote a caption describing only what is actually on screen. They skipped anything showing real-looking email addresses, and anything that contradicted the lesson beside it.
+
+Then the images didn't load. The storage behind the community site refuses requests from other sites, a perfectly reasonable rule that turned every picture into a blank box. So the app now carries them itself: animated GIFs became short looping videos and screenshots became WebP, and 129 MB of media came down to 8.6 MB. They load instantly and work offline. Another seam, another two correct things disagreeing.
+
+## 559 articles and a lesson that was *wrong*
+
+Having the whole documentation set on disk made the obvious next question unavoidable. If the docs are right, how often is the course wrong?
+
+One agent per session went through every factual claim in the lessons, 465 of them, and looked for an article that said otherwise. Each contradiction then went to a second agent whose only job was to prove the first one wrong. Forty-six were raised. Thirty-seven survived.
+
+<figure>
+  <video autoplay loop muted playsinline preload="metadata" poster="/essays/thirty-two-pixels/8-corrections.png" aria-label="Three cards count up one after another: 46 raised, 37 survived a skeptic, 21 fixed." style="width:100%;border-radius:12px;">
+    <source src="/essays/thirty-two-pixels/8-corrections.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Three cards count up one after another: 46 raised, 37 survived a skeptic, 21 fixed.</figcaption>
+</figure>
+
+Some were stale rather than wrong. The training material predates features like automatic retries for integrations. Some were genuinely wrong. One lesson said that when someone leaves, only the flow admin can hand their pending tasks to someone else, not the account admin. The documentation says either can. A learner who believed the lesson would have escalated a problem they could have fixed themselves. Another told learners a column inside a table hides row by row, and built a quiz answer on it. The docs say a rule based on a header field hides the whole column.
+
+The twenty-one serious ones are fixed, each now citing the article it came from. I write documentation for a living, and the most useful thing this project did was turn the documentation around and point it at the course.
+
+## The helper that said it was *open*
+
+Back to Kiko's screen helper. In testing I pressed "Look at my screen". Kiko said the helper was open at the bottom of the Kissflow pane. There was nothing there.
+
+The library was being injected so early that the page didn't have a head yet. Its stylesheet tried to attach itself to that missing head, failed without a word, and the panel was built with no styles at all, which put it just below the visible edge of the pane. Everything reported success. That's the worst kind of bug: nothing is broken except the thing the person can see.
+
+I fixed it, then asked for the obvious next step: let Kiko actually click and type, with any click on something like Delete or Deploy waiting for the learner's say-so. That worked too, until I switched to a newer model and every request came back with an error about a setting called reasoning effort. The library chose its settings from a fixed list of model names, and mine wasn't on it.
+
+That was the moment to stop patching. So Kiko's brain moved home. The agent loop now runs inside the app, in Rust, on OpenAI's newer Responses API. The Kissflow page gets a small script I can read in full: it describes the screen and performs one action at a time, and that's all it can do. The page can no longer call the app at all, and the API key never goes near it.
+
+<figure>
+  <video autoplay loop muted playsinline preload="metadata" poster="/essays/thirty-two-pixels/7-no-door.png" aria-label="An agent loop starts inside the Kissflow page with a line back to the app, then moves into the app. A lock appears, and the page keeps only its hands." style="width:100%;border-radius:12px;">
+    <source src="/essays/thirty-two-pixels/7-no-door.mp4" type="video/mp4" />
+  </video>
+  <figcaption>An agent loop starts inside the Kissflow page with a line back to the app, then moves into the app. A lock appears, and the page keeps only its hands.</figcaption>
+</figure>
+
+There are three buttons now. Look at my screen answers questions about what you're seeing. Do it for me does the task while you watch, with a one-line reason for every step and an Allow or Don't before anything destructive. Check my build reads your exercise and marks each acceptance criterion met, not met or can't tell, with what it saw.
+
+The research said the future is [WebMCP](https://github.com/webmachinelearning/webmcp), where a site publishes typed tools for agents instead of making them guess at buttons. It's right. But it's something a site's owner does, and Kissflow hasn't, yet. That one's a note for my day job, not this app.
+
 ## What a docs person takes from *this*
 
 AI made the code cheap. A desktop app with a mascot, a coaching mode, an offline grading engine and three-platform auto-updates is not a weekend project, and it didn't feel like a heroic one either.
 
-But the work didn't disappear. It moved. It moved to the seams: between the page and the native window, between a helpful library and a learner's private screen, between a README and the code it describes. Every hard problem in this build was two correct things disagreeing, and every fix started with someone refusing to accept "it should work" as an answer.
+But the work didn't disappear. It moved. It moved to the seams: between the page and the native window, between a helpful library and a learner's private screen, between a README and the code it describes, between a course and the documentation it was supposed to agree with. Every hard problem in this build was two correct things disagreeing, and every fix started with someone refusing to accept "it should work" as an answer.
 
 That's not a new skill. It's what good technical writers have always done: read the thing, check the claim, find the place where the story and the system stop matching. Building software with AI is mostly that, too.
 
